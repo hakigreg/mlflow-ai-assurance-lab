@@ -1,0 +1,32 @@
+# Local environment and caches
+.venv/
+.env
+.env.*
+!.env.example
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.uv-cache/
+.coverage
+htmlcov/
+
+# Build and package artifacts
+build/
+dist/
+*.egg-info/
+
+# Planned local MLflow state and generated evidence
+mlflow.db
+mlruns/
+artifacts/
+evidence/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Local execution prompts are not part of the public repository
+mlflow-ai-assurance-lab-prompts/

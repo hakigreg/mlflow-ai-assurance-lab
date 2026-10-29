@@ -1,0 +1,67 @@
+name: Bug report
+description: Report a reproducible defect using sanitized information.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Do not include secrets, personal data, proprietary content, or vulnerability details. Follow SECURITY.md for security-sensitive reports.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, architecture, and relevant local setup.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Python, uv, MLflow, and repository revision when relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      description: Provide a minimal deterministic reproduction using synthetic data.
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sanitized evidence
+      description: Include only the minimum safe logs, trace IDs, case IDs, or screenshots.
+    validations:
+      required: false
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Foundation workflow blocked
+        - Incorrect result
+        - Documentation or usability issue
+        - Other non-security impact
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safe disclosure confirmation
+      options:
+        - label: I removed secrets, personal data, proprietary content, and vulnerability details.
+          required: true
