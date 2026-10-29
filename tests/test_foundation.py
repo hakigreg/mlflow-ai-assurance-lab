@@ -8,9 +8,9 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readme_exposes_foundation_status() -> None:
+def test_readme_exposes_functional_mvp_status() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Foundation — implementation not started" in readme
+    assert "Functional offline assurance MVP" in readme
 
 
 def test_durable_contracts_exist() -> None:
@@ -47,18 +47,17 @@ def test_planned_mlflow_api_surface_is_importable(monkeypatch: pytest.MonkeyPatc
     assert all(callable(item) for item in (mlflow.start_span, evaluate, create_dataset, scorer))
 
 
-def test_phase_one_modules_do_not_exist() -> None:
+def test_phase_one_modules_exist() -> None:
     package = ROOT / "src" / "mlflow_ai_assurance_lab"
-    forbidden = {
-        "providers.py",
-        "retrieval.py",
-        "generation.py",
-        "controls.py",
+    required = {
+        "application.py",
         "scorers.py",
         "gate.py",
         "evidence.py",
+        "evaluation.py",
+        "tracking.py",
     }
-    assert forbidden.isdisjoint(path.name for path in package.rglob("*.py"))
+    assert required <= {path.name for path in package.rglob("*.py")}
 
 
 def test_security_policy_blocks_publication_without_private_channel() -> None:

@@ -1,0 +1,62 @@
+{
+  "corpus_sha256": "ae3c23a74b89ac40cb768bbfd052eddf64a70098b3d67a691382d5b12322131c",
+  "dataset_sha256": "8bfa021682b0a5fa01aeaa0797dccd528f7248ff49e0baff7eb9e6fbcd43d364",
+  "generated_at_utc": "2026-10-29T21:07:02.265224+00:00",
+  "policy_version": "release-policy-v1",
+  "release_policy_sha256": "dffff741e293a6db916c5ec8caafa9963fcb8fda2674ca5277286a7d59367c6d",
+  "schema_version": "1.0",
+  "variants": {
+    "baseline": {
+      "decision": "FAIL",
+      "failed_metrics": [
+        "citation_validity",
+        "scope_adherence",
+        "sensitive_data_leakage",
+        "refusal_behavior",
+        "groundedness_proxy"
+      ],
+      "metrics": {
+        "citation_validity": 0.25,
+        "groundedness_proxy": 0.25,
+        "refusal_behavior": 0.375,
+        "scope_adherence": 0.875,
+        "sensitive_data_leakage": 0.875
+      },
+      "run_id": "ce8f1878982047bf8f4ea898d242ed92",
+      "trace_ids": [
+        "tr-9aa8fcdb5582b98f24b4aababa6b7ffc",
+        "tr-efafa96c32c9e9e25e15be2dd490eb3b",
+        "tr-53f49a66a22507d7c1fba8d27ce04f8a",
+        "tr-e389a0dc183af38fa751a2523d7de7ba",
+        "tr-cce7f42199437e4e2651efd80392b28c",
+        "tr-2b88956852dde01d12b7ec6641c2f25a",
+        "tr-60fa938b51706c665d54e7a18b248100",
+        "tr-0595a6bba781108ed04dabc308e8beb0"
+      ],
+      "variant": "baseline"
+    },
+    "governed": {
+      "decision": "PASS",
+      "failed_metrics": [],
+      "metrics": {
+        "citation_validity": 1.0,
+        "groundedness_proxy": 1.0,
+        "refusal_behavior": 1.0,
+        "scope_adherence": 1.0,
+        "sensitive_data_leakage": 1.0
+      },
+      "run_id": "4752cfac64374f96955b84d83f444c9c",
+      "trace_ids": [
+        "tr-8d751b78f13ff8a922b8533d7b8bff19",
+        "tr-346b83dd911593eac568fad0a7309683",
+        "tr-ff9a72fc0c690701e7ae9e3d5da209b6",
+        "tr-1583752e5f73a1201abe0b0f692321d2",
+        "tr-ce42339e7b0b757903d1f0cd9f613cfe",
+        "tr-3d03b1384f772f1ec3feefdddb80081f",
+        "tr-bd3bc74a3dfcdefa7e8c4cd6d7d42a98",
+        "tr-67e4a0b25bbbba26dd2d88c40e6cafb3"
+      ],
+      "variant": "governed"
+    }
+  }
+}

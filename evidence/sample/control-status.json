@@ -1,0 +1,111 @@
+{
+  "controls": [
+    {
+      "control_id": "CTRL-TRACE-001",
+      "evidence": "summary.json#variants",
+      "implementation": "application.PolicyAssistant.ask",
+      "risk_ids": [
+        "RISK-TRACE-001",
+        "RISK-LEAK-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_tracing.py::test_sensitive_marker_is_not_persisted_in_trace"
+    },
+    {
+      "control_id": "CTRL-CITE-001",
+      "evidence": "summary.json#variants.governed.metrics.citation_validity",
+      "implementation": "scorers.citation_validity",
+      "risk_ids": [
+        "RISK-CITE-001",
+        "RISK-GROUND-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_scorers.py::test_citation_validity_rejects_unknown_source"
+    },
+    {
+      "control_id": "CTRL-SCOPE-001",
+      "evidence": "case-results.json#CASE-SCOPE-001",
+      "implementation": "application.PolicyAssistant._governed_decision",
+      "risk_ids": [
+        "RISK-SCOPE-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_application.py::test_governed_actions_match_dataset"
+    },
+    {
+      "control_id": "CTRL-REDACT-001",
+      "evidence": "case-results.json#CASE-SENS-001",
+      "implementation": "redaction.redact",
+      "risk_ids": [
+        "RISK-LEAK-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_tracing.py::test_sensitive_marker_is_not_persisted_in_trace"
+    },
+    {
+      "control_id": "CTRL-INJECT-001",
+      "evidence": "case-results.json#CASE-PI-DIRECT-001",
+      "implementation": "application.PolicyAssistant._has_injection",
+      "risk_ids": [
+        "RISK-INJECT-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_application.py::test_governed_actions_match_dataset"
+    },
+    {
+      "control_id": "CTRL-SUPPORT-001",
+      "evidence": "case-results.json#CASE-SUPPORT-001",
+      "implementation": "application.PolicyAssistant._governed_decision",
+      "risk_ids": [
+        "RISK-GROUND-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_application.py::test_governed_actions_match_dataset"
+    },
+    {
+      "control_id": "CTRL-REFUSE-001",
+      "evidence": "summary.json#variants.governed.metrics.refusal_behavior",
+      "implementation": "scorers.refusal_behavior",
+      "risk_ids": [
+        "RISK-INJECT-001",
+        "RISK-LEAK-001",
+        "RISK-GROUND-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_scorers.py::test_refusal_behavior_requires_expected_action"
+    },
+    {
+      "control_id": "CTRL-GROUND-001",
+      "evidence": "summary.json#variants.governed.metrics.groundedness_proxy",
+      "implementation": "scorers.groundedness_proxy",
+      "risk_ids": [
+        "RISK-GROUND-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_scorers.py::test_groundedness_proxy_is_limited_and_deterministic"
+    },
+    {
+      "control_id": "CTRL-GATE-001",
+      "evidence": "summary.json#variants.governed.decision",
+      "implementation": "gate.decide",
+      "risk_ids": [
+        "RISK-RELEASE-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_gate.py::test_regression_makes_gate_fail"
+    },
+    {
+      "control_id": "CTRL-EVID-001",
+      "evidence": "manifest.json#files",
+      "implementation": "evidence.validate_evidence",
+      "risk_ids": [
+        "RISK-TRACE-001",
+        "RISK-RELEASE-001"
+      ],
+      "status": "PASS",
+      "test": "tests/test_evidence.py::test_tampered_evidence_is_rejected"
+    }
+  ],
+  "decision": "PASS",
+  "schema_version": "1.0"
+}

@@ -1,7 +1,8 @@
-"""Validate the implemented Phase 0 repository foundation."""
+"""Validate repository structure and functional-MVP consistency."""
 
 from __future__ import annotations
 
+import json
 import re
 import sys
 from pathlib import Path
@@ -28,8 +29,20 @@ REQUIRED_FILES = {
     "PLANS.md",
     "README.md",
     "SECURITY.md",
+    "config/release-policy-v1.json",
+    "data/evaluation/policy-assurance-v1.json",
+    "data/policies/policies-v1.json",
+    "docs/ai-system-card.md",
     "docs/adr/0001-planned-assurance-architecture.md",
+    "docs/control-matrix.md",
+    "docs/findings.md",
+    "docs/human-oversight.md",
+    "docs/risk-assessment.md",
     "docs/source-register.md",
+    "docs/standards-crosswalk.md",
+    "docs/threat-model.md",
+    "evidence/sample/manifest.json",
+    "evidence/sample/report.md",
     "pyproject.toml",
     "uv.lock",
 }
@@ -40,6 +53,8 @@ SECRET_PATTERNS = {
     "private key": re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----"),
     "OpenAI-style key": re.compile(r"\bsk-[A-Za-z0-9_-]{20,}\b"),
 }
+RISK_ID = re.compile(r"\bRISK-[A-Z]+-\d{3}\b")
+CONTROL_ID = re.compile(r"\bCTRL-[A-Z]+-\d{3}\b")
 
 
 def repository_files() -> list[Path]:
@@ -104,7 +119,16 @@ def validate_markdown_links(errors: list[str]) -> None:
 
 def validate_public_files(errors: list[str]) -> None:
     for path in repository_files():
-        if path.suffix not in {".md", ".py", ".toml", ".yml", ".yaml", ".example", ""}:
+        if path.suffix not in {
+            ".json",
+            ".md",
+            ".py",
+            ".toml",
+            ".yml",
+            ".yaml",
+            ".example",
+            "",
+        }:
             continue
         try:
             text = path.read_text(encoding="utf-8")
@@ -120,14 +144,29 @@ def validate_public_files(errors: list[str]) -> None:
 
 def validate_scope(errors: list[str]) -> None:
     package = ROOT / "src/mlflow_ai_assurance_lab"
-    allowed_package_files = {"__init__.py", "py.typed"}
+    required_package_files = {
+        "__init__.py",
+        "__main__.py",
+        "application.py",
+        "config.py",
+        "domain.py",
+        "evaluation.py",
+        "evidence.py",
+        "gate.py",
+        "py.typed",
+        "redaction.py",
+        "scorers.py",
+        "tracking.py",
+    }
     observed = {path.name for path in package.iterdir() if path.is_file()}
-    if observed != allowed_package_files:
-        errors.append(f"Phase 0 package contains unexpected files: {sorted(observed)}")
+    if not required_package_files <= observed:
+        errors.append(
+            f"functional MVP package files are missing: {sorted(required_package_files - observed)}"
+        )
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    if "Foundation — implementation not started" not in readme:
-        errors.append("README does not expose the required Phase 0 status")
+    if "Functional offline assurance MVP" not in readme:
+        errors.append("README does not expose the required Phase 1 status")
 
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if not license_text.startswith("MIT License\n"):
@@ -138,6 +177,39 @@ def validate_scope(errors: list[str]) -> None:
         errors.append("project metadata does not declare the MIT License")
 
 
+def validate_traceability(errors: list[str]) -> None:
+    risk_text = (ROOT / "docs/risk-assessment.md").read_text(encoding="utf-8")
+    matrix_text = (ROOT / "docs/control-matrix.md").read_text(encoding="utf-8")
+    risks = set(RISK_ID.findall(risk_text))
+    matrix_risks = set(RISK_ID.findall(matrix_text))
+    if risks != matrix_risks:
+        errors.append(
+            "risk/control matrix coverage mismatch: "
+            f"missing={sorted(risks - matrix_risks)}, extra={sorted(matrix_risks - risks)}"
+        )
+
+    control_status = json.loads(
+        (ROOT / "evidence/sample/control-status.json").read_text(encoding="utf-8")
+    )
+    machine_controls = {item["control_id"] for item in control_status["controls"]}
+    matrix_controls = set(CONTROL_ID.findall(matrix_text))
+    if machine_controls != matrix_controls:
+        errors.append(
+            "human/machine control coverage mismatch: "
+            f"missing={sorted(machine_controls - matrix_controls)}, "
+            f"extra={sorted(matrix_controls - machine_controls)}"
+        )
+    for item in control_status["controls"]:
+        test_path, separator, test_name = item["test"].partition("::")
+        if not separator or not (ROOT / test_path).is_file():
+            errors.append(f"invalid control test link: {item['test']}")
+        elif f"def {test_name}(" not in (ROOT / test_path).read_text(encoding="utf-8"):
+            errors.append(f"missing linked test function: {item['test']}")
+        evidence_path = item["evidence"].split("#", 1)[0]
+        if not (ROOT / "evidence/sample" / evidence_path).is_file():
+            errors.append(f"missing linked evidence file: {item['evidence']}")
+
+
 def main() -> int:
     errors: list[str] = []
     validate_required_files(errors)
@@ -145,11 +217,12 @@ def main() -> int:
     validate_markdown_links(errors)
     validate_public_files(errors)
     validate_scope(errors)
+    validate_traceability(errors)
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("Phase 0 foundation validation passed.")
+    print("Repository and functional-MVP validation passed.")
     return 0
 
 

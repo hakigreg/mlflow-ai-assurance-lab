@@ -31,7 +31,7 @@ Maintain bidirectional traceability across risk, control, implementation, test, 
 
 ## Verification
 
-Run focused checks while changing a component, then run `make verify`. In Phase 0 this command covers the real foundation checks only. In the final phase it must cover linting, formatting, types, tests, the deterministic offline gate, and evidence validation, including negative paths. Do not claim a check passed unless it was executed and observed.
+Run focused checks while changing a component, then run `make verify`. In Phase 1 this command covers linting, formatting, types, tests, repository validation, the deterministic offline evaluation and gate, generated evidence validation, and sample evidence validation, including negative-path tests. Do not claim a check passed unless it was executed and observed.
 
 ## External boundaries
 

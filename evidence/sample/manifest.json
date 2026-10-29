@@ -1,0 +1,22 @@
+{
+  "evidence_version": "phase1-evidence-v1",
+  "files": {
+    "case-results.json": "9ecbfefc3e83b7fe2ef45db3eafa0b6f75b99756ce393e49fb324ac581f147ce",
+    "control-status.json": "84518091cac0bf62f5ea4c75c8b259801b1902ed0cae5a7fcc3f6926917d5f65",
+    "report.md": "f55ca4768325baadbaac263bd56443c8edc85b28dca0131fbe64220c49f31c53",
+    "summary.json": "703aaca275a4bcf9d23b238d5d3b0c03be0a49339b5ecacaad030d1c31a263b4"
+  },
+  "input_digests": {
+    "corpus": "ae3c23a74b89ac40cb768bbfd052eddf64a70098b3d67a691382d5b12322131c",
+    "dataset": "8bfa021682b0a5fa01aeaa0797dccd528f7248ff49e0baff7eb9e6fbcd43d364",
+    "release_policy": "dffff741e293a6db916c5ec8caafa9963fcb8fda2674ca5277286a7d59367c6d"
+  },
+  "schema_version": "1.0",
+  "volatile_fields": [
+    "summary.generated_at_utc",
+    "summary.variants.*.run_id",
+    "summary.variants.*.trace_ids",
+    "case-results.variants.*.*.trace_id",
+    "report generated timestamp and run IDs"
+  ]
+}

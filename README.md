@@ -1,36 +1,89 @@
 # MLflow AI Assurance Lab
 
-> **Status: Foundation — implementation not started**
+> **Status: Functional offline assurance MVP (Phase 1)**
 
-This repository is the foundation for a small, reproducible portfolio lab that will explore how MLflow can support a technical AI assurance chain:
+This small, inspectable portfolio lab demonstrates a bounded technical assurance chain:
 
 `AI risk -> control -> automated evaluation -> decision gate -> auditable evidence`
 
-The planned lab will compare synthetic-policy RAG baseline and governed variants under a deterministic offline evaluation path. Its bounded claim is comparative: within documented assumptions and synthetic data, the governed variant should provide stronger, verifiable control coverage than the baseline. It will not establish production safety, legal compliance, certification, ISO conformity, or complete audit readiness.
+It compares a deliberately limited `baseline` with a `governed` synthetic-policy RAG
+assistant. The mandatory path uses MLflow 3.17.2, SQLite, a deterministic local provider,
+versioned data, and code-based scorers. It needs no API key, SaaS service, paid call, or model
+download.
 
-## Current contents
+The result is comparative and limited to the documented synthetic cases. It does not establish
+production safety, legal compliance, ISO conformity, certification, or complete audit readiness.
 
-Phase 0 provides only repository contracts, dependency and Python decisions, collaboration controls, primary-source references, an initial architecture decision, and structural checks. Retrieval, generation, policy controls, MLflow traces, evaluation datasets, scorers, release gates, providers, and evidence generation are all **Planned** for later phases and are not implemented or simulated here.
+## Architecture
 
-Read these files before contributing:
+```mermaid
+flowchart LR
+    Q[Synthetic query] --> I[Redacted input handling]
+    I --> R[Deterministic retrieval]
+    R --> B[Baseline]
+    R --> G[Governed controls]
+    B --> T[MLflow traces]
+    G --> T
+    T --> S[Five offline scorers]
+    S --> P[Versioned release policy]
+    P --> E[Validated evidence pack]
+```
 
-- [`GOALS.md`](GOALS.md) — stable scope and success conditions.
-- [`PLANS.md`](PLANS.md) — phase status and observed evidence.
-- [`CONTRIBUTING.md`](CONTRIBUTING.md) — setup and checks.
-- [`SECURITY.md`](SECURITY.md) — pre-release reporting limitations.
-- [`docs/source-register.md`](docs/source-register.md) — official sources and supported decisions.
-- [`docs/adr/0001-planned-assurance-architecture.md`](docs/adr/0001-planned-assurance-architecture.md) — planned local architecture.
+MLflow spans cover input handling, retrieval, generation, control decisions, and output
+validation. Raw application output is available to the scorers, while values are redacted before
+trace persistence. Local runtime state lives under ignored `artifacts/`.
 
-## Foundation setup
+## Happy path
 
 Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
 
 ```bash
-uv sync --locked --dev
+make setup
+make demo
+make evaluate
+make evidence
 make verify
 ```
 
-`make verify` currently validates only the Phase 0 foundation: the lockfile, formatting, lint, types, structural tests, the planned MLflow API import surface, YAML parsing, local Markdown links, repository contracts, and the absence of Phase 1 modules. It does not run an assurance gate or validate an evidence pack because neither exists yet.
+`make evaluate` expects and verifies `baseline=FAIL governed=PASS`; an unexpected decision is an
+error. `make gate` applies the release gate to governed results. The intentional negative path is:
+
+```bash
+uv run python -m mlflow_ai_assurance_lab gate --variant baseline
+```
+
+That command must exit non-zero. A controlled regression is also exercised in
+`tests/test_gate.py`.
+
+The observed Phase 1 sample has baseline metrics of 0.25 citation validity, 0.875 scope
+adherence, 0.875 sensitive-data leakage prevention, 0.375 refusal behavior, and 0.25 for the
+limited groundedness proxy. Governed scores 1.0 on all five versioned metrics. See
+[`evidence/sample/report.md`](evidence/sample/report.md) for generated evidence and
+[`docs/findings.md`](docs/findings.md) for interpretation limits.
+
+## Inspect traces
+
+After `make demo` or `make evaluate`, start the local UI:
+
+```bash
+uv run mlflow ui --backend-store-uri sqlite:///artifacts/mlflow/mlflow.db --port 5000
+```
+
+Open `http://127.0.0.1:5000` and select `mlflow-ai-assurance-lab-offline`. Trace tags and root-span
+attributes distinguish `baseline` and `governed`.
+
+## Repository map
+
+- `src/mlflow_ai_assurance_lab/` — application, tracing, evaluation, gate, and evidence code.
+- `data/policies/` and `data/evaluation/` — versioned synthetic inputs.
+- `config/release-policy-v1.json` — thresholds and expected decisions.
+- `docs/control-matrix.md` — risk/control/test/evidence/decision traceability.
+- `evidence/sample/` — generated, machine-validated sample evidence.
+- `artifacts/` — ignored local MLflow and regenerated evidence state.
+
+LLM-as-a-judge is not part of the required path and is disabled by default. Adding one would
+introduce provider cost, nondeterminism, data-boundary review, and secret handling; it must remain
+optional and may not replace the deterministic gate.
 
 ## License
 

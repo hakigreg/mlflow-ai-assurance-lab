@@ -1,8 +1,8 @@
-# ADR 0001: Planned local assurance architecture
+# ADR 0001: Local assurance architecture
 
-- **Status:** Accepted for planning; implementation unverified
+- **Status:** Accepted and implemented in Phase 1
 - **Date:** 2026-10-29
-- **Scope:** Phase 0 architecture decision only
+- **Scope:** Phase 0 decision, implemented and behaviorally verified in Phase 1
 
 ## Context
 
@@ -12,7 +12,7 @@ MLflow evaluation datasets require a SQL backend. Built-in LLM judges may make p
 
 ## Decision
 
-The following architecture is **Planned** for Phase 1 and later:
+The following architecture is implemented for Phase 1:
 
 1. Use Python 3.12, uv, and the committed lockfile for the required runtime.
 2. Use one deterministic offline provider implemented as explicit local code with no model download or network fallback. An optional real provider may be added later but must remain disabled by default and outside required verification.
@@ -22,7 +22,9 @@ The following architecture is **Planned** for Phase 1 and later:
 6. Apply a versioned release policy after evaluation and emit a machine-validated evidence pack that links risks, controls, tests, run/trace identifiers, results, decisions, and residual risks.
 7. Fail explicitly when the tracking backend, required data, evaluation, gate, or evidence validation fails. No online or permissive success fallback is allowed.
 
-Planned package boundaries are `domain`, `providers`, `rag`, `assurance`, and `evidence`; their exact modules will be decided from the Phase 1 vertical slice. None exists in Phase 0.
+The implemented package boundaries are `domain`, `config`, `application`, `redaction`, `tracking`,
+`scorers`, `evaluation`, `gate`, and `evidence`. The deterministic provider, lexical retrieval, and
+controls remain cohesive inside `application` at this scale.
 
 ## Consequences
 
@@ -40,4 +42,8 @@ Planned package boundaries are `domain`, `providers`, `rag`, `assurance`, and `e
 
 ## Verification status
 
-Official documentation has been reviewed, and the pinned environment imports the planned MLflow tracing, evaluation, dataset, and scorer symbols. No planned runtime component, trace, dataset, evaluation, scorer, gate, provider, or evidence artifact has been implemented or executed. Phase 1 must verify behavioral API compatibility and update this ADR if observed behavior differs.
+Official documentation and the pinned package were reviewed. Phase 1 executed the managed dataset,
+manual tracing, `mlflow.genai.evaluate()`, five code-based scorers, release gate, and evidence
+validation against local SQLite. The observed sample produces the intentionally expected baseline
+`FAIL` and governed `PASS`. The implementation uses manual spans so raw scorer-visible output can
+be redacted before trace persistence. Local run/trace identifiers and timestamps remain volatile.

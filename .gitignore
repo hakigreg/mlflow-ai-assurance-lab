@@ -22,6 +22,10 @@ mlflow.db
 mlruns/
 artifacts/
 evidence/
+!evidence/
+evidence/*
+!evidence/sample/
+!evidence/sample/**
 
 # Editors and operating systems
 .DS_Store
