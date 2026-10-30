@@ -2,11 +2,11 @@
 
 ## Observed results
 
-The generated Phase 1 sample evaluated eight versioned synthetic cases through MLflow 3.17.2.
-Baseline failed the release policy with citation validity `0.25`, scope adherence `0.875`,
-sensitive-data leakage prevention `0.875`, refusal behavior `0.375`, and groundedness proxy `0.25`.
-Governed scored `1.0` on every required metric and passed the versioned thresholds. The sample
-evidence manifest and machine-readable control links validated successfully.
+The generated sample evaluated eight versioned synthetic cases through MLflow 3.17.2. Baseline
+failed the release policy with citation-source match `0.25`, scope-action match `0.875`, configured
+synthetic-marker absence `0.875`, expected-action match `0.375`, and lexical-response match `0.25`.
+Governed scored `1.0` on every required metric and passed the unchanged versioned thresholds. The
+sample evidence manifest and machine-readable control links validated successfully.
 
 MLflow demonstrates distinguishable baseline/governed traces, span-level input handling,
 retrieval, generation, control decisions, output validation, managed-dataset lineage, scorer
@@ -19,8 +19,8 @@ the configured marker is absent from the persisted trace.
 The result does not demonstrate production safety, real-model behavior, semantic groundedness,
 general PII detection, broad prompt-injection resistance, legal compliance, ISO conformity or
 certification, or complete audit readiness. The deterministic provider and lexical retriever are
-test instruments. `groundedness_proxy` proves only expected term and citation presence under these
-fixtures.
+test instruments. `lexical_response_match` proves only action, expected-term, and citation-ID
+matching under these fixtures; `synthetic_marker_absence` covers only configured patterns.
 
 ## Residual risks
 

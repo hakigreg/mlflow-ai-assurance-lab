@@ -59,11 +59,13 @@ uv run python -m mlflow_ai_assurance_lab gate --variant baseline
 That command must exit non-zero. A controlled regression is also exercised in
 `tests/test_gate.py`.
 
-The observed Phase 1 sample has baseline metrics of 0.25 citation validity, 0.875 scope
-adherence, 0.875 sensitive-data leakage prevention, 0.375 refusal behavior, and 0.25 for the
-limited groundedness proxy. Governed scores 1.0 on all five versioned metrics. See
+The current scorer contract names what is measured: citation-source ID match, scope-action match,
+configured synthetic-marker absence, expected-action match, and lexical-response match. The
+observed Phase 1 sample produced baseline scores of `0.25`, `0.875`, `0.875`, `0.375`, and `0.25`
+respectively; governed scored `1.0` on all five versioned metrics. These names were clarified in
+Phase 2 without lowering the original `1.0` thresholds. See
 [`evidence/sample/report.md`](evidence/sample/report.md) for generated evidence and
-[`docs/findings.md`](docs/findings.md) for interpretation limits.
+[`docs/scorer-contracts.md`](docs/scorer-contracts.md) for inputs, negative tests, and limits.
 
 ## Inspect traces
 
@@ -82,6 +84,7 @@ attributes distinguish `baseline` and `governed`.
 - `data/policies/` and `data/evaluation/` — versioned synthetic inputs.
 - `config/release-policy-v1.json` — thresholds and expected decisions.
 - `docs/control-matrix.md` — risk/control/test/evidence/decision traceability.
+- `docs/scorer-contracts.md` — precise scorer claims, inputs, negative tests, and limits.
 - `evidence/sample/` — generated, machine-validated sample evidence.
 - `artifacts/` — ignored local MLflow and regenerated evidence state.
 

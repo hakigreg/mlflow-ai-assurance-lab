@@ -12,7 +12,7 @@ protected ISO clauses are reproduced.
 | ISO/IEC 42001:2023 public themes: risk management, transparency, traceability, and continual improvement | Risk/control links, MLflow traces, evidence manifest, versioned plan | No clause-level mapping, management-system assessment, conformity, or certification claim. |
 | OWASP LLM01:2026 Prompt Injection | Direct/indirect cases and CTRL-INJECT-001 | Defensive pattern tests are not comprehensive penetration testing. |
 | OWASP LLM02:2026 Sensitive Information Disclosure | Leakage scorer, refusal, trace redaction | Only synthetic configured markers are covered. |
-| OWASP LLM07:2026 Misinformation | Citation validity and limited groundedness proxy | The proxy cannot establish semantic truth. |
+| OWASP LLM07:2026 Misinformation | Citation-source ID and lexical-response matching | These matches cannot establish semantic or factual truth. |
 | OWASP LLM09:2026 Vector and Embedding Weaknesses | Retrieval provenance and support threshold | The lab uses lexical retrieval, not production embeddings or a vector database. |
 | EU AI Act public themes: documentation, logging/traceability, transparency, human oversight, robustness, cybersecurity, and accuracy | System card, MLflow traces, evidence, oversight flow, adversarial cases, gate | No legal classification or applicability analysis; technical artifacts alone cannot demonstrate compliance. |
 

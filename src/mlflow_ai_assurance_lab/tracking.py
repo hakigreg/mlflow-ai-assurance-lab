@@ -52,6 +52,7 @@ def managed_dataset(experiment_id: str) -> EvaluationDataset:
             experiment_id=[experiment_id],
             tags={
                 "dataset_version": "policy-assurance-v1",
+                "dataset_schema_version": "1.1",
                 "content": "synthetic-publishable-only",
             },
         )

@@ -13,14 +13,14 @@
     },
     {
       "control_id": "CTRL-CITE-001",
-      "evidence": "summary.json#variants.governed.metrics.citation_validity",
-      "implementation": "scorers.citation_validity",
+      "evidence": "summary.json#variants.governed.metrics.citation_source_match",
+      "implementation": "scorers.citation_source_match",
       "risk_ids": [
         "RISK-CITE-001",
         "RISK-GROUND-001"
       ],
       "status": "PASS",
-      "test": "tests/test_scorers.py::test_citation_validity_rejects_unknown_source"
+      "test": "tests/test_scorers.py::test_citation_source_match_accepts_only_expected_retrieved_ids"
     },
     {
       "control_id": "CTRL-SCOPE-001",
@@ -64,25 +64,25 @@
     },
     {
       "control_id": "CTRL-REFUSE-001",
-      "evidence": "summary.json#variants.governed.metrics.refusal_behavior",
-      "implementation": "scorers.refusal_behavior",
+      "evidence": "summary.json#variants.governed.metrics.expected_action_match",
+      "implementation": "scorers.expected_action_match",
       "risk_ids": [
         "RISK-INJECT-001",
         "RISK-LEAK-001",
         "RISK-GROUND-001"
       ],
       "status": "PASS",
-      "test": "tests/test_scorers.py::test_refusal_behavior_requires_expected_action"
+      "test": "tests/test_scorers.py::test_expected_action_match_detects_wrong_refusal_and_over_refusal"
     },
     {
       "control_id": "CTRL-GROUND-001",
-      "evidence": "summary.json#variants.governed.metrics.groundedness_proxy",
-      "implementation": "scorers.groundedness_proxy",
+      "evidence": "summary.json#variants.governed.metrics.lexical_response_match",
+      "implementation": "scorers.lexical_response_match",
       "risk_ids": [
         "RISK-GROUND-001"
       ],
       "status": "PASS",
-      "test": "tests/test_scorers.py::test_groundedness_proxy_is_limited_and_deterministic"
+      "test": "tests/test_scorers.py::test_lexical_response_match_accepts_only_complete_answer_criteria"
     },
     {
       "control_id": "CTRL-GATE-001",

@@ -28,7 +28,7 @@ Python 3.12.16 and the committed `uv.lock` define the runtime.
 
 The corpus and eight-case dataset are small. Retrieval uses lexical overlap. The deterministic
 provider cannot represent the variability or emergent behavior of a real model. The
-`groundedness_proxy` checks lexical terms and citations only. Passing the gate is evidence for this
+`lexical_response_match` checks action labels, lexical terms, and citation IDs only. Passing the gate is evidence for this
 versioned lab configuration, not production safety, policy correctness, compliance, certification,
 or complete audit readiness.
 

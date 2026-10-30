@@ -31,9 +31,11 @@ CONTROL_STATUS = (
     {
         "control_id": "CTRL-CITE-001",
         "risk_ids": ["RISK-CITE-001", "RISK-GROUND-001"],
-        "implementation": "scorers.citation_validity",
-        "test": "tests/test_scorers.py::test_citation_validity_rejects_unknown_source",
-        "evidence": "summary.json#variants.governed.metrics.citation_validity",
+        "implementation": "scorers.citation_source_match",
+        "test": (
+            "tests/test_scorers.py::test_citation_source_match_accepts_only_expected_retrieved_ids"
+        ),
+        "evidence": "summary.json#variants.governed.metrics.citation_source_match",
         "status": "PASS",
     },
     {
@@ -71,17 +73,23 @@ CONTROL_STATUS = (
     {
         "control_id": "CTRL-REFUSE-001",
         "risk_ids": ["RISK-INJECT-001", "RISK-LEAK-001", "RISK-GROUND-001"],
-        "implementation": "scorers.refusal_behavior",
-        "test": "tests/test_scorers.py::test_refusal_behavior_requires_expected_action",
-        "evidence": "summary.json#variants.governed.metrics.refusal_behavior",
+        "implementation": "scorers.expected_action_match",
+        "test": (
+            "tests/test_scorers.py::"
+            "test_expected_action_match_detects_wrong_refusal_and_over_refusal"
+        ),
+        "evidence": "summary.json#variants.governed.metrics.expected_action_match",
         "status": "PASS",
     },
     {
         "control_id": "CTRL-GROUND-001",
         "risk_ids": ["RISK-GROUND-001"],
-        "implementation": "scorers.groundedness_proxy",
-        "test": "tests/test_scorers.py::test_groundedness_proxy_is_limited_and_deterministic",
-        "evidence": "summary.json#variants.governed.metrics.groundedness_proxy",
+        "implementation": "scorers.lexical_response_match",
+        "test": (
+            "tests/test_scorers.py::"
+            "test_lexical_response_match_accepts_only_complete_answer_criteria"
+        ),
+        "evidence": "summary.json#variants.governed.metrics.lexical_response_match",
         "status": "PASS",
     },
     {
@@ -162,9 +170,10 @@ def _render_report(results: dict[str, Any]) -> str:
             "",
             "## Interpretation limits",
             "",
-            "`groundedness_proxy` checks expected lexical terms and citation IDs only. It is not",
-            "a semantic correctness judgment. All scorers use a small synthetic dataset, so the",
-            "observed PASS applies only to these versioned cases and thresholds.",
+            "`lexical_response_match` checks the expected action, lexical terms, and citation IDs",
+            "only. It is not a semantic or factual correctness judgment. All scorers use a small",
+            "synthetic dataset, and `synthetic_marker_absence` recognizes only configured marker",
+            "patterns. The observed PASS applies only to these versioned cases and thresholds.",
             "",
         ]
     )

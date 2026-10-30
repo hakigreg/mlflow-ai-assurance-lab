@@ -12,10 +12,10 @@ from mlflow_ai_assurance_lab.gate import decide
 def test_regression_makes_gate_fail(tmp_path: Path) -> None:
     policy = load_release_policy()
     metrics = {name: 1.0 for name in policy.required_scorers}
-    metrics["citation_validity"] = 0.875
+    metrics["citation_source_match"] = 0.875
     decision, failed = decide(metrics, policy)
     assert decision == "FAIL"
-    assert failed == ("citation_validity",)
+    assert failed == ("citation_source_match",)
 
     results = tmp_path / "regression.json"
     results.write_text(

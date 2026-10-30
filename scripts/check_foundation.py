@@ -38,6 +38,7 @@ REQUIRED_FILES = {
     "docs/findings.md",
     "docs/human-oversight.md",
     "docs/risk-assessment.md",
+    "docs/scorer-contracts.md",
     "docs/source-register.md",
     "docs/standards-crosswalk.md",
     "docs/threat-model.md",

@@ -113,6 +113,22 @@ offline reproducibility after locked setup.
   `702b56c9f70343adbf065ae831e62a66` (governed) produced expected `FAIL`/`PASS` decisions; the
   governed gate passed; generated and committed sample evidence both validated.
 - `git diff --check` — exited successfully with no output after the P2-01 contract changes.
+- P2-02 retained all eight stable case IDs and the five `1.0` thresholds while moving the dataset
+  to schema `1.1` with per-case rationale and fail-closed validation of structure, types,
+  uniqueness, category/action and risk/control vocabularies, and expected citation presence in the
+  versioned corpus. Five renamed scorer contracts now state only ID, action, configured-marker, and
+  lexical matching claims; focused config/scorer/application/gate tests reported 19 passed.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 20 files formatted; mypy found no issues in 20 files; pytest
+  reported 29 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository
+  validation passed. Final evaluation runs `9fbabaf9e15d430f99fd10a3c3944482` (baseline) and
+  `71129f968070454bbfabafc1d8a2c8df` (governed) each covered eight cases and produced expected
+  `FAIL`/`PASS` decisions. Baseline metrics remained `0.25`, `0.875`, `0.875`, `0.375`, and `0.25`
+  for citation-source match, scope-action match, synthetic-marker absence, expected-action match,
+  and lexical-response match; governed scored `1.0` on all five. The governed gate and generated
+  and committed evidence validation passed.
+- `evidence/sample/manifest.json` — regenerated from the measured P2-02 inputs and scorer names;
+  manifest SHA-256 `0c5f1b5dd8a182c851bcf5f8ecfeeaa7b5125d90aee8ac7132c34032b8c25a76`.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -148,6 +164,11 @@ offline reproducibility after locked setup.
   to repository/CI contract alignment and pinned MLflow API verification; dataset, scorer,
   security-path, traceability, evidence-provenance, and governance changes remain assigned to
   later increments.
+- 2026-10-30: P2-02 preserved the dataset identity, all stable case IDs, and the strict `1.0`
+  thresholds. Dataset schema `1.1` adds reviewable rationale and executable validation. Scorers
+  were renamed to bounded matching claims because the implementation does not establish semantic
+  truth, factual correctness, general sensitive-data absence, or complete scope classification.
+  P2-03 security and persistence negative paths remain unimplemented pending human review.
 
 ## Surprises and discoveries
 
@@ -167,12 +188,17 @@ offline reproducibility after locked setup.
   private repository, stating that the feature requires GitHub Pro or a public repository. No
   hosted setting was changed; local CI remains least privilege and the renamed job will be
   verified by the next hosted run after an authorized push.
+- 2026-10-30: The first local `make test` invocation for P2-02 did not start pytest because `uv`
+  was absent from the shell `PATH`; the documented `UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv`
+  override used by prior verification was available, and the rerun reported 17 passed before any
+  P2-02 mutation.
 
 ## Outcomes and retrospective
 
 Phase 0 and Phase 1 are complete. The repository contains a functional, deterministic offline
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
 governed comparison, strict release gate, generated evidence, governance documentation, and
-secret-free CI. Phase 2 is in progress through independently reviewed increments; only P2-01
-repository and CI contract alignment has begun. The security reporting contact and hosted GitHub
-security settings remain manual pre-publication actions.
+secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
+repository/CI alignment and P2-02 dataset/scorer validity increments are implemented. P2-03 and
+later hardening remain unimplemented pending their human gates. The security reporting contact and
+hosted GitHub security settings remain manual pre-publication actions.
