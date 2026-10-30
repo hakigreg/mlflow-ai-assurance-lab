@@ -87,7 +87,7 @@ offline reproducibility after locked setup.
 
 ## Phase 2 — Assurance and evidence hardening
 
-**Status:** Not started
+**Status:** In progress
 
 **Objective:** Harden bidirectional traceability, evidence integrity, negative paths, security controls, and defensible governance documentation.
 
@@ -95,7 +95,24 @@ offline reproducibility after locked setup.
 
 **Acceptance criteria:** Planned validation must connect every material risk to controls, tests, evidence, decisions, and residual risk while rejecting invalid or stale evidence.
 
-**Verification evidence:** Not run.
+**Verification evidence:**
+
+- 2026-10-30: P2-00 read-only gap analysis received explicit human approval; P2-01 began as the
+  first accepted mutation. Later Phase 2 requirements remain unimplemented until their owning
+  increments are reviewed.
+- Official MLflow tag `v3.17.2` source review plus installed-package signature inspection —
+  confirmed the implemented manual tracing, trace search, GenAI evaluation, managed dataset, and
+  custom scorer call shapes. Exact sources, decisions, and limits are recorded in
+  `docs/source-register.md`; no dependency migration was needed.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv repository` — repository and
+  offline-assurance validation passed. The focused contract test run reported 7 passed.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 19 files already formatted; mypy found no issues in 19 files;
+  pytest reported 17 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository
+  validation passed; evaluation runs `e396f3597ac5447aab9e3c0a39edff05` (baseline) and
+  `702b56c9f70343adbf065ae831e62a66` (governed) produced expected `FAIL`/`PASS` decisions; the
+  governed gate passed; generated and committed sample evidence both validated.
+- `git diff --check` — exited successfully with no output after the P2-01 contract changes.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -127,6 +144,10 @@ offline reproducibility after locked setup.
 - 2026-10-29: Kept LLM-as-a-judge and real providers disabled and unimplemented in the required
   path. Any later extension must remain optional and document cost, variability, data boundaries,
   and secret handling.
+- 2026-10-30: Began Phase 2 through the approved human-gated execution sequence. P2-01 is limited
+  to repository/CI contract alignment and pinned MLflow API verification; dataset, scorer,
+  security-path, traceability, evidence-provenance, and governance changes remain assigned to
+  later increments.
 
 ## Surprises and discoveries
 
@@ -142,12 +163,16 @@ offline reproducibility after locked setup.
 - 2026-10-29: `uv run` attempted isolated package rebuilding after source changes in the
   network-restricted sandbox. The documented workflow now makes setup explicit and uses
   `uv run --locked --no-sync` for checks after setup; CI already performs locked sync first.
+- 2026-10-30: GitHub returned HTTP 403 when P2-01 attempted to inspect hosted rulesets for the
+  private repository, stating that the feature requires GitHub Pro or a public repository. No
+  hosted setting was changed; local CI remains least privilege and the renamed job will be
+  verified by the next hosted run after an authorized push.
 
 ## Outcomes and retrospective
 
-Phase 0 and Phase 1 are complete. The repository now contains a functional, deterministic offline
+Phase 0 and Phase 1 are complete. The repository contains a functional, deterministic offline
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
 governed comparison, strict release gate, generated evidence, governance documentation, and
-secret-free CI. The security reporting contact and hosted GitHub security settings remain manual
-pre-publication actions. Phase 2 has not started; evidence hardening requires the separate Phase 2
-prompt.
+secret-free CI. Phase 2 is in progress through independently reviewed increments; only P2-01
+repository and CI contract alignment has begun. The security reporting contact and hosted GitHub
+security settings remain manual pre-publication actions.

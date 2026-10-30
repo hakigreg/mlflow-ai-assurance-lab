@@ -1,4 +1,4 @@
-"""Validate repository structure and functional-MVP consistency."""
+"""Validate repository structure and implemented offline-assurance consistency."""
 
 from __future__ import annotations
 
@@ -94,7 +94,7 @@ def validate_yaml(errors: list[str]) -> None:
         if required_text not in workflow:
             errors.append(f"CI is missing required text: {required_text}")
     if "secrets." in workflow:
-        errors.append("Phase 0 CI must not reference GitHub Actions secrets")
+        errors.append("Required offline CI must not reference GitHub Actions secrets")
 
 
 def validate_markdown_links(errors: list[str]) -> None:
@@ -142,7 +142,7 @@ def validate_public_files(errors: list[str]) -> None:
                 errors.append(f"possible {label} in {path.relative_to(ROOT)}")
 
 
-def validate_scope(errors: list[str]) -> None:
+def validate_implemented_scope(errors: list[str]) -> None:
     package = ROOT / "src/mlflow_ai_assurance_lab"
     required_package_files = {
         "__init__.py",
@@ -165,8 +165,8 @@ def validate_scope(errors: list[str]) -> None:
         )
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    if "Functional offline assurance MVP" not in readme:
-        errors.append("README does not expose the required Phase 1 status")
+    if "Assurance and evidence hardening (Phase 2 in progress)" not in readme:
+        errors.append("README does not expose the current Phase 2 status")
 
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if not license_text.startswith("MIT License\n"):
@@ -216,13 +216,13 @@ def main() -> int:
     validate_yaml(errors)
     validate_markdown_links(errors)
     validate_public_files(errors)
-    validate_scope(errors)
+    validate_implemented_scope(errors)
     validate_traceability(errors)
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("Repository and functional-MVP validation passed.")
+    print("Repository and offline-assurance validation passed.")
     return 0
 
 

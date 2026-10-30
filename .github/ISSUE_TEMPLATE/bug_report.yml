@@ -52,7 +52,7 @@ body:
     attributes:
       label: Impact
       options:
-        - Foundation workflow blocked
+        - Required offline workflow blocked
         - Incorrect result
         - Documentation or usability issue
         - Other non-security impact

@@ -2,8 +2,9 @@
 
 ## Project state
 
-Phase 1 provides a functional offline assurance MVP. Phase 2 hardening and Phase 3 independent
-release review have not started. Keep changes within the current phase in `PLANS.md`.
+Phase 1 provides a functional offline assurance MVP. Phase 2 hardening is in progress through
+human-gated increments; Phase 3 independent release review has not started. Keep changes within
+the current increment and record observed status in `PLANS.md`.
 
 ## Setup and checks
 
@@ -15,8 +16,8 @@ and installs exactly from `uv.lock`:
 make setup
 ```
 
-Focused checks are `make lint`, `make format-check`, `make types`, `make test`, `make evaluate`,
-`make gate`, and `make evidence-validate`. Before review, run:
+Focused checks are `make lint`, `make format-check`, `make types`, `make test`,
+`make repository`, `make evaluate`, `make gate`, and `make evidence-validate`. Before review, run:
 
 ```bash
 make verify

@@ -8,9 +8,9 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readme_exposes_functional_mvp_status() -> None:
+def test_readme_exposes_phase_two_status() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Functional offline assurance MVP" in readme
+    assert "Assurance and evidence hardening (Phase 2 in progress)" in readme
 
 
 def test_durable_contracts_exist() -> None:
@@ -18,7 +18,7 @@ def test_durable_contracts_exist() -> None:
         assert (ROOT / relative_path).is_file(), relative_path
 
 
-def test_project_metadata_pins_foundation_runtime() -> None:
+def test_project_metadata_pins_runtime() -> None:
     with (ROOT / "pyproject.toml").open("rb") as file_handle:
         metadata = tomllib.load(file_handle)
 
@@ -35,7 +35,7 @@ def test_license_file_is_mit() -> None:
     assert "Permission is hereby granted, free of charge" in license_text
 
 
-def test_planned_mlflow_api_surface_is_importable(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_pinned_mlflow_api_surface_is_importable(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.setenv("MLFLOW_DISABLE_AGENT_HINT", "1")
 
     import mlflow

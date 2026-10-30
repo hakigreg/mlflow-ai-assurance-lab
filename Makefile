@@ -6,7 +6,7 @@ export MLFLOW_ENABLE_TELEMETRY = false
 export DO_NOT_TRACK = 1
 UV_RUN = $(UV) run --locked --no-sync
 
-.PHONY: setup install lock-check lint format-check types test foundation demo evaluate gate \
+.PHONY: setup install lock-check lint format-check types test repository demo evaluate gate \
 	evidence evidence-validate sample-evidence-validate verify
 
 setup: install
@@ -29,7 +29,7 @@ types:
 test:
 	$(UV_RUN) pytest
 
-foundation:
+repository:
 	$(UV_RUN) python scripts/check_foundation.py
 
 demo:
@@ -51,5 +51,5 @@ sample-evidence-validate:
 	$(UV_RUN) python -m mlflow_ai_assurance_lab validate-evidence \
 		--output-dir evidence/sample
 
-verify: lock-check lint format-check types test foundation evaluate gate evidence \
+verify: lock-check lint format-check types test repository evaluate gate evidence \
 	evidence-validate sample-evidence-validate

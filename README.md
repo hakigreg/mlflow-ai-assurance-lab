@@ -1,6 +1,6 @@
 # MLflow AI Assurance Lab
 
-> **Status: Functional offline assurance MVP (Phase 1)**
+> **Status: Assurance and evidence hardening (Phase 2 in progress)**
 
 This small, inspectable portfolio lab demonstrates a bounded technical assurance chain:
 
@@ -13,6 +13,10 @@ download.
 
 The result is comparative and limited to the documented synthetic cases. It does not establish
 production safety, legal compliance, ISO conformity, certification, or complete audit readiness.
+
+The Phase 1 functional offline assurance MVP remains the implemented behavior. Phase 2 is being
+delivered through human-gated increments; unfinished hardening requirements are not presented as
+implemented.
 
 ## Architecture
 

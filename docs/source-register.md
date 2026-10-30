@@ -1,6 +1,6 @@
 # Source register
 
-Consulted on 2026-10-29. This register uses official primary sources to support repository decisions. A reference is not a claim that the planned lab implements a standard, satisfies a regulation, or verifies an MLflow capability end to end.
+Consulted initially on 2026-10-29 and updated on 2026-10-30. This register uses official primary sources to support repository decisions. A reference is not a claim that the lab implements a standard, satisfies a regulation, or verifies an MLflow capability end to end.
 
 | ID | Official source | Organization | Version or date | Decision supported |
 |---|---|---|---|---|
@@ -22,10 +22,28 @@ Consulted on 2026-10-29. This register uses official primary sources to support 
 | SRC-016 | [MLflow evaluation quickstart](https://mlflow.org/docs/latest/genai/eval-monitor/quickstart/) | MLflow | Accessed 2026-10-29; package 3.17.2 | Use the stable `mlflow.genai.evaluate(data, predict_fn, scorers)` path and consume its run ID, aggregate metrics, per-case results, and traces. Local behavioral checks confirmed the pinned signature. |
 | SRC-017 | [OWASP Top 10 for LLM Applications 2026 PDF](https://genai.owasp.org/download/56857/) | OWASP GenAI Security Project | Version 2026; landing page dated 2026-08-03; accessed 2026-10-29 | Use selected current identifiers in the educational crosswalk: LLM01 Prompt Injection, LLM02 Sensitive Information Disclosure, LLM07 Misinformation, and LLM09 Vector and Embedding Weaknesses. |
 | SRC-018 | [MLflow trace masking](https://mlflow.org/docs/latest/genai/tracing/observe-with-traces/masking/) | MLflow | Accessed 2026-10-29; package 3.17.2 | Treat trace masking as a client-side responsibility. The lab applies its own narrow, versioned synthetic-marker redaction before calling span input/output persistence APIs and tests the stored trace. |
+| SRC-019 | [MLflow v3.17.2 tracing API source](https://github.com/mlflow/mlflow/blob/v3.17.2/mlflow/tracing/fluent.py) | MLflow | Tag `v3.17.2`; verified 2026-10-30 | Pin the implemented `start_span`, `update_current_trace`, and `search_traces` signatures to the exact release source rather than relying only on mutable `latest` documentation. |
+| SRC-020 | [MLflow v3.17.2 GenAI evaluation API source](https://github.com/mlflow/mlflow/blob/v3.17.2/mlflow/genai/evaluation/base.py) | MLflow | Tag `v3.17.2`; verified 2026-10-30 | Confirm the implemented `evaluate(data, scorers, predict_fn, model_id)` call shape and `EvaluationResult` return contract for the pinned release. |
+| SRC-021 | [MLflow v3.17.2 evaluation dataset API source](https://github.com/mlflow/mlflow/blob/v3.17.2/mlflow/genai/datasets/__init__.py) | MLflow | Tag `v3.17.2`; verified 2026-10-30 | Confirm the implemented `create_dataset` and filtered `search_datasets` call shapes. `EvaluationDataset.merge_records` was also checked in the same tagged source tree. |
+| SRC-022 | [MLflow v3.17.2 scorer API source](https://github.com/mlflow/mlflow/blob/v3.17.2/mlflow/genai/scorers/base.py) | MLflow | Tag `v3.17.2`; verified 2026-10-30 | Confirm the implemented `@scorer` arguments, supported `mean` aggregation, `Scorer` return type, and custom `Feedback` use for deterministic local scorers. |
+
+## MLflow 3.17.2 API verification record
+
+On 2026-10-30, local signature inspection observed installed MLflow `3.17.2` and matched the
+repository calls to official tag `v3.17.2` sources:
+
+| Implemented surface | Repository use | Verification decision |
+|---|---|---|
+| Tracking and manual tracing | Local SQLite tracking; experiment selection; nested `start_span`; trace tags/metadata; filtered trace search returning trace objects. | The installed signatures used by `tracking.py`, `application.py`, and `evaluation.py` match the pinned release. Keep the manual pre-persistence redaction boundary. |
+| Managed evaluation datasets | Create or find one named dataset in the current experiment and merge versioned `inputs`/`expectations` records. | The installed `create_dataset`, filtered `search_datasets`, and `EvaluationDataset.merge_records` signatures match the pinned release. Keep SQLite because the managed dataset path requires a database-backed tracking store. |
+| GenAI evaluation | Pass the managed dataset, `PolicyAssistant.ask`, and deterministic scorers to `mlflow.genai.evaluate`. | The installed signature and official tagged source match the implemented call. Existing Phase 1 execution verifies this path behaviorally; this check does not extend the claim to later versions or hosted deployments. |
+| Code-based scorers | Define custom scorers with `@scorer(name=..., aggregations=["mean"])` and return `Feedback`. | The installed signature and official tagged source support the implemented form. This verification establishes API compatibility only; scorer validity remains assigned to P2-02. |
 
 ## Register limits
 
-- `latest` MLflow documentation can change after consultation; the implementation must re-check documentation against the pinned package and record any mismatch.
+- `latest` MLflow guides can change after consultation. Exact implemented API decisions are now
+  cross-checked against official tag `v3.17.2` sources in SRC-019 through SRC-022; conceptual
+  guidance links remain date-stamped and must be rechecked before any dependency upgrade.
 - ISO/IEC 42001 content beyond the public ISO overview was not used. No clause-level mapping is authorized by this source register.
 - NIST, OWASP, and EU materials evolve. Later mappings must include the recorded version/date and distinguish technical evidence from governance or legal conclusions.
 - Phase 1 behaviorally verifies the pinned MLflow tracing, managed dataset, evaluation, scorer,
