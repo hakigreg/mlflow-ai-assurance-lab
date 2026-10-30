@@ -169,6 +169,29 @@ offline reproducibility after locked setup.
   `0312ca25235c4349a215bdc0f770f7c1` (baseline) and
   `194c9cb72ed04d319c52826a9264da07` (governed); manifest SHA-256
   `b69cef2195425049f6b5ceddcef37a0ee92aa033274c95e24972b9274ed50e6b`.
+- P2-05 versioned the evaluation result, summary, case-results, and manifest contracts at schema
+  `2.0` while retaining control-status schema `2.0`. Exact-field and type validation now binds the
+  application source, installed application/MLflow/Python versions, Git commit plus working-tree
+  marker, dataset/corpus/policy/catalog versions and SHA-256 digests, policy thresholds, MLflow
+  experiment/run/trace anchors, normalized UTC, and generated artifact checksums without storing
+  local or personal paths.
+- The `material-assurance-v1` comparison profile recomputes a material digest after removing only
+  documented UTC, MLflow-ID, and Git-context volatility. Focused config/control/gate/evidence tests
+  reported 40 passed; evidence tests rejected missing files, stale inputs, unknown schemas,
+  missing/wrong-typed fields, checksum changes, contradictory relations and control status, and
+  prohibited content even when its artifact checksum was updated. Comparison tests distinguished
+  timestamp-only volatility from a coherent material metric drift.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 23 files formatted; mypy found no issues in 23 files; pytest
+  reported 60 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository
+  validation passed. Evaluation runs `80c1a91178df46c8bada4870e968dcbe` (baseline) and
+  `23dd9fb6914c43e5a229244c34dece43` (governed) produced expected `FAIL`/`PASS` decisions, the
+  governed gate passed, and generated and committed evidence validation passed.
+- `evidence/sample/manifest.json` — regenerated only through the evidence command from the final
+  measured runs and explicitly revalidated. Manifest SHA-256 is
+  `1fa0a279123e5bef0314f3c5438ed8d3ec1356eff5e073f46104e2fc5a195559`; material digest is
+  `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`; application-source digest
+  is `834aba66333986d955f9fce23658f9fb1a0de208ebbda92f479c8396e0f10348`.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -219,6 +242,11 @@ offline reproducibility after locked setup.
   observations remain separate from the governed release decision. The existing manifest gained
   only the control-catalog binding needed for this increment; complete provenance remains assigned
   to P2-05, and the standards review remains assigned to P2-06.
+- 2026-10-30: P2-05 made source/input/tool provenance and per-artifact schemas explicit and added
+  a machine comparison that excludes only documented volatile or normalizable fields. Current
+  input and source drift fails validation; coherent result drift changes the material digest.
+  Evidence remains unsigned and locally timestamped, and a `dirty` Git marker requires reviewer
+  judgment. Governance claims and standards review remain assigned to P2-06.
 
 ## Surprises and discoveries
 
@@ -258,6 +286,7 @@ assurance vertical slice with MLflow traces, a managed evaluation dataset, measu
 governed comparison, strict release gate, generated evidence, governance documentation, and
 secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
 repository/CI alignment, P2-02 dataset/scorer validity, P2-03 negative gate and persistence
-security, and P2-04 measured control traceability increments are implemented. P2-05 and later
-hardening remain unimplemented pending their human gates. The security reporting contact and
-hosted GitHub security settings remain manual pre-publication actions.
+security, P2-04 measured control traceability, and P2-05 evidence provenance/reproducibility
+increments are implemented. P2-06 and later hardening remain unimplemented pending their human
+gates. The security reporting contact and hosted GitHub security settings remain manual
+pre-publication actions.

@@ -251,11 +251,17 @@
       "intent": "Bind current source digests, complete case coverage, recorded decisions, and generated file hashes into validated evidence.",
       "implementation_refs": [
         "src/mlflow_ai_assurance_lab/evidence.py::generate_evidence",
-        "src/mlflow_ai_assurance_lab/evidence.py::validate_evidence"
+        "src/mlflow_ai_assurance_lab/evidence.py::validate_evidence",
+        "src/mlflow_ai_assurance_lab/evidence.py::compare_evidence"
       ],
       "test_refs": [
         "tests/test_evidence.py::test_tampered_evidence_is_rejected",
-        "tests/test_evidence.py::test_contradictory_control_status_is_rejected"
+        "tests/test_evidence.py::test_missing_evidence_file_is_rejected",
+        "tests/test_evidence.py::test_stale_input_provenance_is_rejected",
+        "tests/test_evidence.py::test_unknown_schema_version_is_rejected",
+        "tests/test_evidence.py::test_contradictory_control_status_is_rejected",
+        "tests/test_evidence.py::test_prohibited_evidence_content_is_rejected_even_with_updated_checksum",
+        "tests/test_evidence.py::test_comparison_reports_material_result_drift"
       ],
       "evidence_paths": [
         "manifest.json#files",
@@ -266,9 +272,9 @@
       },
       "release_decision_contribution": {
         "kind": "evidence_integrity",
-        "detail": "Generation requires current input bindings, complete case coverage, and recomputable decisions; validation then checks generated file hashes."
+        "detail": "Generation binds current inputs, source and tool provenance, complete case coverage, and recomputable decisions; validation checks schemas, relations, safety, material digest, and generated file hashes."
       },
-      "residual_risk": "The Phase 2 control summary does not yet provide the complete provenance manifest assigned to P2-05; volatile MLflow identifiers remain local evidence anchors."
+      "residual_risk": "The local pack is not signed or independently timestamped; a dirty working-tree marker requires reviewer judgment, and volatile MLflow identifiers remain local evidence anchors."
     }
   ]
 }

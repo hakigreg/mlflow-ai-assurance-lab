@@ -25,7 +25,7 @@ def _results(
     failed_metrics: list[str] | None = None,
 ) -> dict[str, Any]:
     return {
-        "schema_version": "1.0",
+        "schema_version": "2.0",
         "policy_version": "release-policy-v1",
         "release_policy_sha256": hashlib.sha256(DEFAULT_POLICY_PATH.read_bytes()).hexdigest(),
         "variants": {

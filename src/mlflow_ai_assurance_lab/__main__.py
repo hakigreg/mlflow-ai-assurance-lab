@@ -22,6 +22,7 @@ from mlflow_ai_assurance_lab.evaluation import (
 )
 from mlflow_ai_assurance_lab.evidence import (
     DEFAULT_EVIDENCE_DIR,
+    compare_evidence,
     generate_evidence,
     validate_evidence,
 )
@@ -42,6 +43,9 @@ def _parser() -> argparse.ArgumentParser:
     evidence.add_argument("--output-dir", type=Path, default=DEFAULT_EVIDENCE_DIR)
     validate = subparsers.add_parser("validate-evidence", help="validate an evidence pack")
     validate.add_argument("--output-dir", type=Path, default=DEFAULT_EVIDENCE_DIR)
+    compare = subparsers.add_parser("compare-evidence", help="compare two validated evidence packs")
+    compare.add_argument("left", type=Path)
+    compare.add_argument("right", type=Path)
     gate = subparsers.add_parser("gate", help="apply release policy to a variant")
     gate.add_argument("--results", type=Path, default=DEFAULT_RESULTS_PATH)
     gate.add_argument("--policy", type=Path, default=DEFAULT_POLICY_PATH)
@@ -98,6 +102,10 @@ def main() -> int:
         validate_evidence(args.output_dir)
         print(f"Evidence validation passed: {args.output_dir}")
         return 0
+    if args.command == "compare-evidence":
+        comparison = compare_evidence(args.left, args.right)
+        print(json.dumps(comparison, indent=2, sort_keys=True))
+        return 0 if comparison["material_match"] else 1
     if args.command == "gate":
         return _gate(args.results, args.policy, args.variant)
     raise AssertionError(f"unhandled command: {args.command}")

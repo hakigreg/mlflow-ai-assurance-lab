@@ -46,6 +46,7 @@ REQUIRED_FILES = {
     "docs/ai-system-card.md",
     "docs/adr/0001-planned-assurance-architecture.md",
     "docs/control-matrix.md",
+    "docs/evidence-provenance.md",
     "docs/findings.md",
     "docs/human-oversight.md",
     "docs/risk-assessment.md",

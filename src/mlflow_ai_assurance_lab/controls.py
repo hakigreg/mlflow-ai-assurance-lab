@@ -536,8 +536,8 @@ def render_control_matrix(status: dict[str, Any]) -> str:
             "",
             "Machine-readable rows are in",
             "[`../evidence/sample/control-status.json`](../evidence/sample/control-status.json).",
-            "The manifest remains the bounded Phase 1/P2-04 manifest; complete provenance is",
-            "explicitly deferred to P2-05.",
+            "Schema, provenance, validation, and material-comparison semantics are documented in",
+            "[`evidence-provenance.md`](evidence-provenance.md).",
             "",
         ]
     )

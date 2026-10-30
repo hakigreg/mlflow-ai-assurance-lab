@@ -55,6 +55,7 @@ class ReleasePolicy:
 @dataclass(frozen=True)
 class VariantResult:
     variant: Variant
+    experiment_id: str
     run_id: str
     trace_ids: tuple[str, ...]
     metrics: dict[str, float]
@@ -66,6 +67,7 @@ class VariantResult:
     def to_dict(self) -> dict[str, Any]:
         return {
             "variant": self.variant,
+            "experiment_id": self.experiment_id,
             "run_id": self.run_id,
             "trace_ids": list(self.trace_ids),
             "metrics": self.metrics,

@@ -41,7 +41,7 @@ def assess_recorded_results(
 ) -> tuple[Decision, tuple[str, ...]]:
     """Validate a recorded result envelope and independently recompute its decision."""
 
-    if results.get("schema_version") != "1.0":
+    if results.get("schema_version") != "2.0":
         raise GateInputError("evaluation results use an unsupported schema_version")
     if results.get("policy_version") != policy.policy_version:
         raise GateInputError("evaluation results policy_version does not match the release policy")

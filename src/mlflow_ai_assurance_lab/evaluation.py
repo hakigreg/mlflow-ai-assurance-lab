@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.metadata
 import json
 from datetime import UTC, datetime
 from pathlib import Path
@@ -17,6 +18,7 @@ from mlflow_ai_assurance_lab.config import (
     DEFAULT_CORPUS_PATH,
     DEFAULT_DATASET_PATH,
     DEFAULT_POLICY_PATH,
+    load_json,
     load_release_policy,
 )
 from mlflow_ai_assurance_lab.control_catalog import (
@@ -90,6 +92,7 @@ def evaluate_variant(variant: Variant, runtime_dir: Path) -> VariantResult:
         raise RuntimeError("MLflow trace count does not match the managed evaluation dataset")
     return VariantResult(
         variant=variant,
+        experiment_id=experiment_id,
         run_id=result.run_id,
         trace_ids=trace_ids,
         metrics=metrics,
@@ -107,9 +110,14 @@ def run_comparison(
     baseline = evaluate_variant("baseline", runtime_dir)
     governed = evaluate_variant("governed", runtime_dir)
     policy = load_release_policy()
+    dataset = load_json(DEFAULT_DATASET_PATH)
+    corpus = load_json(DEFAULT_CORPUS_PATH)
     payload: dict[str, Any] = {
-        "schema_version": "1.0",
-        "generated_at_utc": datetime.now(UTC).isoformat(),
+        "schema_version": "2.0",
+        "generated_at_utc": datetime.now(UTC).isoformat().replace("+00:00", "Z"),
+        "app_version": importlib.metadata.version("mlflow-ai-assurance-lab"),
+        "dataset_version": dataset["dataset_version"],
+        "corpus_version": corpus["corpus_version"],
         "dataset_sha256": sha256_file(DEFAULT_DATASET_PATH),
         "corpus_sha256": sha256_file(DEFAULT_CORPUS_PATH),
         "release_policy_sha256": sha256_file(DEFAULT_POLICY_PATH),

@@ -38,6 +38,9 @@ download is required.
 3. Regenerate sample evidence explicitly with
    `uv run python -m mlflow_ai_assurance_lab evidence --output-dir evidence/sample` when behavior,
    data, configuration, schemas, or thresholds change.
+   Compare two validated packs with
+   `uv run python -m mlflow_ai_assurance_lab compare-evidence LEFT_DIR RIGHT_DIR`; material drift
+   exits `1`, while documented timestamp and MLflow-ID volatility is normalized.
 4. Record only commands actually run and results actually observed.
 5. Document limitations, residual-risk impact, and a reversible rollback path.
 

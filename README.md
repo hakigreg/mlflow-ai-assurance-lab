@@ -69,6 +69,8 @@ respectively; governed scored `1.0` on all five versioned metrics. These names w
 Phase 2 without lowering the original `1.0` thresholds. See
 [`evidence/sample/report.md`](evidence/sample/report.md) for generated evidence and
 [`docs/scorer-contracts.md`](docs/scorer-contracts.md) for inputs, negative tests, and limits.
+Evidence schemas, provenance, volatility classes, and material comparison semantics are documented
+in [`docs/evidence-provenance.md`](docs/evidence-provenance.md).
 
 ## Inspect traces
 
@@ -90,6 +92,8 @@ attributes distinguish `baseline` and `governed`.
 - `docs/control-matrix.md` — generated measured risk/control/code/test/MLflow/evidence/decision
   traceability; its material status comes from the committed sample evidence.
 - `docs/scorer-contracts.md` — precise scorer claims, inputs, negative tests, and limits.
+- `docs/evidence-provenance.md` — versioned evidence schemas, origin fields, validation, and
+  material-versus-volatile comparison semantics.
 - `evidence/sample/` — generated, machine-validated sample evidence.
 - `artifacts/` — ignored local MLflow and regenerated evidence state.
 
