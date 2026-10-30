@@ -60,6 +60,7 @@ class VariantResult:
     metrics: dict[str, float]
     decision: Decision
     failed_metrics: tuple[str, ...]
+    persistence_safe: bool
     cases: tuple[dict[str, Any], ...]
 
     def to_dict(self) -> dict[str, Any]:
@@ -70,5 +71,6 @@ class VariantResult:
             "metrics": self.metrics,
             "decision": self.decision,
             "failed_metrics": list(self.failed_metrics),
+            "persistence_safe": self.persistence_safe,
             "cases": list(self.cases),
         }

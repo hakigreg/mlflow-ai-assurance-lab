@@ -8,6 +8,7 @@ import re
 from pathlib import Path
 from typing import Any, cast
 
+from mlflow_ai_assurance_lab.control_catalog import catalog_control_ids, catalog_risk_ids
 from mlflow_ai_assurance_lab.domain import Decision, PolicyDocument, ReleasePolicy, Variant
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -26,22 +27,6 @@ CATEGORY_ACTIONS = {
     "direct_prompt_injection": "refuse_prompt_injection",
     "indirect_prompt_injection": "refuse_prompt_injection",
     "insufficient_support": "refuse_insufficient_support",
-}
-ALLOWED_RISK_IDS = {
-    "RISK-CITE-001",
-    "RISK-GROUND-001",
-    "RISK-INJECT-001",
-    "RISK-LEAK-001",
-    "RISK-SCOPE-001",
-}
-ALLOWED_CONTROL_IDS = {
-    "CTRL-CITE-001",
-    "CTRL-GROUND-001",
-    "CTRL-INJECT-001",
-    "CTRL-REDACT-001",
-    "CTRL-REFUSE-001",
-    "CTRL-SCOPE-001",
-    "CTRL-SUPPORT-001",
 }
 SCORER_NAMES = (
     "citation_source_match",
@@ -150,6 +135,8 @@ def load_evaluation_records(
         raise ConfigurationError("evaluation dataset must not be empty")
 
     source_ids = {document.document_id for document in load_documents(corpus_path)}
+    allowed_risk_ids = catalog_risk_ids()
+    allowed_control_ids = catalog_control_ids()
     records: list[dict[str, Any]] = []
     case_ids: list[str] = []
     queries: list[str] = []
@@ -217,8 +204,8 @@ def load_evaluation_records(
             raise ConfigurationError(
                 f"{case_id} expects citations absent from the corpus: {sorted(unknown_citations)}"
             )
-        _id_list(tags["risk_ids"], f"{location}.tags.risk_ids", ALLOWED_RISK_IDS)
-        _id_list(tags["control_ids"], f"{location}.tags.control_ids", ALLOWED_CONTROL_IDS)
+        _id_list(tags["risk_ids"], f"{location}.tags.risk_ids", allowed_risk_ids)
+        _id_list(tags["control_ids"], f"{location}.tags.control_ids", allowed_control_ids)
 
         case_ids.append(case_id)
         queries.append(query)

@@ -148,6 +148,27 @@ offline reproducibility after locked setup.
   prior metric values; the governed gate and generated and committed evidence validation passed.
 - `evidence/sample/manifest.json` — regenerated after the persistence-boundary and control-link
   changes; manifest SHA-256 `8062d95cb10f24ec3c709d94c0f12c9f600914954688322f3d98827ebd54de7a`.
+- P2-04 replaced the hardcoded control-status tuple with versioned static metadata in
+  `config/control-catalog-v1.json` and derived governed/baseline observations in control-status
+  schema `2.0`. Metric controls use release-policy thresholds and aggregate or named-case scores;
+  non-metric controls state trace-coverage, expected-decision, or evidence-precondition rules.
+  The generated human matrix and machine-readable rows now share the same renderer and measured
+  semantics, including MLflow run/trace or case anchors, decision contribution, and residual risk.
+- Focused control/evidence/config/gate tests reported 30 passed. The controlled citation regression
+  changed `CTRL-CITE-001` and the governed decision to `FAIL`. Negative tests rejected a material
+  `PASS` field in static metadata, unknown risk and case IDs, empty test/evidence links, and a
+  re-hashed but contradictory measured control row.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 23 files formatted; mypy found no issues in 23 files; pytest
+  reported 50 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository and
+  bidirectional traceability validation passed. Evaluation runs
+  `e579fd86116b47418f2ec4ecf83a34b6` (baseline) and
+  `a2b5a63940c44a0f9671171b80e17595` (governed) produced expected `FAIL`/`PASS` decisions, the
+  governed gate passed, and generated and committed evidence validation passed.
+- `evidence/sample/manifest.json` — regenerated from measured runs
+  `0312ca25235c4349a215bdc0f770f7c1` (baseline) and
+  `194c9cb72ed04d319c52826a9264da07` (governed); manifest SHA-256
+  `b69cef2195425049f6b5ceddcef37a0ee92aa033274c95e24972b9274ed50e6b`.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -191,8 +212,13 @@ offline reproducibility after locked setup.
 - 2026-10-30: P2-03 retained the dataset, scorer, threshold, evidence-manifest, and control-status
   schemas. It added fail-closed gate/result validation and versioned the narrow persistence policy
   as `persistence-redaction-v2`; raw application output remains available only before the safe
-  persistence boundary. P2-04 measured control status and traceability remains unimplemented
-  pending human review.
+  persistence boundary. At P2-03 completion, P2-04 measured control status and traceability was
+  still unimplemented pending human review.
+- 2026-10-30: P2-04 made `config/control-catalog-v1.json` the source for static control intent and
+  references while deriving all material status from measured results and configuration. Baseline
+  observations remain separate from the governed release decision. The existing manifest gained
+  only the control-catalog binding needed for this increment; complete provenance remains assigned
+  to P2-05, and the standards review remains assigned to P2-06.
 
 ## Surprises and discoveries
 
@@ -220,6 +246,10 @@ offline reproducibility after locked setup.
   treated it as satisfying every threshold. It also found that `case_id` values used in trace
   attributes/tags were outside the prior query/output redaction calls. Finite-range validation and
   uniform pre-persistence redaction closed both paths without changing measured scorer outcomes.
+- 2026-10-30: P2-04 reverse-link validation found that `RISK-GROUND-001` named three controls in
+  the human risk assessment while `CTRL-REFUSE-001` also linked back to that risk. The risk row was
+  corrected, and repository validation now compares every documented risk/control edge with the
+  versioned catalog rather than checking identifier presence alone.
 
 ## Outcomes and retrospective
 
@@ -227,7 +257,7 @@ Phase 0 and Phase 1 are complete. The repository contains a functional, determin
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
 governed comparison, strict release gate, generated evidence, governance documentation, and
 secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
-repository/CI alignment, P2-02 dataset/scorer validity, and P2-03 negative gate and persistence
-security increments are implemented. P2-04 and later hardening remain unimplemented pending their
-human gates. The security reporting contact and hosted GitHub security settings remain manual
-pre-publication actions.
+repository/CI alignment, P2-02 dataset/scorer validity, P2-03 negative gate and persistence
+security, and P2-04 measured control traceability increments are implemented. P2-05 and later
+hardening remain unimplemented pending their human gates. The security reporting contact and
+hosted GitHub security settings remain manual pre-publication actions.

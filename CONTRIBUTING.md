@@ -33,6 +33,8 @@ download is required.
 
 1. Update behavior, tests, documentation, traceability, and evidence together.
 2. Identify affected risk and control IDs from `docs/control-matrix.md`.
+   Change static control metadata only in `config/control-catalog-v1.json`; the human matrix and
+   machine-readable control status are generated from that catalog and measured results.
 3. Regenerate sample evidence explicitly with
    `uv run python -m mlflow_ai_assurance_lab evidence --output-dir evidence/sample` when behavior,
    data, configuration, schemas, or thresholds change.

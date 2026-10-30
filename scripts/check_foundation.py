@@ -10,6 +10,16 @@ from urllib.parse import unquote, urlparse
 
 import yaml
 
+from mlflow_ai_assurance_lab.control_catalog import (
+    ControlCatalogError,
+    load_control_catalog,
+)
+from mlflow_ai_assurance_lab.controls import (
+    ControlTraceabilityError,
+    render_control_matrix,
+    validate_static_traceability,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED_PARTS = {".git", ".mypy_cache", ".pytest_cache", ".ruff_cache", ".venv", "__pycache__"}
 REQUIRED_FILES = {
@@ -29,6 +39,7 @@ REQUIRED_FILES = {
     "PLANS.md",
     "README.md",
     "SECURITY.md",
+    "config/control-catalog-v1.json",
     "config/release-policy-v1.json",
     "data/evaluation/policy-assurance-v1.json",
     "data/policies/policies-v1.json",
@@ -150,6 +161,8 @@ def validate_implemented_scope(errors: list[str]) -> None:
         "__main__.py",
         "application.py",
         "config.py",
+        "control_catalog.py",
+        "controls.py",
         "domain.py",
         "evaluation.py",
         "evidence.py",
@@ -182,33 +195,50 @@ def validate_traceability(errors: list[str]) -> None:
     risk_text = (ROOT / "docs/risk-assessment.md").read_text(encoding="utf-8")
     matrix_text = (ROOT / "docs/control-matrix.md").read_text(encoding="utf-8")
     risks = set(RISK_ID.findall(risk_text))
-    matrix_risks = set(RISK_ID.findall(matrix_text))
-    if risks != matrix_risks:
+    try:
+        catalog = load_control_catalog()
+        validate_static_traceability(catalog=catalog)
+    except (ControlCatalogError, ControlTraceabilityError) as exc:
+        errors.append(f"invalid measured control traceability: {exc}")
+        return
+    catalog_risks = set(catalog["risk_ids"])
+    if risks != catalog_risks:
         errors.append(
-            "risk/control matrix coverage mismatch: "
-            f"missing={sorted(risks - matrix_risks)}, extra={sorted(matrix_risks - risks)}"
+            "risk/control catalog coverage mismatch: "
+            f"missing={sorted(risks - catalog_risks)}, extra={sorted(catalog_risks - risks)}"
         )
+    documented_risk_controls: dict[str, set[str]] = {}
+    for line in risk_text.splitlines():
+        cells = [cell.strip() for cell in line.split("|")]
+        if len(cells) >= 7 and RISK_ID.fullmatch(cells[1]):
+            documented_risk_controls[cells[1]] = set(CONTROL_ID.findall(cells[5]))
+    expected_risk_controls = {
+        risk_id: {item["control_id"] for item in catalog["controls"] if risk_id in item["risk_ids"]}
+        for risk_id in catalog_risks
+    }
+    if documented_risk_controls != expected_risk_controls:
+        errors.append("risk assessment control links are stale relative to the control catalog")
 
     control_status = json.loads(
         (ROOT / "evidence/sample/control-status.json").read_text(encoding="utf-8")
     )
     machine_controls = {item["control_id"] for item in control_status["controls"]}
-    matrix_controls = set(CONTROL_ID.findall(matrix_text))
-    if machine_controls != matrix_controls:
+    catalog_controls = {item["control_id"] for item in catalog["controls"]}
+    if machine_controls != catalog_controls:
         errors.append(
-            "human/machine control coverage mismatch: "
-            f"missing={sorted(machine_controls - matrix_controls)}, "
-            f"extra={sorted(matrix_controls - machine_controls)}"
+            "catalog/machine control coverage mismatch: "
+            f"missing={sorted(catalog_controls - machine_controls)}, "
+            f"extra={sorted(machine_controls - catalog_controls)}"
         )
-    for item in control_status["controls"]:
-        test_path, separator, test_name = item["test"].partition("::")
-        if not separator or not (ROOT / test_path).is_file():
-            errors.append(f"invalid control test link: {item['test']}")
-        elif f"def {test_name}(" not in (ROOT / test_path).read_text(encoding="utf-8"):
-            errors.append(f"missing linked test function: {item['test']}")
-        evidence_path = item["evidence"].split("#", 1)[0]
-        if not (ROOT / "evidence/sample" / evidence_path).is_file():
-            errors.append(f"missing linked evidence file: {item['evidence']}")
+    matrix_controls = set(CONTROL_ID.findall(matrix_text))
+    if matrix_controls != catalog_controls:
+        errors.append(
+            "human/catalog control coverage mismatch: "
+            f"missing={sorted(catalog_controls - matrix_controls)}, "
+            f"extra={sorted(matrix_controls - catalog_controls)}"
+        )
+    if matrix_text != render_control_matrix(control_status):
+        errors.append("human control matrix is stale relative to measured machine evidence")
 
 
 def main() -> int:

@@ -1,0 +1,274 @@
+{
+  "schema_version": "1.0",
+  "catalog_version": "control-catalog-v1",
+  "risk_ids": [
+    "RISK-TRACE-001",
+    "RISK-CITE-001",
+    "RISK-SCOPE-001",
+    "RISK-LEAK-001",
+    "RISK-INJECT-001",
+    "RISK-GROUND-001",
+    "RISK-RELEASE-001"
+  ],
+  "controls": [
+    {
+      "control_id": "CTRL-TRACE-001",
+      "risk_ids": ["RISK-TRACE-001", "RISK-LEAK-001"],
+      "intent": "Trace input handling, retrieval, generation, control decisions, and output validation with safe persisted metadata.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/application.py::PolicyAssistant.ask",
+        "src/mlflow_ai_assurance_lab/redaction.py::redact_for_persistence"
+      ],
+      "test_refs": [
+        "tests/test_tracing.py::test_sensitive_marker_is_not_persisted_in_trace",
+        "tests/test_tracing.py::test_inputs_outputs_metadata_logs_and_runtime_files_are_safely_persisted"
+      ],
+      "evidence_paths": [
+        "summary.json#variants.governed.trace_ids",
+        "case-results.json#variants.governed"
+      ],
+      "observation": {
+        "method": "trace_coverage"
+      },
+      "release_decision_contribution": {
+        "kind": "supporting_evidence",
+        "detail": "Complete case-to-trace coverage and the recorded persistence check support review of the governed decision but are not a release-policy metric."
+      },
+      "residual_risk": "Local MLflow storage and configured redaction are not production observability, general PII detection, or general secret detection."
+    },
+    {
+      "control_id": "CTRL-CITE-001",
+      "risk_ids": ["RISK-CITE-001", "RISK-GROUND-001"],
+      "intent": "Accept only expected citation IDs that were retrieved from the versioned corpus.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/scorers.py::citation_source_match",
+        "config/release-policy-v1.json#thresholds.citation_source_match"
+      ],
+      "test_refs": [
+        "tests/test_scorers.py::test_citation_source_match_accepts_only_expected_retrieved_ids"
+      ],
+      "evidence_paths": [
+        "summary.json#variants.governed.metrics.citation_source_match",
+        "case-results.json#variants.governed.CASE-CIT-001"
+      ],
+      "observation": {
+        "method": "aggregate_metric",
+        "metric": "citation_source_match"
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The aggregate metric is compared with the versioned release threshold."
+      },
+      "residual_risk": "Citation-ID provenance does not prove source truth, answer entailment, or semantic correctness."
+    },
+    {
+      "control_id": "CTRL-SCOPE-001",
+      "risk_ids": ["RISK-SCOPE-001"],
+      "intent": "Refuse the configured out-of-scope request and avoid scope over-refusal on other cases.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/application.py::PolicyAssistant._governed_decision",
+        "src/mlflow_ai_assurance_lab/scorers.py::scope_action_match",
+        "config/release-policy-v1.json#thresholds.scope_action_match"
+      ],
+      "test_refs": [
+        "tests/test_application.py::test_governed_actions_match_dataset",
+        "tests/test_scorers.py::test_scope_action_match_detects_under_and_over_refusal"
+      ],
+      "evidence_paths": [
+        "case-results.json#variants.governed.CASE-SCOPE-001",
+        "summary.json#variants.governed.metrics.scope_action_match"
+      ],
+      "observation": {
+        "method": "case_metric",
+        "metric": "scope_action_match",
+        "case_ids": ["CASE-SCOPE-001"]
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The named case is the stable control anchor; the same scorer's aggregate metric is release-gated."
+      },
+      "residual_risk": "The configured vocabulary is incomplete, so novel out-of-scope phrasing may bypass the heuristic."
+    },
+    {
+      "control_id": "CTRL-REDACT-001",
+      "risk_ids": ["RISK-LEAK-001"],
+      "intent": "Prevent configured synthetic markers, credential shapes, and prohibited prompt phrases from unsafe persistence.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/redaction.py::redact_for_persistence",
+        "src/mlflow_ai_assurance_lab/evaluation.py::_assert_trace_redaction",
+        "src/mlflow_ai_assurance_lab/scorers.py::synthetic_marker_absence",
+        "config/release-policy-v1.json#thresholds.synthetic_marker_absence"
+      ],
+      "test_refs": [
+        "tests/test_tracing.py::test_inputs_outputs_metadata_logs_and_runtime_files_are_safely_persisted",
+        "tests/test_tracing.py::test_redaction_contract_failure_prevents_trace_persistence",
+        "tests/test_scorers.py::test_synthetic_marker_absence_is_limited_to_configured_patterns"
+      ],
+      "evidence_paths": [
+        "case-results.json#variants.governed.CASE-SENS-001",
+        "summary.json#variants.governed.persistence_safe"
+      ],
+      "observation": {
+        "method": "case_metric_and_persistence",
+        "metric": "synthetic_marker_absence",
+        "case_ids": ["CASE-SENS-001"]
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric_and_supporting_evidence",
+        "detail": "The case metric is release-gated; the independent persistence assertion must also have completed before results are recorded."
+      },
+      "residual_risk": "Configured pattern coverage is narrow and is not general PII, secret, or prompt-injection detection."
+    },
+    {
+      "control_id": "CTRL-INJECT-001",
+      "risk_ids": ["RISK-INJECT-001"],
+      "intent": "Detect the versioned direct and indirect instruction-override patterns and refuse untrusted retrieved instructions.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/application.py::PolicyAssistant._has_injection",
+        "src/mlflow_ai_assurance_lab/application.py::PolicyAssistant._governed_decision",
+        "config/release-policy-v1.json#thresholds.expected_action_match"
+      ],
+      "test_refs": [
+        "tests/test_application.py::test_governed_actions_match_dataset"
+      ],
+      "evidence_paths": [
+        "case-results.json#variants.governed.CASE-PI-DIRECT-001",
+        "case-results.json#variants.governed.CASE-PI-INDIRECT-001"
+      ],
+      "observation": {
+        "method": "case_metric",
+        "metric": "expected_action_match",
+        "case_ids": ["CASE-PI-DIRECT-001", "CASE-PI-INDIRECT-001"]
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The named cases anchor the control; expected_action_match is release-gated across the dataset."
+      },
+      "residual_risk": "Pattern matching does not cover obfuscated, multilingual, multimodal, or novel prompt-injection attacks."
+    },
+    {
+      "control_id": "CTRL-SUPPORT-001",
+      "risk_ids": ["RISK-GROUND-001"],
+      "intent": "Refuse when lexical retrieval support is below the configured deterministic rule.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/application.py::PolicyAssistant._governed_decision",
+        "config/release-policy-v1.json#thresholds.expected_action_match"
+      ],
+      "test_refs": [
+        "tests/test_application.py::test_governed_actions_match_dataset"
+      ],
+      "evidence_paths": [
+        "case-results.json#variants.governed.CASE-SUPPORT-001"
+      ],
+      "observation": {
+        "method": "case_metric",
+        "metric": "expected_action_match",
+        "case_ids": ["CASE-SUPPORT-001"]
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The named case anchors the control; expected_action_match is release-gated across the dataset."
+      },
+      "residual_risk": "Lexical retrieval support is not semantic evidence and the small corpus does not represent production retrieval."
+    },
+    {
+      "control_id": "CTRL-REFUSE-001",
+      "risk_ids": ["RISK-SCOPE-001", "RISK-LEAK-001", "RISK-INJECT-001", "RISK-GROUND-001"],
+      "intent": "Require the versioned expected action and detect wrong refusal, missing refusal, and excessive refusal.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/scorers.py::expected_action_match",
+        "config/release-policy-v1.json#thresholds.expected_action_match"
+      ],
+      "test_refs": [
+        "tests/test_scorers.py::test_expected_action_match_detects_wrong_refusal_and_over_refusal"
+      ],
+      "evidence_paths": [
+        "summary.json#variants.governed.metrics.expected_action_match"
+      ],
+      "observation": {
+        "method": "aggregate_metric",
+        "metric": "expected_action_match"
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The aggregate expected-action metric is compared with the versioned release threshold."
+      },
+      "residual_risk": "Only the versioned categories and action labels are exercised; novel refusal modes remain unmeasured."
+    },
+    {
+      "control_id": "CTRL-GROUND-001",
+      "risk_ids": ["RISK-GROUND-001"],
+      "intent": "Match expected action, lexical terms, and citation IDs without treating the match as semantic truth.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/scorers.py::lexical_response_match",
+        "config/release-policy-v1.json#thresholds.lexical_response_match"
+      ],
+      "test_refs": [
+        "tests/test_scorers.py::test_lexical_response_match_accepts_only_complete_answer_criteria"
+      ],
+      "evidence_paths": [
+        "summary.json#variants.governed.metrics.lexical_response_match"
+      ],
+      "observation": {
+        "method": "aggregate_metric",
+        "metric": "lexical_response_match"
+      },
+      "release_decision_contribution": {
+        "kind": "required_metric",
+        "detail": "The aggregate lexical-response metric is compared with the versioned release threshold."
+      },
+      "residual_risk": "Lexical and citation-ID matching is not semantic grounding, factual correctness, or source entailment."
+    },
+    {
+      "control_id": "CTRL-GATE-001",
+      "risk_ids": ["RISK-RELEASE-001"],
+      "intent": "Apply the versioned thresholds and reject invalid or policy-inconsistent results without a success fallback.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/gate.py::decide",
+        "src/mlflow_ai_assurance_lab/gate.py::assess_recorded_results",
+        "config/release-policy-v1.json#expected_decisions"
+      ],
+      "test_refs": [
+        "tests/test_gate.py::test_regression_makes_gate_fail",
+        "tests/test_gate.py::test_recorded_pass_cannot_override_recomputed_failure"
+      ],
+      "evidence_paths": [
+        "summary.json#variants.baseline.decision",
+        "summary.json#variants.governed.decision"
+      ],
+      "observation": {
+        "method": "release_decision"
+      },
+      "release_decision_contribution": {
+        "kind": "release_gate",
+        "detail": "The control status is satisfied only when each recomputed decision matches the versioned expected decision."
+      },
+      "residual_risk": "Strict thresholds cover only the eight versioned synthetic cases; independent release review remains future work."
+    },
+    {
+      "control_id": "CTRL-EVID-001",
+      "risk_ids": ["RISK-TRACE-001", "RISK-RELEASE-001"],
+      "intent": "Bind current source digests, complete case coverage, recorded decisions, and generated file hashes into validated evidence.",
+      "implementation_refs": [
+        "src/mlflow_ai_assurance_lab/evidence.py::generate_evidence",
+        "src/mlflow_ai_assurance_lab/evidence.py::validate_evidence"
+      ],
+      "test_refs": [
+        "tests/test_evidence.py::test_tampered_evidence_is_rejected",
+        "tests/test_evidence.py::test_contradictory_control_status_is_rejected"
+      ],
+      "evidence_paths": [
+        "manifest.json#files",
+        "control-status.json#controls.CTRL-EVID-001"
+      ],
+      "observation": {
+        "method": "evidence_preconditions"
+      },
+      "release_decision_contribution": {
+        "kind": "evidence_integrity",
+        "detail": "Generation requires current input bindings, complete case coverage, and recomputable decisions; validation then checks generated file hashes."
+      },
+      "residual_risk": "The Phase 2 control summary does not yet provide the complete provenance manifest assigned to P2-05; volatile MLflow identifiers remain local evidence anchors."
+    }
+  ]
+}

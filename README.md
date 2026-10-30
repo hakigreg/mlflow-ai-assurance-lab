@@ -86,7 +86,9 @@ attributes distinguish `baseline` and `governed`.
 - `src/mlflow_ai_assurance_lab/` — application, tracing, evaluation, gate, and evidence code.
 - `data/policies/` and `data/evaluation/` — versioned synthetic inputs.
 - `config/release-policy-v1.json` — thresholds and expected decisions.
-- `docs/control-matrix.md` — risk/control/test/evidence/decision traceability.
+- `config/control-catalog-v1.json` — versioned static control metadata and observation rules.
+- `docs/control-matrix.md` — generated measured risk/control/code/test/MLflow/evidence/decision
+  traceability; its material status comes from the committed sample evidence.
 - `docs/scorer-contracts.md` — precise scorer claims, inputs, negative tests, and limits.
 - `evidence/sample/` — generated, machine-validated sample evidence.
 - `artifacts/` — ignored local MLflow and regenerated evidence state.

@@ -1,12 +1,13 @@
 {
-  "evidence_version": "phase1-evidence-v1",
+  "evidence_version": "phase2-control-traceability-v1",
   "files": {
-    "case-results.json": "2865c32b5c9d2dceca8c2a5a41969bc637753a67594d9d26a38672172e20efba",
-    "control-status.json": "0145c52bf365218b4587b6aeddee921d8021ceac375543a28c7657f69c82577d",
-    "report.md": "1b6a5a97622fad03817c1629f7a6651d9f37e51538e1057c6060476edc53e0cf",
-    "summary.json": "75f017c781e299b697c1a811c0bff559da9b9f9988b73554edaf09d3537c16d9"
+    "case-results.json": "47bec78dbcd57ed6ebc3133fa453fc9bf0a25a56b3d39d223906a5715cd8b3ab",
+    "control-status.json": "a261e8d4cac55fc884fc97f750abc36fca3160f6851096fc474af2d27d20406d",
+    "report.md": "6a476108ae01420988bb9106957e95b18c7734f0fed62a0ae2098c054687be5f",
+    "summary.json": "b81e72d488493f8747a449d9ac5051dc97a98032ea59cdb66918c7b942a278ff"
   },
   "input_digests": {
+    "control_catalog": "7d0e1312f50dece46bae24865dea2e4bfa648a1d005848a5b00673fa75a03659",
     "corpus": "ae3c23a74b89ac40cb768bbfd052eddf64a70098b3d67a691382d5b12322131c",
     "dataset": "52e8233512ee90631a64b1728a591a1cd6962f270ea76cb4e47e736bf5ce4069",
     "release_policy": "1628365b997bd6caefa9609e5566fbd6942fbf168ae4e19b7b945a0eb1ffe4da"
@@ -17,6 +18,8 @@
     "summary.variants.*.run_id",
     "summary.variants.*.trace_ids",
     "case-results.variants.*.*.trace_id",
+    "control-status.controls.*.mlflow_anchors.*.run_id",
+    "control-status.controls.*.mlflow_anchors.*.cases.*.trace_id",
     "report generated timestamp and run IDs"
   ]
 }

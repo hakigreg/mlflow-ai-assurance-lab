@@ -19,6 +19,10 @@ from mlflow_ai_assurance_lab.config import (
     DEFAULT_POLICY_PATH,
     load_release_policy,
 )
+from mlflow_ai_assurance_lab.control_catalog import (
+    DEFAULT_CONTROL_CATALOG_PATH,
+    load_control_catalog,
+)
 from mlflow_ai_assurance_lab.domain import Variant, VariantResult
 from mlflow_ai_assurance_lab.gate import decide
 from mlflow_ai_assurance_lab.redaction import contains_sensitive_marker
@@ -91,6 +95,7 @@ def evaluate_variant(variant: Variant, runtime_dir: Path) -> VariantResult:
         metrics=metrics,
         decision=decision,
         failed_metrics=failed_metrics,
+        persistence_safe=True,
         cases=cases,
     )
 
@@ -108,6 +113,8 @@ def run_comparison(
         "dataset_sha256": sha256_file(DEFAULT_DATASET_PATH),
         "corpus_sha256": sha256_file(DEFAULT_CORPUS_PATH),
         "release_policy_sha256": sha256_file(DEFAULT_POLICY_PATH),
+        "control_catalog_sha256": sha256_file(DEFAULT_CONTROL_CATALOG_PATH),
+        "control_catalog_version": load_control_catalog()["catalog_version"],
         "policy_version": policy.policy_version,
         "variants": {
             "baseline": baseline.to_dict(),

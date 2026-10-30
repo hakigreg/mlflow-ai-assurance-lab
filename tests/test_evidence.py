@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import shutil
 from pathlib import Path
 
@@ -21,6 +23,29 @@ def test_tampered_evidence_is_rejected(tmp_path: Path) -> None:
     report = evidence / "report.md"
     report.write_text(report.read_text(encoding="utf-8") + "tampered\n", encoding="utf-8")
     with pytest.raises(EvidenceValidationError, match="hash mismatch"):
+        validate_evidence(evidence)
+
+
+def test_contradictory_control_status_is_rejected(tmp_path: Path) -> None:
+    evidence = tmp_path / "evidence"
+    shutil.copytree(ROOT / "evidence/sample", evidence)
+    control_path = evidence / "control-status.json"
+    control_status = json.loads(control_path.read_text(encoding="utf-8"))
+    citation = next(
+        item for item in control_status["controls"] if item["control_id"] == "CTRL-CITE-001"
+    )
+    citation["status"] = "FAIL"
+    control_path.write_text(
+        json.dumps(control_status, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    manifest_path = evidence / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["files"]["control-status.json"] = hashlib.sha256(control_path.read_bytes()).hexdigest()
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+
+    with pytest.raises(EvidenceValidationError, match="contradicts measured results"):
         validate_evidence(evidence)
 
 
