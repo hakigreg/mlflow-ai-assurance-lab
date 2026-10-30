@@ -18,8 +18,10 @@ from mlflow_ai_assurance_lab.domain import (
 )
 from mlflow_ai_assurance_lab.redaction import (
     REDACTION_POLICY_VERSION,
+    assert_safe_for_persistence,
+    contains_prohibited_prompt,
     contains_sensitive_marker,
-    redact,
+    redact_for_persistence,
 )
 
 PROMPT_VERSION = "policy-rag-prompt-v1"
@@ -44,12 +46,6 @@ STOPWORDS = {
     "will",
     "with",
 }
-INJECTION_PATTERNS = (
-    "ignore previous",
-    "ignore all previous",
-    "reveal system prompt",
-    "override instructions",
-)
 OUT_OF_SCOPE_TERMS = {"weather", "sports", "stock", "recipe", "horoscope"}
 
 
@@ -81,8 +77,7 @@ class PolicyAssistant:
 
     @staticmethod
     def _has_injection(text: str) -> bool:
-        normalized = text.lower()
-        return any(pattern in normalized for pattern in INJECTION_PATTERNS)
+        return contains_prohibited_prompt(text)
 
     def _governed_decision(
         self, raw_query: str, retrieved: tuple[RetrievedDocument, ...]
@@ -177,76 +172,100 @@ class PolicyAssistant:
         """Run one request; return raw output while persisting only redacted trace values."""
 
         started = time.perf_counter_ns()
-        safe_query = str(redact(query))
-        with mlflow.start_span(
-            name="policy_assistant_request",
-            span_type="CHAIN",
-            attributes={
+        safe_case_id = str(redact_for_persistence(case_id))
+        safe_query = str(redact_for_persistence(query))
+        safe_trace_attributes = redact_for_persistence(
+            {
                 "variant": self.variant,
-                "case_id": case_id,
+                "case_id": safe_case_id,
                 "prompt_version": PROMPT_VERSION,
                 "app_config_version": APP_CONFIG_VERSION,
                 "provider": PROVIDER_NAME,
                 "redaction_policy_version": REDACTION_POLICY_VERSION,
-            },
+            }
+        )
+        assert_safe_for_persistence(safe_trace_attributes)
+        with mlflow.start_span(
+            name="policy_assistant_request",
+            span_type="CHAIN",
+            attributes=safe_trace_attributes,
         ) as root_span:
             mlflow.update_current_trace(
-                tags={"variant": self.variant, "case_id": case_id},
-                metadata={
-                    "prompt_version": PROMPT_VERSION,
-                    "app_config_version": APP_CONFIG_VERSION,
-                },
+                tags=redact_for_persistence({"variant": self.variant, "case_id": safe_case_id}),
+                metadata=redact_for_persistence(
+                    {
+                        "prompt_version": PROMPT_VERSION,
+                        "app_config_version": APP_CONFIG_VERSION,
+                        "redaction_policy_version": REDACTION_POLICY_VERSION,
+                    }
+                ),
                 user="synthetic-lab-operator",
             )
-            root_span.set_inputs({"case_id": case_id, "query": safe_query})
+            root_span.set_inputs(
+                redact_for_persistence({"case_id": safe_case_id, "query": safe_query})
+            )
             with mlflow.start_span(name="input_handling", span_type="PARSER") as span:
-                span.set_inputs({"query": safe_query})
+                span.set_inputs(redact_for_persistence({"query": safe_query}))
                 span.set_outputs(
-                    {
-                        "sensitive_marker_detected": contains_sensitive_marker(query),
-                        "query_token_count": len(query.split()),
-                    }
+                    redact_for_persistence(
+                        {
+                            "sensitive_marker_detected": contains_sensitive_marker(query),
+                            "query_token_count": len(query.split()),
+                        }
+                    )
                 )
 
             with mlflow.start_span(name="retrieval", span_type="RETRIEVER") as span:
-                span.set_inputs({"query": safe_query, "corpus_version": "synthetic-policies-v1"})
+                span.set_inputs(
+                    redact_for_persistence(
+                        {"query": safe_query, "corpus_version": "synthetic-policies-v1"}
+                    )
+                )
                 retrieved = self._retrieve(query)
                 span.set_outputs(
-                    [
-                        {
-                            "document_id": item.document.document_id,
-                            "score": item.score,
-                            "trusted": item.document.trusted,
-                        }
-                        for item in retrieved
-                    ]
+                    redact_for_persistence(
+                        [
+                            {
+                                "document_id": item.document.document_id,
+                                "score": item.score,
+                                "trusted": item.document.trusted,
+                            }
+                            for item in retrieved
+                        ]
+                    )
                 )
 
             with mlflow.start_span(name="control_decision", span_type="GUARDRAIL") as span:
                 span.set_inputs(
-                    {
-                        "variant": self.variant,
-                        "retrieved_source_ids": [item.document.document_id for item in retrieved],
-                    }
+                    redact_for_persistence(
+                        {
+                            "variant": self.variant,
+                            "retrieved_source_ids": [
+                                item.document.document_id for item in retrieved
+                            ],
+                        }
+                    )
                 )
                 if self.variant == "governed":
                     action, rationale = self._governed_decision(query, retrieved)
                 else:
                     action, rationale = "answer", "baseline has no explicit policy controls"
-                span.set_outputs({"action": action, "rationale": rationale})
+                span.set_outputs(redact_for_persistence({"action": action, "rationale": rationale}))
 
             with mlflow.start_span(name="generation", span_type="LLM") as span:
                 span.set_inputs(
-                    {
-                        "provider": PROVIDER_NAME,
-                        "prompt_version": PROMPT_VERSION,
-                        "query": safe_query,
-                        "source_ids": [item.document.document_id for item in retrieved],
-                    }
+                    redact_for_persistence(
+                        {
+                            "provider": PROVIDER_NAME,
+                            "prompt_version": PROMPT_VERSION,
+                            "query": safe_query,
+                            "source_ids": [item.document.document_id for item in retrieved],
+                        }
+                    )
                 )
                 answer, citations = self._generate(case_id, query, action, retrieved)
                 span.set_outputs(
-                    redact(
+                    redact_for_persistence(
                         {
                             "answer": answer,
                             "citations": list(citations),
@@ -264,12 +283,16 @@ class PolicyAssistant:
                 citation in known_sources and citation in retrieved_ids for citation in citations
             )
             with mlflow.start_span(name="output_validation", span_type="GUARDRAIL") as span:
-                span.set_inputs(redact({"answer": answer, "citations": list(citations)}))
+                span.set_inputs(
+                    redact_for_persistence({"answer": answer, "citations": list(citations)})
+                )
                 span.set_outputs(
-                    {
-                        "citations_valid": citations_valid,
-                        "sensitive_output_detected": contains_sensitive_marker(answer),
-                    }
+                    redact_for_persistence(
+                        {
+                            "citations_valid": citations_valid,
+                            "sensitive_output_detected": contains_sensitive_marker(answer),
+                        }
+                    )
                 )
 
             response = AssistantResponse(
@@ -283,7 +306,7 @@ class PolicyAssistant:
                 prompt_version=PROMPT_VERSION,
                 provider=PROVIDER_NAME,
             )
-            persisted_response = redact(response.to_dict())
+            persisted_response = redact_for_persistence(response.to_dict())
             persisted_response["latency_ms"] = round(
                 (time.perf_counter_ns() - started) / 1_000_000, 3
             )

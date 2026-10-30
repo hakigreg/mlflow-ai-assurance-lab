@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any, cast
@@ -279,8 +280,10 @@ def load_release_policy(path: Path = DEFAULT_POLICY_PATH) -> ReleasePolicy:
         )
     if set(required) != set(thresholds):
         raise ConfigurationError("release policy scorers and threshold keys must match")
-    if any(value < 0.0 or value > 1.0 for value in thresholds.values()):
-        raise ConfigurationError("release thresholds must be in the inclusive range [0, 1]")
+    if any(not math.isfinite(value) or value < 0.0 or value > 1.0 for value in thresholds.values()):
+        raise ConfigurationError(
+            "release thresholds must be finite and in the inclusive range [0, 1]"
+        )
     if expected != {"baseline": "FAIL", "governed": "PASS"}:
         raise ConfigurationError("Phase 1 expects baseline FAIL and governed PASS")
     return ReleasePolicy(

@@ -28,7 +28,7 @@ trust zones.
 |---|---|---|---|
 | Direct prompt injection | Intended behavior and system context | CTRL-INJECT-001, CTRL-REFUSE-001 | Simple patterns; no obfuscation or multilingual coverage. |
 | Indirect injection in retrieved text | Generation integrity | Trust flag, content pattern check, refusal | No production ingestion or corpus-poisoning lifecycle. |
-| Synthetic-sensitive request/output | Trace and evidence confidentiality | CTRL-REDACT-001, leakage scorer, refusal, trace assertion | Pattern list is intentionally narrow. |
+| Configured synthetic-sensitive, credential-shaped, or prohibited-prompt content | Trace and evidence confidentiality | CTRL-REDACT-001, leakage scorer, refusal, persistence assertion | Pattern lists are intentionally narrow and do not provide general PII, secret, or injection detection. |
 | Unsupported question | Answer integrity | Retrieval support threshold, controlled refusal | Lexical scores are not semantic relevance. |
 | Invalid citation | Provenance integrity | Retrieved-source and expectation validation | Does not verify external document truth. |
 | Out-of-scope query | Purpose limitation | Scope classifier and refusal scorer | Vocabulary-based classification can miss paraphrases. |

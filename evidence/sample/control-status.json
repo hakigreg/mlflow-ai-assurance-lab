@@ -35,12 +35,12 @@
     {
       "control_id": "CTRL-REDACT-001",
       "evidence": "case-results.json#CASE-SENS-001",
-      "implementation": "redaction.redact",
+      "implementation": "redaction.redact_for_persistence",
       "risk_ids": [
         "RISK-LEAK-001"
       ],
       "status": "PASS",
-      "test": "tests/test_tracing.py::test_sensitive_marker_is_not_persisted_in_trace"
+      "test": "tests/test_tracing.py::test_inputs_outputs_metadata_logs_and_runtime_files_are_safely_persisted"
     },
     {
       "control_id": "CTRL-INJECT-001",

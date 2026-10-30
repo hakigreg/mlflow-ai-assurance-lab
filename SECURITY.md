@@ -22,10 +22,13 @@ Public quality or governance issues include incorrect documentation, missing tra
 
 Security evidence must be minimal, synthetic or sanitized, and shared only through the future private channel. Do not publish real credentials, personal or client data, proprietary prompts or policies, weaponized payloads, complete exploit instructions, raw sensitive traces, local environment dumps, or internal infrastructure details.
 
-The Phase 1 trace boundary applies `trace-redaction-v1` before MLflow persistence. Known synthetic
-sensitive markers are still presented to the application and deterministic leakage scorer, but
-only redacted values may enter spans, trace previews, generated evidence, or logs. Treat a failed
-redaction assertion as a security defect; do not bypass it or publish the affected local database.
+The persistence boundary applies `persistence-redaction-v2` before MLflow trace persistence. It
+redacts the configured synthetic markers, selected credential/API-key shapes, and configured
+instruction-override phrases from span inputs, outputs, attributes, tags, and metadata. Known
+synthetic sensitive markers are still presented to the application and deterministic leakage
+scorer, but only redacted values may enter traces, generated evidence, or logs. This narrow policy
+is not general PII, secret, or prompt-injection detection. Treat a failed redaction assertion as a
+security defect; do not bypass it or publish the affected local database.
 
 ## Maintainer actions required before publication
 

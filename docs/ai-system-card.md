@@ -14,8 +14,9 @@ the controls, traces, evaluation results, and evidence—not end users seeking r
 - The required provider is deterministic local code. It is not a trained language model and makes
   no network call or model download.
 - SQLite stores local MLflow runs, traces, and the managed evaluation dataset under `artifacts/`.
-- Known sensitive test markers are scored in raw application output but redacted before trace or
-  evidence persistence under `trace-redaction-v1`.
+- Known sensitive test markers are scored in raw application output but configured synthetic
+  markers, credential shapes, and prohibited prompt phrases are redacted before trace or evidence
+  persistence under `persistence-redaction-v2`. This is not general PII or secret detection.
 
 ## Variants and dependencies
 

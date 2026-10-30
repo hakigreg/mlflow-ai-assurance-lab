@@ -129,6 +129,25 @@ offline reproducibility after locked setup.
   and committed evidence validation passed.
 - `evidence/sample/manifest.json` — regenerated from the measured P2-02 inputs and scorer names;
   manifest SHA-256 `0c5f1b5dd8a182c851bcf5f8ecfeeaa7b5125d90aee8ac7132c34032b8c25a76`.
+- P2-03 hardened the gate against missing, extra, non-numeric, non-finite, and out-of-range metrics;
+  policy/result mismatches; stale policy digests; and recorded decisions or failed-metric lists that
+  disagree with recomputation. Focused gate/config/tracing/evidence tests reported 26 passed. CLI
+  tests observed exit `1` for a valid measured regression and exit `2` for invalid inputs, with no
+  successful fallback.
+- `persistence-redaction-v2` centralized the configured synthetic-marker, credential-shape, and
+  prohibited-prompt patterns and applies them to trace inputs, outputs, attributes, tags, metadata,
+  and mapping keys. The integration tests confirmed raw baseline leakage remained scoreable before
+  persistence, inspected the stored MLflow trace and runtime files, and observed a redaction
+  contract failure before a new trace was created. The claim remains limited to configured
+  patterns and is not general PII, secret, or prompt-injection detection.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 20 files formatted; mypy found no issues in 20 files; pytest
+  reported 43 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository
+  validation passed. Evaluation runs `36fc7c4a6a6043cca82ea81a2e268093` (baseline) and
+  `e31de8ff672248a48f6154b907fba2c3` (governed) produced expected `FAIL`/`PASS` decisions and the
+  prior metric values; the governed gate and generated and committed evidence validation passed.
+- `evidence/sample/manifest.json` — regenerated after the persistence-boundary and control-link
+  changes; manifest SHA-256 `8062d95cb10f24ec3c709d94c0f12c9f600914954688322f3d98827ebd54de7a`.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -168,7 +187,12 @@ offline reproducibility after locked setup.
   thresholds. Dataset schema `1.1` adds reviewable rationale and executable validation. Scorers
   were renamed to bounded matching claims because the implementation does not establish semantic
   truth, factual correctness, general sensitive-data absence, or complete scope classification.
-  P2-03 security and persistence negative paths remain unimplemented pending human review.
+  P2-03 security and persistence negative paths remained unimplemented pending human review.
+- 2026-10-30: P2-03 retained the dataset, scorer, threshold, evidence-manifest, and control-status
+  schemas. It added fail-closed gate/result validation and versioned the narrow persistence policy
+  as `persistence-redaction-v2`; raw application output remains available only before the safe
+  persistence boundary. P2-04 measured control status and traceability remains unimplemented
+  pending human review.
 
 ## Surprises and discoveries
 
@@ -192,6 +216,10 @@ offline reproducibility after locked setup.
   was absent from the shell `PATH`; the documented `UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv`
   override used by prior verification was available, and the rerun reported 17 passed before any
   P2-02 mutation.
+- 2026-10-30: P2-03 found that Python's JSON parser accepted `NaN` and the previous comparison
+  treated it as satisfying every threshold. It also found that `case_id` values used in trace
+  attributes/tags were outside the prior query/output redaction calls. Finite-range validation and
+  uniform pre-persistence redaction closed both paths without changing measured scorer outcomes.
 
 ## Outcomes and retrospective
 
@@ -199,6 +227,7 @@ Phase 0 and Phase 1 are complete. The repository contains a functional, determin
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
 governed comparison, strict release gate, generated evidence, governance documentation, and
 secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
-repository/CI alignment and P2-02 dataset/scorer validity increments are implemented. P2-03 and
-later hardening remain unimplemented pending their human gates. The security reporting contact and
-hosted GitHub security settings remain manual pre-publication actions.
+repository/CI alignment, P2-02 dataset/scorer validity, and P2-03 negative gate and persistence
+security increments are implemented. P2-04 and later hardening remain unimplemented pending their
+human gates. The security reporting contact and hosted GitHub security settings remain manual
+pre-publication actions.

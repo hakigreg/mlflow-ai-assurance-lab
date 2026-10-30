@@ -34,8 +34,10 @@ flowchart LR
 ```
 
 MLflow spans cover input handling, retrieval, generation, control decisions, and output
-validation. Raw application output is available to the scorers, while values are redacted before
-trace persistence. Local runtime state lives under ignored `artifacts/`.
+validation. Raw application output is available to the scorers, while configured synthetic
+markers, credential shapes, and prohibited prompt phrases are redacted before trace persistence.
+This is a narrow configured boundary, not general PII or secret detection. Local runtime state
+lives under ignored `artifacts/`.
 
 ## Happy path
 
@@ -56,8 +58,9 @@ error. `make gate` applies the release gate to governed results. The intentional
 uv run python -m mlflow_ai_assurance_lab gate --variant baseline
 ```
 
-That command must exit non-zero. A controlled regression is also exercised in
-`tests/test_gate.py`.
+That command must exit non-zero. Gate input errors use exit `2`; a measured threshold failure uses
+exit `1`. Negative tests cover controlled regression, missing/non-finite metrics, inconsistent
+policy, stale policy binding, and recorded decisions that disagree with recomputation.
 
 The current scorer contract names what is measured: citation-source ID match, scope-action match,
 configured synthetic-marker absence, expected-action match, and lexical-response match. The

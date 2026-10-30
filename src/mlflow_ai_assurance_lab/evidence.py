@@ -14,7 +14,7 @@ from mlflow_ai_assurance_lab.config import (
     load_evaluation_records,
 )
 from mlflow_ai_assurance_lab.evaluation import DEFAULT_RESULTS_PATH, sha256_file
-from mlflow_ai_assurance_lab.redaction import contains_sensitive_marker
+from mlflow_ai_assurance_lab.redaction import contains_unsafe_persistence_content
 
 DEFAULT_EVIDENCE_DIR = Path("artifacts/evidence/latest")
 MACHINE_FILES = ("summary.json", "case-results.json", "control-status.json")
@@ -49,8 +49,11 @@ CONTROL_STATUS = (
     {
         "control_id": "CTRL-REDACT-001",
         "risk_ids": ["RISK-LEAK-001"],
-        "implementation": "redaction.redact",
-        "test": "tests/test_tracing.py::test_sensitive_marker_is_not_persisted_in_trace",
+        "implementation": "redaction.redact_for_persistence",
+        "test": (
+            "tests/test_tracing.py::"
+            "test_inputs_outputs_metadata_logs_and_runtime_files_are_safely_persisted"
+        ),
         "evidence": "case-results.json#CASE-SENS-001",
         "status": "PASS",
     },
@@ -243,8 +246,10 @@ def validate_evidence(output_dir: Path = DEFAULT_EVIDENCE_DIR) -> None:
         path = output_dir / name
         if files.get(name) != sha256_file(path):
             raise EvidenceValidationError(f"evidence file hash mismatch: {name}")
-        if contains_sensitive_marker(path.read_text(encoding="utf-8")):
-            raise EvidenceValidationError(f"sensitive marker found in evidence: {name}")
+        if contains_unsafe_persistence_content(path.read_text(encoding="utf-8")):
+            raise EvidenceValidationError(
+                f"prohibited persistence content found in evidence: {name}"
+            )
     summary = _json(output_dir / "summary.json")
     variants = cast(dict[str, dict[str, Any]], summary["variants"])
     if variants["baseline"]["decision"] != "FAIL":

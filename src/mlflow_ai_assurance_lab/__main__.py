@@ -3,12 +3,18 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
+import sys
 from pathlib import Path
-from typing import Any, cast
+from typing import Any
 
 from mlflow_ai_assurance_lab.application import PolicyAssistant
-from mlflow_ai_assurance_lab.config import load_release_policy
+from mlflow_ai_assurance_lab.config import (
+    DEFAULT_POLICY_PATH,
+    ConfigurationError,
+    load_release_policy,
+)
 from mlflow_ai_assurance_lab.evaluation import (
     DEFAULT_RESULTS_PATH,
     DEFAULT_RUNTIME_DIR,
@@ -19,7 +25,7 @@ from mlflow_ai_assurance_lab.evidence import (
     generate_evidence,
     validate_evidence,
 )
-from mlflow_ai_assurance_lab.gate import decide
+from mlflow_ai_assurance_lab.gate import GateInputError, assess_recorded_results
 from mlflow_ai_assurance_lab.tracking import configure_offline_tracking
 
 
@@ -38,6 +44,7 @@ def _parser() -> argparse.ArgumentParser:
     validate.add_argument("--output-dir", type=Path, default=DEFAULT_EVIDENCE_DIR)
     gate = subparsers.add_parser("gate", help="apply release policy to a variant")
     gate.add_argument("--results", type=Path, default=DEFAULT_RESULTS_PATH)
+    gate.add_argument("--policy", type=Path, default=DEFAULT_POLICY_PATH)
     gate.add_argument("--variant", choices=("baseline", "governed"), default="governed")
     return parser
 
@@ -56,14 +63,17 @@ def _demo(runtime_dir: Path) -> int:
     return 0
 
 
-def _gate(results_path: Path, variant: str) -> int:
+def _gate(results_path: Path, policy_path: Path, variant: str) -> int:
     try:
         results = json.loads(results_path.read_text(encoding="utf-8"))
-    except (FileNotFoundError, json.JSONDecodeError) as exc:
-        raise SystemExit(f"cannot read evaluation results: {exc}") from exc
-    variant_result = cast(dict[str, Any], results["variants"][variant])
-    metrics = {str(key): float(value) for key, value in variant_result["metrics"].items()}
-    decision, failed = decide(metrics, load_release_policy())
+        if not isinstance(results, dict):
+            raise GateInputError("evaluation results root must be an object")
+        policy = load_release_policy(policy_path)
+        policy_digest = hashlib.sha256(policy_path.read_bytes()).hexdigest()
+        decision, failed = assess_recorded_results(results, variant, policy, policy_digest)
+    except (FileNotFoundError, json.JSONDecodeError, ConfigurationError, GateInputError) as exc:
+        print(f"gate input error: {exc}", file=sys.stderr)
+        return 2
     print(f"{variant}: {decision}; failed_metrics={list(failed)}")
     return 0 if decision == "PASS" else 1
 
@@ -89,7 +99,7 @@ def main() -> int:
         print(f"Evidence validation passed: {args.output_dir}")
         return 0
     if args.command == "gate":
-        return _gate(args.results, args.variant)
+        return _gate(args.results, args.policy, args.variant)
     raise AssertionError(f"unhandled command: {args.command}")
 
 

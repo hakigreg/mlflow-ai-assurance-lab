@@ -9,8 +9,10 @@ import pytest
 
 from mlflow_ai_assurance_lab.config import (
     DEFAULT_DATASET_PATH,
+    DEFAULT_POLICY_PATH,
     ConfigurationError,
     load_evaluation_records,
+    load_release_policy,
 )
 
 
@@ -94,3 +96,13 @@ def test_dataset_loader_rejects_citation_absent_from_corpus(tmp_path: Path) -> N
 
     with pytest.raises(ConfigurationError, match="absent from the corpus"):
         load_evaluation_records(path)
+
+
+def test_release_policy_rejects_non_finite_threshold(tmp_path: Path) -> None:
+    payload = json.loads(DEFAULT_POLICY_PATH.read_text(encoding="utf-8"))
+    payload["thresholds"]["citation_source_match"] = float("nan")
+    path = tmp_path / "invalid-policy.json"
+    path.write_text(json.dumps(payload), encoding="utf-8")
+
+    with pytest.raises(ConfigurationError, match="thresholds must be finite"):
+        load_release_policy(path)
