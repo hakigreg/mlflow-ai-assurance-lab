@@ -37,75 +37,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-47726b36254bef4be7e6e461b1b60f15"
+              "trace_id": "tr-fb97434f8f089fc1c326aa8c8a5bd722"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-a131ef951356071c3f0e0fedb737188f"
+              "trace_id": "tr-e8c6db7283068e475eff60650bf720d4"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d1af47ae42690ae0f2416dc72a7b1acc"
+              "trace_id": "tr-a4ff9f6fccaeab05a9f76fdb873a35e9"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-dfbc486c7f28edfa5b81b4380281ee6d"
+              "trace_id": "tr-d5bf309e578dbcd2cd4fe84091c69e1b"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-831823b9a8ad5bbbbe64569abfaeea82"
+              "trace_id": "tr-d71ac309ce27ddf9124efc10f0ec6dac"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-ae3038d7592652ba0abc5f243aecec30"
+              "trace_id": "tr-95f3965e4709c9764189faa17d7bd8d8"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-f43d9b811dc408264805038f56064c48"
+              "trace_id": "tr-87a5ba8d730d48198ebf7bcfb28de0db"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-3a556f838007c91916c2da9974a06067"
+              "trace_id": "tr-d63f5f59efa3781a3f6e415a64ab13ae"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-ccc351bc3be19588835c4af20c272ed6"
+              "trace_id": "tr-a1c4b7bc72e91a4259dff962ef10a2f4"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-3e5aa4d971b2f52ba55e28a6d9caf59a"
+              "trace_id": "tr-c13e0fc39b91e4a32035ab1811511723"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-587e668456e4df7088ba0bb02b23d219"
+              "trace_id": "tr-ed911ab55da85ac06f4cdb2d987b813e"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-470bff079a228dd31345815ce54468f1"
+              "trace_id": "tr-b40bea35c7473c90f1aadcdc7ea09901"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-590ed57901996c90e81f173a4aa9457a"
+              "trace_id": "tr-e51299a1bac8f5c47cbda6e75d8cf38b"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-32862979d1373bd227a03c2ff53c8a9c"
+              "trace_id": "tr-4c4ba5f18839ae16507bb2c4158f1549"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-5d8d368f9e836aadde9984c68cd3cd63"
+              "trace_id": "tr-8eb8fd77c2a54b1327f1687e3c85e76b"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-51d97ae5b3878ba6ae93fc9c9a83e080"
+              "trace_id": "tr-5c10462de300f6189d4461ba2c273911"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "trace_coverage",
@@ -160,75 +160,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-47726b36254bef4be7e6e461b1b60f15"
+              "trace_id": "tr-fb97434f8f089fc1c326aa8c8a5bd722"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-a131ef951356071c3f0e0fedb737188f"
+              "trace_id": "tr-e8c6db7283068e475eff60650bf720d4"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d1af47ae42690ae0f2416dc72a7b1acc"
+              "trace_id": "tr-a4ff9f6fccaeab05a9f76fdb873a35e9"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-dfbc486c7f28edfa5b81b4380281ee6d"
+              "trace_id": "tr-d5bf309e578dbcd2cd4fe84091c69e1b"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-831823b9a8ad5bbbbe64569abfaeea82"
+              "trace_id": "tr-d71ac309ce27ddf9124efc10f0ec6dac"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-ae3038d7592652ba0abc5f243aecec30"
+              "trace_id": "tr-95f3965e4709c9764189faa17d7bd8d8"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-f43d9b811dc408264805038f56064c48"
+              "trace_id": "tr-87a5ba8d730d48198ebf7bcfb28de0db"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-3a556f838007c91916c2da9974a06067"
+              "trace_id": "tr-d63f5f59efa3781a3f6e415a64ab13ae"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-ccc351bc3be19588835c4af20c272ed6"
+              "trace_id": "tr-a1c4b7bc72e91a4259dff962ef10a2f4"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-3e5aa4d971b2f52ba55e28a6d9caf59a"
+              "trace_id": "tr-c13e0fc39b91e4a32035ab1811511723"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-587e668456e4df7088ba0bb02b23d219"
+              "trace_id": "tr-ed911ab55da85ac06f4cdb2d987b813e"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-470bff079a228dd31345815ce54468f1"
+              "trace_id": "tr-b40bea35c7473c90f1aadcdc7ea09901"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-590ed57901996c90e81f173a4aa9457a"
+              "trace_id": "tr-e51299a1bac8f5c47cbda6e75d8cf38b"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-32862979d1373bd227a03c2ff53c8a9c"
+              "trace_id": "tr-4c4ba5f18839ae16507bb2c4158f1549"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-5d8d368f9e836aadde9984c68cd3cd63"
+              "trace_id": "tr-8eb8fd77c2a54b1327f1687e3c85e76b"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-51d97ae5b3878ba6ae93fc9c9a83e080"
+              "trace_id": "tr-5c10462de300f6189d4461ba2c273911"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "aggregate_metric",
@@ -280,19 +280,19 @@
           "cases": [
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-ae3038d7592652ba0abc5f243aecec30"
+              "trace_id": "tr-95f3965e4709c9764189faa17d7bd8d8"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-32862979d1373bd227a03c2ff53c8a9c"
+              "trace_id": "tr-4c4ba5f18839ae16507bb2c4158f1549"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "case_metric",
@@ -351,19 +351,19 @@
           "cases": [
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-f43d9b811dc408264805038f56064c48"
+              "trace_id": "tr-87a5ba8d730d48198ebf7bcfb28de0db"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-5d8d368f9e836aadde9984c68cd3cd63"
+              "trace_id": "tr-8eb8fd77c2a54b1327f1687e3c85e76b"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "case_metric_and_persistence",
@@ -423,27 +423,27 @@
           "cases": [
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-a131ef951356071c3f0e0fedb737188f"
+              "trace_id": "tr-e8c6db7283068e475eff60650bf720d4"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d1af47ae42690ae0f2416dc72a7b1acc"
+              "trace_id": "tr-a4ff9f6fccaeab05a9f76fdb873a35e9"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-3e5aa4d971b2f52ba55e28a6d9caf59a"
+              "trace_id": "tr-c13e0fc39b91e4a32035ab1811511723"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-587e668456e4df7088ba0bb02b23d219"
+              "trace_id": "tr-ed911ab55da85ac06f4cdb2d987b813e"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "case_metric",
@@ -498,19 +498,19 @@
           "cases": [
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-3a556f838007c91916c2da9974a06067"
+              "trace_id": "tr-d63f5f59efa3781a3f6e415a64ab13ae"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-51d97ae5b3878ba6ae93fc9c9a83e080"
+              "trace_id": "tr-5c10462de300f6189d4461ba2c273911"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "case_metric",
@@ -559,75 +559,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-47726b36254bef4be7e6e461b1b60f15"
+              "trace_id": "tr-fb97434f8f089fc1c326aa8c8a5bd722"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-a131ef951356071c3f0e0fedb737188f"
+              "trace_id": "tr-e8c6db7283068e475eff60650bf720d4"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d1af47ae42690ae0f2416dc72a7b1acc"
+              "trace_id": "tr-a4ff9f6fccaeab05a9f76fdb873a35e9"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-dfbc486c7f28edfa5b81b4380281ee6d"
+              "trace_id": "tr-d5bf309e578dbcd2cd4fe84091c69e1b"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-831823b9a8ad5bbbbe64569abfaeea82"
+              "trace_id": "tr-d71ac309ce27ddf9124efc10f0ec6dac"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-ae3038d7592652ba0abc5f243aecec30"
+              "trace_id": "tr-95f3965e4709c9764189faa17d7bd8d8"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-f43d9b811dc408264805038f56064c48"
+              "trace_id": "tr-87a5ba8d730d48198ebf7bcfb28de0db"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-3a556f838007c91916c2da9974a06067"
+              "trace_id": "tr-d63f5f59efa3781a3f6e415a64ab13ae"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-ccc351bc3be19588835c4af20c272ed6"
+              "trace_id": "tr-a1c4b7bc72e91a4259dff962ef10a2f4"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-3e5aa4d971b2f52ba55e28a6d9caf59a"
+              "trace_id": "tr-c13e0fc39b91e4a32035ab1811511723"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-587e668456e4df7088ba0bb02b23d219"
+              "trace_id": "tr-ed911ab55da85ac06f4cdb2d987b813e"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-470bff079a228dd31345815ce54468f1"
+              "trace_id": "tr-b40bea35c7473c90f1aadcdc7ea09901"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-590ed57901996c90e81f173a4aa9457a"
+              "trace_id": "tr-e51299a1bac8f5c47cbda6e75d8cf38b"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-32862979d1373bd227a03c2ff53c8a9c"
+              "trace_id": "tr-4c4ba5f18839ae16507bb2c4158f1549"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-5d8d368f9e836aadde9984c68cd3cd63"
+              "trace_id": "tr-8eb8fd77c2a54b1327f1687e3c85e76b"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-51d97ae5b3878ba6ae93fc9c9a83e080"
+              "trace_id": "tr-5c10462de300f6189d4461ba2c273911"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "aggregate_metric",
@@ -674,75 +674,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-47726b36254bef4be7e6e461b1b60f15"
+              "trace_id": "tr-fb97434f8f089fc1c326aa8c8a5bd722"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-a131ef951356071c3f0e0fedb737188f"
+              "trace_id": "tr-e8c6db7283068e475eff60650bf720d4"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d1af47ae42690ae0f2416dc72a7b1acc"
+              "trace_id": "tr-a4ff9f6fccaeab05a9f76fdb873a35e9"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-dfbc486c7f28edfa5b81b4380281ee6d"
+              "trace_id": "tr-d5bf309e578dbcd2cd4fe84091c69e1b"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-831823b9a8ad5bbbbe64569abfaeea82"
+              "trace_id": "tr-d71ac309ce27ddf9124efc10f0ec6dac"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-ae3038d7592652ba0abc5f243aecec30"
+              "trace_id": "tr-95f3965e4709c9764189faa17d7bd8d8"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-f43d9b811dc408264805038f56064c48"
+              "trace_id": "tr-87a5ba8d730d48198ebf7bcfb28de0db"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-3a556f838007c91916c2da9974a06067"
+              "trace_id": "tr-d63f5f59efa3781a3f6e415a64ab13ae"
             }
           ],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-ccc351bc3be19588835c4af20c272ed6"
+              "trace_id": "tr-a1c4b7bc72e91a4259dff962ef10a2f4"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-3e5aa4d971b2f52ba55e28a6d9caf59a"
+              "trace_id": "tr-c13e0fc39b91e4a32035ab1811511723"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-587e668456e4df7088ba0bb02b23d219"
+              "trace_id": "tr-ed911ab55da85ac06f4cdb2d987b813e"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-470bff079a228dd31345815ce54468f1"
+              "trace_id": "tr-b40bea35c7473c90f1aadcdc7ea09901"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-590ed57901996c90e81f173a4aa9457a"
+              "trace_id": "tr-e51299a1bac8f5c47cbda6e75d8cf38b"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-32862979d1373bd227a03c2ff53c8a9c"
+              "trace_id": "tr-4c4ba5f18839ae16507bb2c4158f1549"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-5d8d368f9e836aadde9984c68cd3cd63"
+              "trace_id": "tr-8eb8fd77c2a54b1327f1687e3c85e76b"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-51d97ae5b3878ba6ae93fc9c9a83e080"
+              "trace_id": "tr-5c10462de300f6189d4461ba2c273911"
             }
           ],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "aggregate_metric",
@@ -786,11 +786,11 @@
       "mlflow_anchors": {
         "baseline": {
           "cases": [],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "release_decision",
@@ -843,11 +843,11 @@
       "mlflow_anchors": {
         "baseline": {
           "cases": [],
-          "run_id": "80c1a91178df46c8bada4870e968dcbe"
+          "run_id": "9f2d644661f14092bb9d24ca474cf602"
         },
         "governed": {
           "cases": [],
-          "run_id": "23dd9fb6914c43e5a229244c34dece43"
+          "run_id": "448208ca8dda4db9818a1d0c4a1d23c3"
         }
       },
       "observation_method": "evidence_preconditions",

@@ -51,6 +51,7 @@ REQUIRED_FILES = {
     "docs/evidence-provenance.md",
     "docs/findings.md",
     "docs/human-oversight.md",
+    "docs/phase-2-closure.md",
     "docs/risk-assessment.md",
     "docs/scorer-contracts.md",
     "docs/source-register.md",
@@ -182,7 +183,7 @@ def validate_implemented_scope(errors: list[str]) -> None:
         )
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    if "Assurance and evidence hardening (Phase 2 in progress)" not in readme:
+    if "Assurance and evidence hardening (Phase 2 complete)" not in readme:
         errors.append("README does not expose the current Phase 2 status")
 
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")

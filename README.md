@@ -1,6 +1,6 @@
 # MLflow AI Assurance Lab
 
-> **Status: Assurance and evidence hardening (Phase 2 in progress)**
+> **Status: Assurance and evidence hardening (Phase 2 complete)**
 
 This small, inspectable portfolio lab demonstrates a bounded technical assurance chain:
 
@@ -17,9 +17,9 @@ The precise claim, assumptions, and limitations are in the
 [`bounded assurance statement`](docs/assurance-statement.md); claim-to-evidence boundaries are in
 the [`claim ledger`](docs/claim-ledger.md).
 
-The Phase 1 functional offline assurance MVP remains the implemented behavior. Phase 2 is being
-delivered through human-gated increments; unfinished hardening requirements are not presented as
-implemented.
+The Phase 1 functional offline assurance MVP remains the implemented behavior. Phase 2 completed
+the human-gated assurance and evidence hardening increments. Phase 3 independent portfolio and
+release review has not started.
 
 ## Architecture
 
@@ -99,6 +99,8 @@ attributes distinguish `baseline` and `governed`.
   material-versus-volatile comparison semantics.
 - `docs/assurance-statement.md` and `docs/claim-ledger.md` — bounded public claim, supporting
   evidence, assumptions, and material claim limits.
+- `docs/phase-2-closure.md` — final requirement-to-implementation/test/evidence closure matrix and
+  observed rehearsal results.
 - `docs/standards-crosswalk.md` and `docs/threat-model.md` — source-versioned educational mappings,
   demonstrated fixture coverage, non-applicable threats, and explicit out-of-scope boundaries.
 - `evidence/sample/` — generated, machine-validated sample evidence.

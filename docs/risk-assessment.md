@@ -1,6 +1,7 @@
 # Risk assessment
 
-This qualitative assessment covers the synthetic lab through P2-06. Likelihood and impact are
+This qualitative assessment covers the synthetic lab through the Phase 2 closure rehearsal.
+Likelihood and impact are
 reasoned for the lab context; they are not enterprise ratings. Lifecycle stages describe where the
 scenario is represented in this lab, not a complete enterprise lifecycle assessment.
 

@@ -87,7 +87,7 @@ offline reproducibility after locked setup.
 
 ## Phase 2 — Assurance and evidence hardening
 
-**Status:** In progress
+**Status:** Complete
 
 **Objective:** Harden bidirectional traceability, evidence integrity, negative paths, security controls, and defensible governance documentation.
 
@@ -215,6 +215,38 @@ offline reproducibility after locked setup.
   `07e4c1a3c33c4b96a9cc46b8a663e775` (baseline) and
   `dd5cd8381afa435399877d4e44d77457` (governed) with expected `FAIL`/`PASS` decisions; the
   governed gate passed, and generated and committed sample evidence validation passed.
+- P2-07 mapped every master requirement to implementation, tests, evidence, and an observed result
+  in `docs/phase-2-closure.md`. No unresolved Phase 2 technical, traceability, evidence, or
+  governance-claim gap was found. README, contribution guidance, repository validation, tests,
+  and this plan now expose the completed Phase 2 state while Phase 3 remains `Not started`.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv setup` — from an initially clean Git working
+  tree, uv 0.13.6 resolved 102 packages from the committed lockfile, rebuilt the local project,
+  and retained Python 3.12.16 without changing the dependency graph.
+- P2-07 CI-equivalent rehearsal — `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify`
+  passed lock validation, Ruff lint/format, mypy over 23 source files, 61 tests with the same one
+  upstream deprecation warning, repository/documentation/link/traceability validation, offline
+  evaluation, governed gate, regenerated evidence validation, and committed sample validation.
+  Final evaluation runs `9f2d644661f14092bb9d24ca474cf602` (baseline) and
+  `448208ca8dda4db9818a1d0c4a1d23c3` (governed) produced the expected `FAIL`/`PASS` decisions.
+  An explicit baseline-gate invocation returned exit `1` with all five failed metrics; negative
+  tests retain exit `2` for invalid gate inputs and no success fallback.
+- `evidence/sample/manifest.json` — regenerated only through the evidence command from the P2-07
+  measured runs and validated. Manifest SHA-256 is
+  `1ca8a73689e0c3b1eb56482a63d22448fe2b51970adbb358829170651d0966ef`; material digest remains
+  `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`; application-source digest
+  remains `834aba66333986d955f9fce23658f9fb1a0de208ebbda92f479c8396e0f10348`. Comparison with the
+  independently generated rehearsal pack returned `material_match=true` and `classification=identical`.
+- Final hygiene checks — `git diff --check` exited successfully; the publishable-tree scan found
+  no credential-shaped values or personal absolute paths; the committed evidence scan found no
+  configured raw synthetic marker or prohibited prompt phrase. The final focused rerun retained
+  61 passing tests, a passing governed gate, and valid generated and sample evidence.
+- Residual risks remain compatible with the bounded claim: local evidence is unsigned,
+  independently untimestamped, and not append-only; the synthetic dataset, lexical checks, and
+  configured redaction patterns are narrow; and independent enterprise release review and
+  production controls remain out of scope. Before publication, the maintainer must configure a
+  private security channel, enable hosted Dependabot security features, confirm the reporting
+  path, and observe hosted CI after an authorized push. No hosted setting, publication, push, or
+  Phase 3 work was performed.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -275,6 +307,11 @@ offline reproducibility after locked setup.
   evidence-and-limit ledger; standards and regulatory entries are educational analogies only;
   OWASP/MITRE entries describe demonstrated fixture intent or explicit non-coverage. Phase 2
   remains `In progress`; P2-07 and Phase 3 were not started.
+- 2026-11-02: P2-07 completed the clean-state rehearsal, final requirement matrix, generated sample
+  evidence, failure-semantics check, and closure record. All Phase 2 acceptance criteria have
+  observed executable or generated evidence, so Phase 2 is `Complete`. The remaining bounded
+  residual risks and manual pre-publication actions do not convert the local lab gate into an
+  enterprise release authorization. Phase 3 remains `Not started`.
 
 ## Surprises and discoveries
 
@@ -309,12 +346,10 @@ offline reproducibility after locked setup.
 
 ## Outcomes and retrospective
 
-Phase 0 and Phase 1 are complete. The repository contains a functional, deterministic offline
+Phases 0, 1, and 2 are complete. The repository contains a functional, deterministic offline
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
-governed comparison, strict release gate, generated evidence, governance documentation, and
-secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
-repository/CI alignment, P2-02 dataset/scorer validity, P2-03 negative gate and persistence
-security, P2-04 measured control traceability, and P2-05 evidence provenance/reproducibility
-increments are implemented. P2-06 governance claims/documentation hardening is also implemented;
-P2-07 and later hardening remain unimplemented pending their human gates. The security reporting
-contact and hosted GitHub security settings remain manual pre-publication actions.
+governed comparison, strict failure semantics, generated and validated evidence, bidirectional
+traceability, bounded governance documentation, and secret-free CI. P2-07 found no remaining
+Phase 2 acceptance gap and closed the phase without beginning Phase 3. The security reporting
+contact, hosted Dependabot security features, and observation of hosted CI remain manual
+pre-publication actions.

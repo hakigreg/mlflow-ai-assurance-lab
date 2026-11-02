@@ -6,14 +6,14 @@ conformity, certification, or complete audit readiness.
 
 - Dataset digest: `52e8233512ee90631a64b1728a591a1cd6962f270ea76cb4e47e736bf5ce4069`
 - Release policy: `release-policy-v1`
-- Generated at (volatile): `2026-10-30T19:44:41.344372Z`
+- Generated at (volatile): `2026-11-02T20:40:15.308951Z`
 
 ## Observed decisions
 
 | Variant | Decision | MLflow run (volatile) | Failed metrics |
 |---|---|---|---|
-| baseline | FAIL | `80c1a91178df46c8bada4870e968dcbe` | citation_source_match, scope_action_match, synthetic_marker_absence, expected_action_match, lexical_response_match |
-| governed | PASS | `23dd9fb6914c43e5a229244c34dece43` | None |
+| baseline | FAIL | `9f2d644661f14092bb9d24ca474cf602` | citation_source_match, scope_action_match, synthetic_marker_absence, expected_action_match, lexical_response_match |
+| governed | PASS | `448208ca8dda4db9818a1d0c4a1d23c3` | None |
 
 ## Aggregate metrics
 

@@ -2,9 +2,9 @@
 
 ## Project state
 
-Phase 1 provides a functional offline assurance MVP. Phase 2 hardening is in progress through
-human-gated increments; Phase 3 independent release review has not started. Keep changes within
-the current increment and record observed status in `PLANS.md`.
+Phase 1 provides a functional offline assurance MVP, and Phase 2 assurance/evidence hardening is
+complete. Phase 3 independent release review has not started. Keep changes within the active
+increment and record observed status in `PLANS.md`.
 
 ## Setup and checks
 

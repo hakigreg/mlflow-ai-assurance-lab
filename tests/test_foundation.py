@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def test_readme_exposes_phase_two_status() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Assurance and evidence hardening (Phase 2 in progress)" in readme
+    assert "Assurance and evidence hardening (Phase 2 complete)" in readme
 
 
 def test_durable_contracts_exist() -> None:
