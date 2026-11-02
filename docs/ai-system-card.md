@@ -6,6 +6,8 @@
 demonstrate a bounded assurance chain. It compares a deliberately limited baseline with a governed
 variant. Intended users are engineers, assurance reviewers, and governance architects examining
 the controls, traces, evaluation results, and evidence—not end users seeking real policy advice.
+The governing interpretation is the [`bounded assurance statement`](assurance-statement.md), with
+individual evidence boundaries in the [`claim ledger`](claim-ledger.md).
 
 ## Boundaries and data
 
@@ -14,6 +16,8 @@ the controls, traces, evaluation results, and evidence—not end users seeking r
 - The required provider is deterministic local code. It is not a trained language model and makes
   no network call or model download.
 - SQLite stores local MLflow runs, traces, and the managed evaluation dataset under `artifacts/`.
+- The generated evidence schemas are version `2.0`; the manifest binds application/source and input
+  digests, tool versions, MLflow anchors, artifact hashes, and a material comparison digest.
 - Known sensitive test markers are scored in raw application output but configured synthetic
   markers, credential shapes, and prohibited prompt phrases are redacted before trace or evidence
   persistence under `persistence-redaction-v2`. This is not general PII or secret detection.
@@ -29,9 +33,11 @@ Python 3.12.16 and the committed `uv.lock` define the runtime.
 
 The corpus and eight-case dataset are small. Retrieval uses lexical overlap. The deterministic
 provider cannot represent the variability or emergent behavior of a real model. The
-`lexical_response_match` checks action labels, lexical terms, and citation IDs only. Passing the gate is evidence for this
-versioned lab configuration, not production safety, policy correctness, compliance, certification,
-or complete audit readiness.
+`lexical_response_match` checks action labels, lexical terms, and citation IDs only. The application
+has no vector store, external provider, tools, autonomous actions, dynamic ingestion, or production
+identity/access boundary. Passing the gate is evidence for this versioned lab configuration, not
+production safety, policy correctness, legal applicability or compliance, NIST alignment, ISO/IEC
+42001 conformity or certification, general security effectiveness, or complete audit readiness.
 
 ## Human oversight
 

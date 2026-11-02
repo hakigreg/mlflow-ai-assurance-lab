@@ -59,4 +59,4 @@ The pack is local and hash-linked but not cryptographically signed, independentl
 stored in append-only infrastructure. Hashes detect changes relative to trusted current inputs;
 they do not establish author identity or custody. MLflow identifiers are local review anchors and
 are intentionally excluded from semantic drift. Independent release review remains outside this
-Phase 2 increment.
+Phase 2 governance increment and is planned for Phase 3.

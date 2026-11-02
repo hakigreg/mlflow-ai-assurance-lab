@@ -13,6 +13,9 @@ download.
 
 The result is comparative and limited to the documented synthetic cases. It does not establish
 production safety, legal compliance, ISO conformity, certification, or complete audit readiness.
+The precise claim, assumptions, and limitations are in the
+[`bounded assurance statement`](docs/assurance-statement.md); claim-to-evidence boundaries are in
+the [`claim ledger`](docs/claim-ledger.md).
 
 The Phase 1 functional offline assurance MVP remains the implemented behavior. Phase 2 is being
 delivered through human-gated increments; unfinished hardening requirements are not presented as
@@ -64,7 +67,7 @@ policy, stale policy binding, and recorded decisions that disagree with recomput
 
 The current scorer contract names what is measured: citation-source ID match, scope-action match,
 configured synthetic-marker absence, expected-action match, and lexical-response match. The
-observed Phase 1 sample produced baseline scores of `0.25`, `0.875`, `0.875`, `0.375`, and `0.25`
+committed sample produced baseline scores of `0.25`, `0.875`, `0.875`, `0.375`, and `0.25`
 respectively; governed scored `1.0` on all five versioned metrics. These names were clarified in
 Phase 2 without lowering the original `1.0` thresholds. See
 [`evidence/sample/report.md`](evidence/sample/report.md) for generated evidence and
@@ -94,6 +97,10 @@ attributes distinguish `baseline` and `governed`.
 - `docs/scorer-contracts.md` — precise scorer claims, inputs, negative tests, and limits.
 - `docs/evidence-provenance.md` — versioned evidence schemas, origin fields, validation, and
   material-versus-volatile comparison semantics.
+- `docs/assurance-statement.md` and `docs/claim-ledger.md` — bounded public claim, supporting
+  evidence, assumptions, and material claim limits.
+- `docs/standards-crosswalk.md` and `docs/threat-model.md` — source-versioned educational mappings,
+  demonstrated fixture coverage, non-applicable threats, and explicit out-of-scope boundaries.
 - `evidence/sample/` — generated, machine-validated sample evidence.
 - `artifacts/` — ignored local MLflow and regenerated evidence state.
 

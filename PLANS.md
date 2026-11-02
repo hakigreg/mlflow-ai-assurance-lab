@@ -192,6 +192,29 @@ offline reproducibility after locked setup.
   `1fa0a279123e5bef0314f3c5438ed8d3ec1356eff5e073f46104e2fc5a195559`; material digest is
   `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`; application-source digest
   is `834aba66333986d955f9fce23658f9fb1a0de208ebbda92f479c8396e0f10348`.
+- 2026-11-02 official-source review — rechecked NIST AI RMF 1.0/NIST AI 100-1, NIST AI
+  600-1, the ISO/IEC 42001:2023 public overview, OWASP GenAI LLM Top 10 2026 landing page and
+  final source files, the live MITRE ATLAS catalog, Regulation (EU) 2024/1689, and the current
+  European Commission AI Act overview. `docs/source-register.md` records versions, dates, and
+  decisions. P2-06 uses NIST functions/categories and ISO/EU public themes only, marks OWASP
+  `LLM09:2026` not applicable to the lexical retriever, and limits MITRE mappings to pertinent
+  threat vocabulary rather than control-effectiveness claims.
+- P2-06 added a bounded assurance statement and material claim ledger linking each public claim
+  to measured or executable evidence and an explicit limit. The threat model now distinguishes
+  demonstrated fixtures, partial analogues, non-applicable risks, and out-of-scope attack
+  lifecycles. The standards crosswalk makes no legal, conformity, certification, alignment, or
+  complete-coverage conclusion. Findings now separate observed risk/lifecycle/control/evidence
+  and enterprise-fit facts from gaps and future recommendations.
+- Focused documentation checks — `pytest tests/test_foundation.py` reported 8 passed;
+  `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv repository` reported repository and
+  offline-assurance validation passed; `git diff --check` exited successfully with no output.
+- `make UV=/private/tmp/mlflow-ai-assurance-uv/bin/uv verify` — lock check resolved 102 packages;
+  Ruff lint and format passed with 23 files formatted; mypy found no issues in 23 files; pytest
+  reported 61 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository
+  validation passed. The final rerun produced evaluation runs
+  `07e4c1a3c33c4b96a9cc46b8a663e775` (baseline) and
+  `dd5cd8381afa435399877d4e44d77457` (governed) with expected `FAIL`/`PASS` decisions; the
+  governed gate passed, and generated and committed sample evidence validation passed.
 
 ## Phase 3 — Independent portfolio and release review
 
@@ -247,6 +270,11 @@ offline reproducibility after locked setup.
   input and source drift fails validation; coherent result drift changes the material digest.
   Evidence remains unsigned and locally timestamped, and a `dirty` Git marker requires reviewer
   judgment. Governance claims and standards review remain assigned to P2-06.
+- 2026-11-02: P2-06 retained the technical implementation, evidence schemas, dataset, thresholds,
+  and committed sample while hardening governance interpretation. Material claims now have an
+  evidence-and-limit ledger; standards and regulatory entries are educational analogies only;
+  OWASP/MITRE entries describe demonstrated fixture intent or explicit non-coverage. Phase 2
+  remains `In progress`; P2-07 and Phase 3 were not started.
 
 ## Surprises and discoveries
 
@@ -287,6 +315,6 @@ governed comparison, strict release gate, generated evidence, governance documen
 secret-free CI. Phase 2 is in progress through independently reviewed increments; the P2-01
 repository/CI alignment, P2-02 dataset/scorer validity, P2-03 negative gate and persistence
 security, P2-04 measured control traceability, and P2-05 evidence provenance/reproducibility
-increments are implemented. P2-06 and later hardening remain unimplemented pending their human
-gates. The security reporting contact and hosted GitHub security settings remain manual
-pre-publication actions.
+increments are implemented. P2-06 governance claims/documentation hardening is also implemented;
+P2-07 and later hardening remain unimplemented pending their human gates. The security reporting
+contact and hosted GitHub security settings remain manual pre-publication actions.

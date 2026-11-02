@@ -45,6 +45,8 @@ REQUIRED_FILES = {
     "data/policies/policies-v1.json",
     "docs/ai-system-card.md",
     "docs/adr/0001-planned-assurance-architecture.md",
+    "docs/assurance-statement.md",
+    "docs/claim-ledger.md",
     "docs/control-matrix.md",
     "docs/evidence-provenance.md",
     "docs/findings.md",

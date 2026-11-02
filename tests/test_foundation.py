@@ -18,6 +18,33 @@ def test_durable_contracts_exist() -> None:
         assert (ROOT / relative_path).is_file(), relative_path
 
 
+def test_governance_claim_contracts_are_explicit() -> None:
+    assurance = (ROOT / "docs/assurance-statement.md").read_text(encoding="utf-8")
+    ledger = (ROOT / "docs/claim-ledger.md").read_text(encoding="utf-8")
+    findings = (ROOT / "docs/findings.md").read_text(encoding="utf-8")
+    crosswalk = (ROOT / "docs/standards-crosswalk.md").read_text(encoding="utf-8")
+    threat_model = (ROOT / "docs/threat-model.md").read_text(encoding="utf-8")
+
+    for heading in (
+        "## Claim",
+        "## Evidence",
+        "## Assumptions",
+        "## Limitations and permitted use",
+    ):
+        assert heading in assurance
+    for claim_number in range(1, 9):
+        assert f"CLAIM-{claim_number:03d}" in ledger
+    for heading in (
+        "## Observed technical results",
+        "## Known gaps and bounded interpretation",
+        "## Recommendations for enterprise extension",
+    ):
+        assert heading in findings
+    assert "does not establish legal" in crosswalk
+    assert "Not applicable to the implemented retriever" in threat_model
+    assert "Out of scope" in threat_model
+
+
 def test_project_metadata_pins_runtime() -> None:
     with (ROOT / "pyproject.toml").open("rb") as file_handle:
         metadata = tomllib.load(file_handle)
