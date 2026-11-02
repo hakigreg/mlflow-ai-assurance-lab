@@ -2,9 +2,9 @@
 
 ## Project state
 
-Phase 1 provides a functional offline assurance MVP, and Phase 2 assurance/evidence hardening is
-complete. Phase 3 independent release review has not started. Keep changes within the active
-increment and record observed status in `PLANS.md`.
+The functional offline MVP, assurance/evidence hardening, and local portfolio review are complete.
+Public release remains blocked on the owner-controlled actions in `RELEASE_READINESS.md`. Keep
+changes within the bounded claim and record only observed status in `PLANS.md`.
 
 ## Setup and checks
 

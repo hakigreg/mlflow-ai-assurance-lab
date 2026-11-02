@@ -1,114 +1,148 @@
 # MLflow AI Assurance Lab
 
-> **Status: Assurance and evidence hardening (Phase 2 complete)**
+> **Status: local portfolio review complete; publication controls pending**
 
-This small, inspectable portfolio lab demonstrates a bounded technical assurance chain:
+This inspectable portfolio lab shows how a Data & AI Governance Architect can turn an AI risk
+into an executable control, an MLflow evaluation, a fail-closed decision, and reviewable evidence:
 
 `AI risk -> control -> automated evaluation -> decision gate -> auditable evidence`
 
-It compares a deliberately limited `baseline` with a `governed` synthetic-policy RAG
-assistant. The mandatory path uses MLflow 3.17.2, SQLite, a deterministic local provider,
-versioned data, and code-based scorers. It needs no API key, SaaS service, paid call, or model
-download.
+The lab compares an intentionally weak `baseline` with a `governed` synthetic-policy RAG
+assistant. MLflow 3.17.2 is the assurance system for tracing, evaluation, and evidence anchors.
+The required path uses SQLite, synthetic data, deterministic local code, and five code-based
+scorers. It needs no API key, SaaS service, paid call, or model download after locked dependencies
+have been acquired.
 
-The result is comparative and limited to the documented synthetic cases. It does not establish
-production safety, legal compliance, ISO conformity, certification, or complete audit readiness.
-The precise claim, assumptions, and limitations are in the
-[`bounded assurance statement`](docs/assurance-statement.md); claim-to-evidence boundaries are in
-the [`claim ledger`](docs/claim-ledger.md).
+The result is deliberately bounded. It shows stronger control coverage for the governed variant
+on eight versioned synthetic cases; it does not establish production safety, semantic truth,
+legal compliance, NIST alignment, ISO conformity, certification, or complete audit readiness.
+See the [assurance statement](docs/assurance-statement.md) and
+[claim ledger](docs/claim-ledger.md) for the exact claim and its limits.
 
-The Phase 1 functional offline assurance MVP remains the implemented behavior. Phase 2 completed
-the human-gated assurance and evidence hardening increments. Phase 3 independent portfolio and
-release review has not started.
-
-## Architecture
+## Architecture and scenario
 
 ```mermaid
 flowchart LR
-    Q[Synthetic query] --> I[Redacted input handling]
-    I --> R[Deterministic retrieval]
-    R --> B[Baseline]
-    R --> G[Governed controls]
-    B --> T[MLflow traces]
+    Q[Synthetic policy query] --> R[Deterministic retrieval]
+    R --> B[Baseline: controls intentionally absent]
+    R --> G[Governed: scope, support, injection and leakage controls]
+    B --> T[Redacted MLflow traces]
     G --> T
-    T --> S[Five offline scorers]
+    T --> S[Five deterministic scorers]
     S --> P[Versioned release policy]
-    P --> E[Validated evidence pack]
+    P --> D{Decision gate}
+    D --> E[Validated evidence pack]
 ```
 
-MLflow spans cover input handling, retrieval, generation, control decisions, and output
-validation. Raw application output is available to the scorers, while configured synthetic
-markers, credential shapes, and prohibited prompt phrases are redacted before trace persistence.
-This is a narrow configured boundary, not general PII or secret detection. Local runtime state
-lives under ignored `artifacts/`.
+Both variants receive the same corpus and cases. The baseline deliberately answers unsupported,
+out-of-scope, injection, and synthetic-sensitive requests so that missing controls are observable.
+The governed path refuses or answers according to explicit rules. Raw application output remains
+available to scorers, while configured synthetic markers, credential shapes, and prohibited
+prompt phrases are redacted before trace persistence. This is a narrow configured boundary, not
+general PII or secret detection.
 
-## Happy path
+## Reproduce locally
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
+Prerequisites are Git, `make`, and [uv](https://docs.astral.sh/uv/) available on `PATH`. The
+repository pins Python 3.12.16 and uv resolves exactly from `uv.lock`.
+
+From the repository root:
 
 ```bash
+uv --version
 make setup
 make demo
 make evaluate
+make gate
 make evidence
 make verify
 ```
 
-`make evaluate` expects and verifies `baseline=FAIL governed=PASS`; an unexpected decision is an
-error. `make gate` applies the release gate to governed results. The intentional negative path is:
+`make setup` may need network access the first time to obtain the pinned Python runtime and locked
+packages. After those dependencies are available locally, the demo, evaluation, gate, evidence,
+and verification path makes no provider or SaaS calls and downloads no model.
+
+Expected behavior:
+
+- `make demo` shows the baseline answer an out-of-scope weather request while the governed variant
+  returns `refuse_scope`.
+- `make evaluate` requires `baseline=FAIL governed=PASS`; an unexpected decision is an error.
+- `make gate` passes only the governed result bound to the current release policy.
+- `make verify` runs lock, lint, formatting, types, 62 tests, repository checks, evaluation, gate,
+  generated-evidence validation, and committed-sample validation.
+
+The intentional negative path must exit `1`:
 
 ```bash
-uv run python -m mlflow_ai_assurance_lab gate --variant baseline
+MLFLOW_DISABLE_AGENT_HINT=1 UV_CACHE_DIR=.uv-cache uv run --locked --no-sync \
+  python -m mlflow_ai_assurance_lab gate --variant baseline
 ```
 
-That command must exit non-zero. Gate input errors use exit `2`; a measured threshold failure uses
-exit `1`. Negative tests cover controlled regression, missing/non-finite metrics, inconsistent
-policy, stale policy binding, and recorded decisions that disagree with recomputation.
+Invalid or inconsistent gate inputs exit `2`; there is no successful fallback. For a guided
+walkthrough, use the [5–7 minute demo script](docs/demo-script.md).
 
-The current scorer contract names what is measured: citation-source ID match, scope-action match,
-configured synthetic-marker absence, expected-action match, and lexical-response match. The
-committed sample produced baseline scores of `0.25`, `0.875`, `0.875`, `0.375`, and `0.25`
-respectively; governed scored `1.0` on all five versioned metrics. These names were clarified in
-Phase 2 without lowering the original `1.0` thresholds. See
-[`evidence/sample/report.md`](evidence/sample/report.md) for generated evidence and
-[`docs/scorer-contracts.md`](docs/scorer-contracts.md) for inputs, negative tests, and limits.
-Evidence schemas, provenance, volatility classes, and material comparison semantics are documented
-in [`docs/evidence-provenance.md`](docs/evidence-provenance.md).
+## Measured sample
 
-## Inspect traces
+The committed pack in [`evidence/sample/`](evidence/sample/) was generated by the repository and
+validated against its schemas, hashes, source/input digests, case coverage, decisions, and control
+relations.
 
-After `make demo` or `make evaluate`, start the local UI:
+| Scorer | Baseline | Governed | Threshold |
+|---|---:|---:|---:|
+| Citation-source ID match | 0.250 | 1.000 | 1.000 |
+| Scope-action match | 0.875 | 1.000 | 1.000 |
+| Configured synthetic-marker absence | 0.875 | 1.000 | 1.000 |
+| Expected-action match | 0.375 | 1.000 | 1.000 |
+| Lexical-response match | 0.250 | 1.000 | 1.000 |
 
-```bash
-uv run mlflow ui --backend-store-uri sqlite:///artifacts/mlflow/mlflow.db --port 5000
-```
+The observed decision is `baseline=FAIL` and `governed=PASS`. These are deterministic regression
+signals, not model-quality benchmarks. Read the generated [evidence report](evidence/sample/report.md)
+and [scorer contracts](docs/scorer-contracts.md) before interpreting them.
 
-Open `http://127.0.0.1:5000` and select `mlflow-ai-assurance-lab-offline`. Trace tags and root-span
-attributes distinguish `baseline` and `governed`.
+## Traceability and governance view
 
-## Repository map
+The generated [control matrix](docs/control-matrix.md) connects each material risk to control
+intent, implementation/configuration, tests, MLflow run or trace anchors, measured evidence,
+decision contribution, and residual risk. The machine-readable view is
+[`control-status.json`](evidence/sample/control-status.json); evidence schemas and volatility rules
+are in [evidence provenance](docs/evidence-provenance.md).
 
-- `src/mlflow_ai_assurance_lab/` — application, tracing, evaluation, gate, and evidence code.
-- `data/policies/` and `data/evaluation/` — versioned synthetic inputs.
-- `config/release-policy-v1.json` — thresholds and expected decisions.
-- `config/control-catalog-v1.json` — versioned static control metadata and observation rules.
-- `docs/control-matrix.md` — generated measured risk/control/code/test/MLflow/evidence/decision
-  traceability; its material status comes from the committed sample evidence.
-- `docs/scorer-contracts.md` — precise scorer claims, inputs, negative tests, and limits.
-- `docs/evidence-provenance.md` — versioned evidence schemas, origin fields, validation, and
-  material-versus-volatile comparison semantics.
-- `docs/assurance-statement.md` and `docs/claim-ledger.md` — bounded public claim, supporting
-  evidence, assumptions, and material claim limits.
-- `docs/phase-2-closure.md` — final requirement-to-implementation/test/evidence closure matrix and
-  observed rehearsal results.
-- `docs/standards-crosswalk.md` and `docs/threat-model.md` — source-versioned educational mappings,
-  demonstrated fixture coverage, non-applicable threats, and explicit out-of-scope boundaries.
-- `evidence/sample/` — generated, machine-validated sample evidence.
-- `artifacts/` — ignored local MLflow and regenerated evidence state.
+The [standards crosswalk](docs/standards-crosswalk.md) uses public NIST AI RMF 1.0, NIST AI 600-1,
+ISO/IEC 42001 overview, OWASP GenAI, MITRE ATLAS, and EU AI Act themes as educational architecture
+analogies only. It is not a compliance, conformity, certification, legal, or complete-coverage
+assessment.
 
-LLM-as-a-judge is not part of the required path and is disabled by default. Adding one would
-introduce provider cost, nondeterminism, data-boundary review, and secret handling; it must remain
-optional and may not replace the deterministic gate.
+## Repository structure
+
+- `src/mlflow_ai_assurance_lab/` — application, tracing, scoring, gate, and evidence code.
+- `data/` — versioned synthetic corpus and eight-case evaluation dataset.
+- `config/` — strict release policy and static control catalog.
+- `tests/` — positive, regression, invalid-input, persistence, and evidence-tampering paths.
+- `docs/` — assurance claim, risks, controls, threats, standards, decisions, findings, and review aids.
+- `evidence/sample/` — selected generated and machine-validated sample evidence.
+- `artifacts/` — ignored local MLflow databases, traces, and regenerated evidence.
+
+## Design decisions and limitations
+
+The key choices are summarized in [architecture decisions](docs/architecture-decisions.md): a
+deterministic offline provider, manual MLflow spans with pre-persistence redaction, code-based
+scorers, strict `1.0` thresholds, and fail-closed evidence validation. A real provider and
+LLM-as-a-judge are intentionally absent from the required path because they add cost,
+nondeterminism, secret handling, and data-boundary review.
+
+The main limitations are the small synthetic dataset, lexical rather than semantic evaluation,
+configured-pattern rather than general privacy/security detection, and local evidence that is not
+signed, independently timestamped, append-only, or custody-controlled. The gate is a technical
+decision aid, not enterprise release authorization. See [findings](docs/findings.md),
+[interview notes](docs/interview-notes.md), and [release readiness](RELEASE_READINESS.md).
+
+## Next steps
+
+- Complete the owner-only hosted controls listed in `RELEASE_READINESS.md` before publication.
+- Keep any real-provider experiment optional and outside the mandatory offline gate.
+- Use a future `deepeval-governance-tests` lab for additional CI-oriented evaluation patterns.
+- Use a future `verifywise-governance-lab` for inventory, governance workflows, and compliance
+  management; those tools are intentionally not integrated here.
 
 ## License
 

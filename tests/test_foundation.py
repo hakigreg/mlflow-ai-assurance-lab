@@ -8,9 +8,19 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readme_exposes_phase_two_status() -> None:
+def test_readme_exposes_phase_three_status() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Assurance and evidence hardening (Phase 2 complete)" in readme
+    assert "local portfolio review complete; publication controls pending" in readme
+
+
+def test_portfolio_release_review_deliverables_exist() -> None:
+    for relative_path in (
+        "RELEASE_READINESS.md",
+        "docs/architecture-decisions.md",
+        "docs/demo-script.md",
+        "docs/interview-notes.md",
+    ):
+        assert (ROOT / relative_path).is_file(), relative_path
 
 
 def test_durable_contracts_exist() -> None:
@@ -89,5 +99,5 @@ def test_phase_one_modules_exist() -> None:
 
 def test_security_policy_blocks_publication_without_private_channel() -> None:
     policy = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-    assert "No private reporting channel exists yet" in policy
+    assert "No verified private reporting channel is documented" in policy
     assert "Publication is blocked" in policy

@@ -1,8 +1,6 @@
 name: Assurance gap
 description: Report a sanitized gap in a risk, control, evaluation, or evidence chain.
 title: "[Assurance gap]: "
-labels:
-  - enhancement
 body:
   - type: markdown
     attributes:

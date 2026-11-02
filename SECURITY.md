@@ -2,7 +2,10 @@
 
 ## Pre-release status
 
-This repository is not yet published or released. No private reporting channel exists yet. **Publication is blocked until the maintainer configures a real private contact or enables GitHub Private Vulnerability Reporting and replaces this placeholder.** Do not put vulnerability details, secrets, personal data, exploitable payloads, or unsanitized evidence in a public issue.
+This repository has not been publicly released. No verified private reporting channel is documented
+yet. **Publication is blocked until the maintainer configures a real private contact or enables
+GitHub Private Vulnerability Reporting.** Do not put vulnerability details, secrets, personal
+data, exploitable payloads, or unsanitized evidence in a public issue.
 
 There is no response-time or remediation SLA. Reports will be handled on a best-effort basis after a private channel exists.
 
@@ -34,6 +37,7 @@ security defect; do not bypass it or publish the affected local database.
 
 - Configure and document a real private security contact or enable GitHub Private Vulnerability Reporting.
 - Enable Dependabot alerts and Dependabot security updates in hosted repository settings.
-- Confirm that the final public reporting path is reachable and remove this placeholder language.
+- Confirm that the final private reporting path is reachable and update this file with the verified
+  instructions.
 
 Local files do not enable hosted security settings.

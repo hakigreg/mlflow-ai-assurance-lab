@@ -1,8 +1,28 @@
-# Phase 2 governance findings
+# Final portfolio and release-review findings
 
 This document separates observed results, known gaps, and recommendations. The detailed claim and
 evidence boundaries are in the [`claim ledger`](claim-ledger.md); the overall interpretation is in
 the [`bounded assurance statement`](assurance-statement.md).
+
+## Review conclusion
+
+The local portfolio package is coherent and reproducible for its bounded claim. The quickstart,
+baseline/governed demo, MLflow evaluation, fail-closed gate, negative paths, trace redaction checks,
+and generated/committed evidence validation were observed during the Phase 3 review. No critical
+implementation defect or false successful fallback was found.
+
+The review corrected five material presentation/readiness gaps: the README still described Phase 2
+instead of leading with portfolio value; the initial setup network boundary and `uv`-on-`PATH`
+prerequisite were not explicit; the Phase 3 demo, interview, architecture summary, and release
+checklist were absent; unverified hosted labels were assigned by issue forms; and hosted controls
+were not clearly separated from local verification. Blank issues are now disabled so public reports
+use the sanitized quality/governance forms; private security reporting remains a publication
+blocker.
+
+Public publication is not ready. The configured remote could not be inspected because local GitHub
+authentication was invalid, and private vulnerability reporting, Dependabot security features,
+repository rules, required hosted CI, public visibility, and the final reporting path remain
+owner-controlled and unverified. No hosted setting was changed.
 
 ## Observed technical results
 
@@ -46,7 +66,7 @@ These are recommendations, not implemented controls or observed results.
 
 | Related risk | Recommendation | Why it remains future work |
 |---|---|---|
-| RISK-TRACE-001, RISK-RELEASE-001 | Add signed, independently timestamped, access-controlled, append-only evidence storage; generate from a clean reviewed commit; add independent release review and a governed exception process. | The current pack is local and hash-linked only; Phase 3 independent portfolio/release review has not started. |
+| RISK-TRACE-001, RISK-RELEASE-001 | Add signed, independently timestamped, access-controlled, append-only evidence storage; generate from a clean reviewed commit; add independent enterprise release review and a governed exception process. | The current pack is local and hash-linked only; Phase 3 reviewed portfolio readiness, not enterprise release authorization. |
 | RISK-CITE-001, RISK-GROUND-001 | Perform domain-owner source validation and representative semantic/factual evaluation with uncertainty and human adjudication. | Current scorers intentionally measure only IDs, actions, configured markers, and lexical terms. |
 | RISK-SCOPE-001 | Build a versioned, domain-owned scope taxonomy and test paraphrases, ambiguity, multilingual inputs, and production-like traffic. | The current vocabulary and eight cases are deliberately small. |
 | RISK-LEAK-001 | Complete privacy/security review; add data classification, authorization, general secret/PII controls, retention, access logging, and incident response before handling real data. | Real sensitive data and production identity/access architecture are out of scope. |

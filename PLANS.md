@@ -250,15 +250,59 @@ offline reproducibility after locked setup.
 
 ## Phase 3 — Independent portfolio and release review
 
-**Status:** Not started
+**Status:** Complete
 
 **Objective:** Perform an independent public-portfolio and release-readiness review without overstating the lab's assurance claim.
 
-**Required outputs:** Planned independent review findings, corrected public narrative, reproducibility review, release checklist, and documented limitations and manual publication actions.
+**Required outputs:** Independent review findings, corrected public narrative, reproducibility
+review, release checklist, and documented limitations and manual publication actions.
 
-**Acceptance criteria:** Planned review must confirm a clean offline checkout, coherent claims and evidence, safe public artifacts, and explicit release decisions and open risks.
+**Acceptance criteria:** The review must confirm a clean offline checkout, coherent claims and
+evidence, safe public artifacts, and explicit release decisions and open risks.
 
-**Verification evidence:** Not run.
+**Verification evidence:**
+
+- Phase 3 began from `main` synchronized with `origin/main` and an initially clean working tree.
+  The first `command -v uv` preflight exited `1`, before a project command ran, because this review
+  shell did not expose uv on `PATH`. The README now makes that prerequisite and the one-time setup
+  network boundary explicit. The complete documented sequence then ran with the already installed
+  uv 0.13.6 executable: locked setup resolved 102 packages and checked 98 installed packages;
+  `make demo` showed baseline answering the out-of-scope weather query and governed returning
+  `refuse_scope`; evaluation produced the expected `FAIL`/`PASS`; evidence generated and validated;
+  and the full verification gate passed.
+- Final `make UV=<installed-uv> verify` — uv lock validation resolved 102 packages; Ruff lint and
+  formatting passed with 23 files formatted; mypy found no issues in 23 source files; pytest
+  reported 62 passed with one upstream MLflow/SQLAlchemy deprecation warning; repository,
+  documentation-link, CI, claim, and traceability validation passed. Evaluation runs
+  `f229e1f336e844e7bb47a3aff0a33b4d` (baseline) and
+  `3aeb103ff60b4158bb754bdf811ddcca` (governed) produced expected `FAIL`/`PASS`; the governed gate
+  passed, and generated and committed evidence validation passed.
+- The direct baseline gate, with the project-local uv cache and agent hint disabled, exited `1` and
+  listed all five metrics as failed. The full suite retained the controlled governed citation
+  regression exit `1`, invalid-input exit `2`, persistence-redaction failure, and evidence-tamper
+  rejection paths without a successful fallback.
+- The committed sample remained materially current because Phase 3 changed no application source,
+  dataset, corpus, policy, catalog, threshold, or evidence schema. Validation retained manifest
+  SHA-256 `1ca8a73689e0c3b1eb56482a63d22448fe2b51970adbb358829170651d0966ef`,
+  material digest `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`,
+  and application-source digest
+  `834aba66333986d955f9fce23658f9fb1a0de208ebbda92f479c8396e0f10348`.
+- Public-content and repository validation found no credential-shaped values or personal absolute
+  paths in tracked text, no oversized tracked artifact, and no unresolved TODO, fake badge, or
+  invented link. Ignored `.DS_Store` files outside the protected Git metadata directory were
+  removed. Issue forms no longer assume unverified hosted labels, and blank public issues are
+  disabled in favor of the sanitized forms.
+- The README now leads with audience-relevant value, bounded claim, architecture, scenario,
+  reproducibility, measured results, traceability, decisions, limitations, and next steps. Phase 3
+  added current architecture decisions, a 5–7 minute demo, interview notes, final findings, and a
+  release-readiness record. A screenshot was judged unnecessary because the generated Markdown and
+  JSON evidence is reproducible and more inspectable.
+- Read-only remote inspection found an existing `origin`, but `gh auth status` reported an invalid
+  local token; no hosted setting or CI result could be verified. `RELEASE_READINESS.md` therefore
+  records local review `PASS` and public publication `BLOCKED` until the owner confirms visibility,
+  repository rules and required CI, Dependabot alerts/security updates, private vulnerability
+  reporting, the reporting path, and a successful hosted CI run after an authorized push. No push,
+  publication, release, remote creation, or hosted setting change was performed.
 
 ## Decision log
 
@@ -312,6 +356,10 @@ offline reproducibility after locked setup.
   observed executable or generated evidence, so Phase 2 is `Complete`. The remaining bounded
   residual risks and manual pre-publication actions do not convert the local lab gate into an
   enterprise release authorization. Phase 3 remains `Not started`.
+- 2026-11-02: Phase 3 completed the local portfolio, reproducibility, code/test, evidence,
+  governance-document, license, CI-configuration, and publication-boundary review. The local
+  portfolio package is ready for owner review, while public publication remains explicitly blocked
+  on unverified hosted controls and a private security-reporting path.
 
 ## Surprises and discoveries
 
@@ -343,13 +391,21 @@ offline reproducibility after locked setup.
   the human risk assessment while `CTRL-REFUSE-001` also linked back to that risk. The risk row was
   corrected, and repository validation now compares every documented risk/control edge with the
   versioned catalog rather than checking identifier presence alone.
+- 2026-11-02: The review shell did not expose its installed uv on `PATH`, and a direct `uv run`
+  initially targeted a sandbox-inaccessible global cache. Making the `PATH` prerequisite, setup
+  network boundary, and project-local `UV_CACHE_DIR` explicit removed the ambiguity without
+  changing the required offline behavior.
+- 2026-11-02: GitHub CLI authentication was invalid during the read-only hosted review. The local
+  repository proves only its committed CI/security configuration; current hosted rules, security
+  features, visibility, and CI status remain unverified and block public publication.
 
 ## Outcomes and retrospective
 
-Phases 0, 1, and 2 are complete. The repository contains a functional, deterministic offline
+Phases 0 through 3 are complete. The repository contains a functional, deterministic offline
 assurance vertical slice with MLflow traces, a managed evaluation dataset, measured baseline and
 governed comparison, strict failure semantics, generated and validated evidence, bidirectional
-traceability, bounded governance documentation, and secret-free CI. P2-07 found no remaining
-Phase 2 acceptance gap and closed the phase without beginning Phase 3. The security reporting
-contact, hosted Dependabot security features, and observation of hosted CI remain manual
-pre-publication actions.
+traceability, bounded governance documentation, secret-free CI configuration, and a public-facing
+portfolio narrative with reproducible demo and review aids. The local portfolio review found no
+critical implementation defect or false successful fallback. Public publication is not authorized
+or ready until the owner completes and verifies the hosted security, repository-rule, visibility,
+reporting, and CI actions in `RELEASE_READINESS.md`.
