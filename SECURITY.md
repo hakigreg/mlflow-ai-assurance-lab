@@ -2,12 +2,11 @@
 
 ## Pre-release status
 
-This repository has not been publicly released. No verified private reporting channel is documented
-yet. **Publication is blocked until the maintainer configures a real private contact or enables
-GitHub Private Vulnerability Reporting.** Do not put vulnerability details, secrets, personal
-data, exploitable payloads, or unsanitized evidence in a public issue.
+This repository has not been publicly released. Report suspected vulnerabilities privately to
+[contacto@vektoria.io](mailto:contacto@vektoria.io). Do not put vulnerability details, secrets,
+personal data, exploitable payloads, or unsanitized evidence in a public issue.
 
-There is no response-time or remediation SLA. Reports will be handled on a best-effort basis after a private channel exists.
+There is no response-time or remediation SLA. Reports are handled on a best-effort basis.
 
 ## Security scope
 
@@ -23,7 +22,10 @@ Public quality or governance issues include incorrect documentation, missing tra
 
 ## Safe evidence handling
 
-Security evidence must be minimal, synthetic or sanitized, and shared only through the future private channel. Do not publish real credentials, personal or client data, proprietary prompts or policies, weaponized payloads, complete exploit instructions, raw sensitive traces, local environment dumps, or internal infrastructure details.
+Security evidence must be minimal, synthetic or sanitized, and shared only through the private
+contact above. Do not publish real credentials, personal or client data, proprietary prompts or
+policies, weaponized payloads, complete exploit instructions, raw sensitive traces, local
+environment dumps, or internal infrastructure details.
 
 The persistence boundary applies `persistence-redaction-v2` before MLflow trace persistence. It
 redacts the configured synthetic markers, selected credential/API-key shapes, and configured
@@ -35,9 +37,9 @@ security defect; do not bypass it or publish the affected local database.
 
 ## Maintainer actions required before publication
 
-- Configure and document a real private security contact or enable GitHub Private Vulnerability Reporting.
+- Confirm that `contacto@vektoria.io` is reachable and monitored.
 - Enable Dependabot alerts and Dependabot security updates in hosted repository settings.
-- Confirm that the final private reporting path is reachable and update this file with the verified
-  instructions.
+- After publication, consider enabling GitHub Private Vulnerability Reporting as an additional
+  channel.
 
 Local files do not enable hosted security settings.

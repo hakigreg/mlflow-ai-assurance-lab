@@ -360,6 +360,10 @@ evidence, safe public artifacts, and explicit release decisions and open risks.
   governance-document, license, CI-configuration, and publication-boundary review. The local
   portfolio package is ready for owner review, while public publication remains explicitly blocked
   on unverified hosted controls and a private security-reporting path.
+- 2026-11-02: After GitHub reauthentication, read-only inspection confirmed `ab2b4e8` synchronized
+  on `main` with successful hosted CI. The owner designated `contacto@vektoria.io` as the private
+  security contact. Dependabot alerts/security updates remain explicitly deferred; rulesets and
+  optional GitHub Private Vulnerability Reporting remain post-publication actions.
 
 ## Surprises and discoveries
 
@@ -406,6 +410,6 @@ assurance vertical slice with MLflow traces, a managed evaluation dataset, measu
 governed comparison, strict failure semantics, generated and validated evidence, bidirectional
 traceability, bounded governance documentation, secret-free CI configuration, and a public-facing
 portfolio narrative with reproducible demo and review aids. The local portfolio review found no
-critical implementation defect or false successful fallback. Public publication is not authorized
-or ready until the owner completes and verifies the hosted security, repository-rule, visibility,
-reporting, and CI actions in `RELEASE_READINESS.md`.
+critical implementation defect or false successful fallback. A private security contact is now
+documented; the remaining publication and post-publication actions are tracked in
+`RELEASE_READINESS.md`.

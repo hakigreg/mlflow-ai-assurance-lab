@@ -3,9 +3,8 @@
 **Local review decision:** PASS  
 **Public publication decision:** BLOCKED pending owner-controlled hosted settings
 
-This record separates checks observed locally on 2026-11-02 from GitHub settings that were not
-verified or changed. `PASS` applies only to the bounded synthetic lab and is not enterprise release
-authorization.
+This record separates checks observed locally on 2026-11-02 from owner-controlled GitHub settings.
+`PASS` applies only to the bounded synthetic lab and is not enterprise release authorization.
 
 ## Locally verified
 
@@ -34,18 +33,19 @@ the required application/evaluation path remains offline after setup.
 
 | Check | Result | Required owner action |
 |---|---|---|
-| Repository destination and public visibility | NOT VERIFIED | Confirm the existing `origin` is the intended destination, review history, and explicitly make it public or create the publication remote. |
-| Repository rules and required CI checks | NOT VERIFIED | Configure branch/ruleset protection for `main` and require the `offline-assurance` CI job. |
-| Hosted CI on the publication commit | NOT VERIFIED | Push only after authorization and observe a successful clean GitHub Actions run. |
-| Dependabot alerts | NOT VERIFIED | Enable alerts in repository security settings. |
-| Dependabot security updates | NOT VERIFIED | Enable security updates; the committed weekly uv/Actions update configuration is only the local configuration. |
-| Private vulnerability reporting | FAIL / BLOCKER | Enable GitHub Private Vulnerability Reporting or document a real private security contact, then update `SECURITY.md`. |
-| Public reporting path | FAIL / BLOCKER | Confirm that security reports stay private and sanitized quality/governance issues can use the issue forms. |
+| Repository destination and public visibility | VERIFIED / PRIVATE | `origin/main` and local `main` resolve to `ab2b4e8`; explicitly change visibility only after final review. |
+| Repository rules and required CI checks | PENDING PUBLICATION | GitHub Free returned `403` for the private repository; after making it public, configure a `main` ruleset requiring `offline-assurance`. |
+| Hosted CI on the current commit | PASS | GitHub Actions run `41526813368` completed successfully for `ab2b4e8` on `main`. |
+| Dependabot alerts | DISABLED / DEFERRED | Enable alerts in repository security settings; the owner accepted completing this later. |
+| Dependabot security updates | DISABLED / DEFERRED | Enable security updates after alerts; the committed weekly uv/Actions configuration covers version updates only. |
+| Private security contact | CONFIGURED | `SECURITY.md` directs private reports to `contacto@vektoria.io`; the owner must confirm that the mailbox is reachable and monitored. |
+| Private vulnerability reporting | POST-PUBLICATION | GitHub exposes this feature for public repositories; consider enabling it as an additional channel after changing visibility. |
+| Public issue path | PASS | Blank issues are disabled; the two issue forms require sanitized non-security reports and direct vulnerabilities to `SECURITY.md`. |
 | Screenshots | NOT REQUIRED | Add only a real, sanitized, small screenshot if it improves the portfolio; record its provenance. The reproducible Markdown/JSON evidence is currently clearer. |
 
-The GitHub CLI detected the configured `origin`, but its local authentication token was invalid;
-therefore no hosted setting or current CI run was claimed as verified. No push, publication,
-release, remote creation, or hosted setting change was performed.
+Read-only GitHub inspection confirmed the private repository, current synchronized commit, hosted
+CI success, read-only default workflow permissions, and the disabled Dependabot settings. No
+visibility, ruleset, security-setting, publication, release, or remote change was performed.
 
 ## Known issues and accepted limits
 
@@ -66,7 +66,8 @@ release, remote creation, or hosted setting change was performed.
 - [ ] Confirm the intended remote and public visibility; inspect commit history for sensitive data.
 - [ ] Configure repository rules and the required `offline-assurance` CI check.
 - [ ] Enable Dependabot alerts and security updates.
-- [ ] Enable private vulnerability reporting or document a real private contact.
-- [ ] Update `SECURITY.md` with the verified private reporting path.
+- [x] Document a real private security contact in `SECURITY.md`.
+- [ ] Confirm that `contacto@vektoria.io` is reachable and monitored.
+- [ ] After publication, consider enabling GitHub Private Vulnerability Reporting.
 - [ ] Push only with explicit authorization and observe hosted CI.
 - [ ] Publish a release only if separately authorized; no release is required for the portfolio.

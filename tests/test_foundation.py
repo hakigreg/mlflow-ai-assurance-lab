@@ -97,7 +97,7 @@ def test_phase_one_modules_exist() -> None:
     assert required <= {path.name for path in package.rglob("*.py")}
 
 
-def test_security_policy_blocks_publication_without_private_channel() -> None:
+def test_security_policy_defines_private_channel_without_fictitious_sla() -> None:
     policy = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
-    assert "No verified private reporting channel is documented" in policy
-    assert "Publication is blocked" in policy
+    assert "contacto@vektoria.io" in policy
+    assert "There is no response-time or remediation SLA" in policy

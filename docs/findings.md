@@ -19,10 +19,11 @@ were not clearly separated from local verification. Blank issues are now disable
 use the sanitized quality/governance forms; private security reporting remains a publication
 blocker.
 
-Public publication is not ready. The configured remote could not be inspected because local GitHub
-authentication was invalid, and private vulnerability reporting, Dependabot security features,
-repository rules, required hosted CI, public visibility, and the final reporting path remain
-owner-controlled and unverified. No hosted setting was changed.
+Read-only GitHub inspection later confirmed that the current commit is synchronized and its hosted
+CI passed. The owner designated `contacto@vektoria.io` as the private security contact. Dependabot
+alerts and security updates remain deferred, and repository rules plus optional GitHub Private
+Vulnerability Reporting can be configured after the repository becomes public. No hosted setting
+was changed during the review.
 
 ## Observed technical results
 
