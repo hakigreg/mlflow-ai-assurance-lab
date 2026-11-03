@@ -364,6 +364,14 @@ evidence, safe public artifacts, and explicit release decisions and open risks.
   on `main` with successful hosted CI. The owner designated `contacto@vektoria.io` as the private
   security contact. Dependabot alerts/security updates remain explicitly deferred; rulesets and
   optional GitHub Private Vulnerability Reporting remain post-publication actions.
+- 2026-11-03: Regenerated the committed sample from clean commit `cbec33f` after evaluating runs
+  `8aed3e6ede26405a9fd9c215629b9fd2` (baseline `FAIL`) and
+  `e2f0ea6c4cfc46b49c0a29d06ba5fea2` (governed `PASS`). The manifest now records
+  `working_tree=clean` and SHA-256
+  `54812a2d63410a81b1f00a0b724480affc4fa4c53812d1897bc499c5d224420f`.
+  Comparison with the prior valid pack returned `material_match=true`, classification
+  `volatile_or_normalizable_only`, and the unchanged material digest
+  `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`.
 
 ## Surprises and discoveries
 

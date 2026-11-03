@@ -20,7 +20,7 @@ This record separates checks observed locally on 2026-11-02 from owner-controlle
 | Tests | PASS | `make verify` reported 62 passed and one upstream MLflow/SQLAlchemy deprecation warning. |
 | Repository, links, claims, CI, and traceability validation | PASS | `make repository` completed successfully; CI has `contents: read`, pinned actions, and no secret reference. |
 | Generated evidence | PASS | `make evidence` and `make evidence-validate` generated and validated the local pack. |
-| Committed sample evidence | PASS | `make sample-evidence-validate` validated schemas, hashes, provenance, decisions, cases, controls, and configured-content safety. |
+| Committed sample evidence | PASS | Regenerated on 2026-11-03 from clean commit `cbec33f`; validation confirmed schemas, hashes, provenance, decisions, cases, controls, and configured-content safety. |
 | License and attribution consistency | PASS | Project metadata and `LICENSE` declare MIT; installed MLflow 3.17.2 metadata carries the Apache License 2.0 text. |
 | Publishable-content scan | PASS | Repository validation found no personal absolute path or credential-shaped value in public text; generated runtime state is ignored. |
 
@@ -56,13 +56,15 @@ visibility, ruleset, security-setting, publication, release, or remote change wa
 - The provider, corpus, and dataset are synthetic; lexical and ID checks do not establish semantic
   correctness or real-model safety.
 - Redaction covers configured patterns only. Real sensitive data remains prohibited.
-- A dirty working-tree provenance marker requires reviewer judgment; publish from a reviewed clean
-  commit and regenerate evidence if application source, inputs, policy, catalog, or schemas change.
+- The refreshed sample records clean source commit `cbec33f`, manifest SHA-256
+  `54812a2d63410a81b1f00a0b724480affc4fa4c53812d1897bc499c5d224420f`, and unchanged material
+  digest `94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a`.
 
 ## Publication checklist
 
 - [ ] Review the final diff and commit from a clean working tree.
 - [ ] Re-run `make setup`, `make verify`, and the explicit baseline gate on the publication commit.
+- [x] Regenerate and validate sample evidence from a clean reviewed commit with no material drift.
 - [ ] Confirm the intended remote and public visibility; inspect commit history for sensitive data.
 - [ ] Configure repository rules and the required `offline-assurance` CI check.
 - [ ] Enable Dependabot alerts and security updates.
