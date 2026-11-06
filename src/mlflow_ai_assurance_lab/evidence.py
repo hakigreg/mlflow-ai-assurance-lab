@@ -289,10 +289,10 @@ def _render_report(results: dict[str, Any], control_status: dict[str, Any]) -> s
     lines.extend(
         [
             "",
-            "## Measured control status",
+            "## Measured control observations",
             "",
-            "| Control | Governed status | Metric or method | Observed | Threshold | "
-            "Baseline status |",
+            "| Control | Governed result | Metric or method | Observed | Threshold | "
+            "Baseline result |",
             "|---|---|---|---|---|---|",
         ]
     )

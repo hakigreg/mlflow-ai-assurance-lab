@@ -272,7 +272,7 @@ def load_release_policy(path: Path = DEFAULT_POLICY_PATH) -> ReleasePolicy:
             "release thresholds must be finite and in the inclusive range [0, 1]"
         )
     if expected != {"baseline": "FAIL", "governed": "PASS"}:
-        raise ConfigurationError("Phase 1 expects baseline FAIL and governed PASS")
+        raise ConfigurationError("Expected decisions must be baseline FAIL and governed PASS")
     return ReleasePolicy(
         schema_version=str(raw["schema_version"]),
         policy_version=str(raw["policy_version"]),

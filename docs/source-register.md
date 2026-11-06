@@ -6,9 +6,9 @@ standard, satisfies a regulation, or verifies an MLflow capability end to end.
 
 | ID | Official source | Organization | Version or date | Decision supported |
 |---|---|---|---|---|
-| SRC-001 | [Python version status](https://devguide.python.org/versions/) | Python Software Foundation | Accessed 2026-10-29 | Python 3.12 remains supported through October 2028. Pin 3.12.16 for the foundation rather than adopting a prerelease branch. |
+| SRC-001 | [Python support lifecycle](https://devguide.python.org/versions/) | Python Software Foundation | Accessed 2026-10-29 | Python 3.12 remains supported through October 2028. Pin 3.12.16 for the foundation rather than adopting a prerelease branch. |
 | SRC-002 | [uv locking and syncing](https://docs.astral.sh/uv/concepts/projects/sync/) | Astral | Accessed 2026-10-29 | Use `uv.lock`, `uv sync --locked`, and `uv lock --check` for reproducible dependency installation. |
-| SRC-003 | [MLflow 3.17.2 release](https://pypi.org/project/mlflow/3.17.2/) | MLflow maintainers / PyPI | 3.17.2, 2026-10-21 | Pin the stable patch release used for the implemented and behaviorally verified Phase 1 path. Later upgrades require re-running compatibility and evidence checks. |
+| SRC-003 | [MLflow 3.17.2 release](https://pypi.org/project/mlflow/3.17.2/) | MLflow maintainers / PyPI | 3.17.2, 2026-10-21 | Pin the stable patch release used by the deterministic offline path. Later upgrades require re-running compatibility and evidence checks. |
 | SRC-004 | [MLflow tracing](https://mlflow.org/docs/latest/genai/tracing/) | MLflow | Accessed 2026-10-29; package 3.17.2 | Use manual root/child spans for input handling, retrieval, generation, control decisions, and output validation; tag traces by variant. Manual persistence boundaries allow pre-persistence redaction. |
 | SRC-005 | [MLflow evaluation datasets SDK](https://mlflow.org/docs/latest/genai/datasets/sdk-guide/) | MLflow | Accessed 2026-10-29; package 3.17.2 | Evaluation datasets require SQL. Use a managed, version-tagged dataset with SQLite and merge versioned dictionary records using the documented `inputs`/`expectations` schema. |
 | SRC-006 | [MLflow custom code-based scorers](https://mlflow.org/docs/latest/genai/eval-monitor/scorers/custom/) | MLflow | Accessed 2026-10-29; package 3.17.2 | Implement deterministic field-based scorers with `@scorer`, `Feedback`, and mean aggregation. Keep LLM judges out of the mandatory path. |
@@ -40,7 +40,7 @@ repository calls to official tag `v3.17.2` sources:
 |---|---|---|
 | Tracking and manual tracing | Local SQLite tracking; experiment selection; nested `start_span`; trace tags/metadata; filtered trace search returning trace objects. | The installed signatures used by `tracking.py`, `application.py`, and `evaluation.py` match the pinned release. Keep the manual pre-persistence redaction boundary. |
 | Managed evaluation datasets | Create or find one named dataset in the current experiment and merge versioned `inputs`/`expectations` records. | The installed `create_dataset`, filtered `search_datasets`, and `EvaluationDataset.merge_records` signatures match the pinned release. Keep SQLite because the managed dataset path requires a database-backed tracking store. |
-| GenAI evaluation | Pass the managed dataset, `PolicyAssistant.ask`, and deterministic scorers to `mlflow.genai.evaluate`. | The installed signature and official tagged source match the implemented call. Existing Phase 1 execution verifies this path behaviorally; this check does not extend the claim to later versions or hosted deployments. |
+| GenAI evaluation | Pass the managed dataset, `PolicyAssistant.ask`, and deterministic scorers to `mlflow.genai.evaluate`. | The installed signature and official tagged source match the implemented call. The executable checks verify this path behaviorally; the claim does not extend to later versions or hosted deployments. |
 | Code-based scorers | Define custom scorers with `@scorer(name=..., aggregations=["mean"])` and return `Feedback`. | The installed signature and official tagged source support the implemented form. This verification establishes API compatibility only; scorer validity remains assigned to P2-02. |
 
 ## Register limits
@@ -53,6 +53,6 @@ repository calls to official tag `v3.17.2` sources:
 - NIST, OWASP, MITRE ATLAS, and EU materials evolve. Mappings use the recorded version/date and
   distinguish technical evidence from governance, security-framework, or legal conclusions. A
   current catalog identifier does not demonstrate that the lab exercised the full threat lifecycle.
-- Phase 1 behaviorally verifies the pinned MLflow tracing, managed dataset, evaluation, scorer,
+- The executable checks verify the pinned MLflow tracing, managed dataset, evaluation, scorer,
   gate, and evidence path locally. This does not validate later MLflow releases or production
   deployment architecture.

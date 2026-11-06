@@ -71,10 +71,9 @@ offline evaluation, governed gate, generated evidence, and committed sample evid
 
 ## 6:00–7:00 — Close with honest limitations
 
-Open `RELEASE_READINESS.md`. State that local review passes but publication remains blocked on
-owner-controlled hosted settings and a private vulnerability-reporting path. Close with the main
-technical limits: synthetic cases, lexical checks, configured-pattern redaction, a deterministic
-non-LLM provider, and local unsigned evidence.
+Open `docs/assurance-statement.md` and close with the main technical limits: synthetic cases,
+lexical checks, configured-pattern redaction, a deterministic non-LLM provider, and local unsigned
+evidence.
 
 ## Optional trace inspection
 
@@ -89,4 +88,4 @@ MLFLOW_DISABLE_AGENT_HINT=1 UV_CACHE_DIR=.uv-cache uv run --locked --no-sync mlf
 
 Open `http://127.0.0.1:5000`, select `mlflow-ai-assurance-lab-offline`, and inspect one baseline and
 one governed trace. A screenshot is not required because the committed Markdown and JSON evidence
-is reproducible and more reviewable.
+is reproducible and easier to inspect.

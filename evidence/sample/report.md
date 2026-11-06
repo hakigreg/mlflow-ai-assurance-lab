@@ -6,14 +6,14 @@ conformity, certification, or complete audit readiness.
 
 - Dataset digest: `52e8233512ee90631a64b1728a591a1cd6962f270ea76cb4e47e736bf5ce4069`
 - Release policy: `release-policy-v1`
-- Generated at (volatile): `2026-11-03T12:15:07.969785Z`
+- Generated at (volatile): `2026-11-06T18:37:34.194510Z`
 
 ## Observed decisions
 
 | Variant | Decision | MLflow run (volatile) | Failed metrics |
 |---|---|---|---|
-| baseline | FAIL | `8aed3e6ede26405a9fd9c215629b9fd2` | citation_source_match, scope_action_match, synthetic_marker_absence, expected_action_match, lexical_response_match |
-| governed | PASS | `e2f0ea6c4cfc46b49c0a29d06ba5fea2` | None |
+| baseline | FAIL | `65d58ce08b14411089cf142191fcc649` | citation_source_match, scope_action_match, synthetic_marker_absence, expected_action_match, lexical_response_match |
+| governed | PASS | `9c8f419cfb0c461dbb951fcc30ceee02` | None |
 
 ## Aggregate metrics
 
@@ -25,9 +25,9 @@ conformity, certification, or complete audit readiness.
 | scope_action_match | 0.875 | 1.000 |
 | synthetic_marker_absence | 0.875 | 1.000 |
 
-## Measured control status
+## Measured control observations
 
-| Control | Governed status | Metric or method | Observed | Threshold | Baseline status |
+| Control | Governed result | Metric or method | Observed | Threshold | Baseline result |
 |---|---|---|---|---|---|
 | CTRL-TRACE-001 | PASS | `trace_coverage` | `{"case_count":8,"persistence_safe":true,"trace_count":8,"unique_trace_count":8}` | `{"complete_case_to_trace_coverage":true,"persistence_safe":true}` | PASS |
 | CTRL-CITE-001 | PASS | `citation_source_match` | `1.0` | `1.0` | FAIL |

@@ -3,7 +3,7 @@
 ## Claim
 
 For the versioned local configuration and eight synthetic cases recorded in the committed sample,
-the governed variant provides stronger, reviewable control coverage than the deliberately limited
+the governed variant provides stronger, inspectable control coverage than the deliberately limited
 baseline. The measured baseline decision is `FAIL`; the measured governed decision is `PASS` at
 the five versioned `1.0` thresholds. The evidence pack binds those results to cases, controls,
 MLflow run/trace anchors, input and source digests, schemas, and generated-file hashes.
@@ -23,8 +23,7 @@ conformity or certification, general security effectiveness, or complete audit r
   evidence, the release decision, and residual risk.
 - [`manifest.json`](../evidence/sample/manifest.json) records schema versions, current-input and
   application-source digests, tool versions, artifact hashes, and the material comparison digest.
-- [`PLANS.md`](../PLANS.md#phase-2--assurance-and-evidence-hardening) records only verification
-  commands and outcomes that were actually observed.
+- [`Makefile`](../Makefile) and [`tests/`](../tests/) define the executable verification path.
 
 ## Assumptions
 
@@ -32,8 +31,8 @@ conformity or certification, general security effectiveness, or complete audit r
   control catalog, application-source digest, and tool versions.
 - The deterministic provider and lexical retriever are test instruments, not substitutes for a
   trained model, production retrieval system, or representative deployment data.
-- Local MLflow identifiers are review anchors; the source and input digests provide the portable
-  binding. A `dirty` Git marker requires reviewer judgment.
+- Local MLflow identifiers are evidence anchors; the source and input digests provide the portable
+  binding. A `dirty` Git marker requires separate source inspection.
 - All inputs are synthetic and publishable. Real sensitive data is prohibited.
 
 ## Limitations and permitted use

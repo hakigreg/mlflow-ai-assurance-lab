@@ -4,7 +4,7 @@
 
 `mlflow-ai-assurance-lab` is a portfolio-scale synthetic-policy question-answering system used to
 demonstrate a bounded assurance chain. It compares a deliberately limited baseline with a governed
-variant. Intended users are engineers, assurance reviewers, and governance architects examining
+variant. Intended users are engineers, assurance practitioners, and governance architects examining
 the controls, traces, evaluation results, and evidence—not end users seeking real policy advice.
 The governing interpretation is the [`bounded assurance statement`](assurance-statement.md), with
 individual evidence boundaries in the [`claim ledger`](claim-ledger.md).
@@ -41,5 +41,5 @@ production safety, policy correctness, legal applicability or compliance, NIST a
 
 ## Human oversight
 
-The gate is a decision aid. A lab reviewer owns release decisions, exceptions, stop/use decisions,
-and review of failed cases and residual risks. See [`human-oversight.md`](human-oversight.md).
+The gate is a decision aid. A lab decision owner handles releases, exceptions, stop/use decisions,
+failed cases, and residual risks. See [`human-oversight.md`](human-oversight.md).

@@ -14,7 +14,7 @@ that the controls make an observable difference within the fixture.
 - Governance requirements are executable: risks and controls connect to tests, metrics, gate
   semantics, evidence, and residual-risk statements.
 - Failure paths are first-class: regressions, invalid metrics, stale policy bindings, tampered
-  evidence, contradictory status, and configured persistence leakage fail explicitly.
+  evidence, contradictory control observations, and configured persistence leakage fail explicitly.
 - Claims are narrower than the implementation's marketing potential: scorer names state exactly
   what is measured, and standards mappings are non-compliance educational crosswalks.
 - Evidence is generated and machine-validated rather than hand-authored as a success narrative.
@@ -44,16 +44,12 @@ The provider is deterministic code, not a trained model. The corpus and eight ca
 The controls do not cover obfuscated, multilingual, multimodal, adaptive, authorization, tool-use,
 or production ingestion threats. Configured redaction is not general PII or secret detection.
 Citation IDs and lexical overlap do not establish factual correctness. The evidence pack is local
-and unsigned. The gate is a technical regression decision aid, not legal review, certification,
+and unsigned. The gate is a technical regression decision aid, not legal assessment, certification,
 enterprise release authorization, or production monitoring.
 
 ## Sensible extension path
 
 For a real system, add accountable business and domain owners, representative data, human
-adjudication, privacy/security review, provider and retention controls, broader adversarial tests,
+adjudication, privacy/security assessment, provider and retention controls, broader adversarial tests,
 monitoring, incident and exception workflows, and signed evidence storage. Keep those as new
 versioned risks, controls, tests, and evidence rather than silently broadening this lab's claim.
-
-Future separate portfolio labs may use `deepeval-governance-tests` for additional CI-oriented
-evaluation and `verifywise-governance-lab` for inventory, governance workflows, and compliance
-management. They are intentionally not dependencies of this MLflow-focused lab.

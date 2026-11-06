@@ -8,14 +8,14 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_readme_exposes_phase_three_status() -> None:
+def test_readme_leads_with_the_assurance_lab() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "local portfolio review complete; publication controls pending" in readme
+    assert readme.startswith("# MLflow AI Assurance Lab\n")
+    assert "Status:" not in readme
 
 
-def test_portfolio_release_review_deliverables_exist() -> None:
+def test_portfolio_explanation_materials_exist() -> None:
     for relative_path in (
-        "RELEASE_READINESS.md",
         "docs/architecture-decisions.md",
         "docs/demo-script.md",
         "docs/interview-notes.md",
@@ -24,7 +24,7 @@ def test_portfolio_release_review_deliverables_exist() -> None:
 
 
 def test_durable_contracts_exist() -> None:
-    for relative_path in ("AGENTS.md", "GOALS.md", "PLANS.md"):
+    for relative_path in ("AGENTS.md", "GOALS.md"):
         assert (ROOT / relative_path).is_file(), relative_path
 
 

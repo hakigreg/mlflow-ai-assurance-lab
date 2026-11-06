@@ -16,7 +16,7 @@ sources recorded as SRC-011, SRC-017, SRC-023, and SRC-024 in the
 ```mermaid
 flowchart LR
     U[Synthetic user input] -->|untrusted| H[Input handling]
-    C[Versioned policy corpus] -->|review-controlled plus flagged-untrusted fixture| R[Lexical retriever]
+    C[Versioned policy corpus] -->|version-controlled plus flagged-untrusted fixture| R[Lexical retriever]
     H --> R
     R --> D[Control decision]
     D --> P[Deterministic provider]
@@ -28,7 +28,7 @@ flowchart LR
 ```
 
 User input and the flagged bulletin fixture are untrusted. Corpus/configuration and code are
-review-controlled but not assumed infallible. Raw output may contain the synthetic leakage marker
+version-controlled but not assumed infallible. Raw output may contain the synthetic leakage marker
 solely so the scorer can observe the baseline gap; it must cross no persistence boundary without
 configured redaction. Local MLflow state and the generated evidence pack are separate trust zones.
 
@@ -42,7 +42,7 @@ configured redaction. Local MLflow state and the generated evidence pack are sep
 | Unsupported question | Retrieval and decision | `CASE-SUPPORT-001`; CTRL-SUPPORT-001 and CTRL-REFUSE-001 | Lexical support threshold only; not semantic relevance or factual verification. |
 | Absent or unretrieved citation | Output evaluation | `CASE-CIT-001`; CTRL-CITE-001 and CTRL-GROUND-001 | Citation-ID provenance only; not source truth, entailment, or policy correctness. |
 | Out-of-scope query | Input and decision | `CASE-SCOPE-001`; CTRL-SCOPE-001 and CTRL-REFUSE-001 | Configured vocabulary can miss paraphrases and novel domains. |
-| Tampered, stale, incomplete, or contradictory evidence | Evaluation and release | CTRL-GATE-001 and CTRL-EVID-001; negative tests in [`test_gate.py`](../tests/test_gate.py) and [`test_evidence.py`](../tests/test_evidence.py) | Local hash-linked evidence is not signed, independently timestamped, append-only, or independently reviewed. |
+| Tampered, stale, incomplete, or contradictory evidence | Evaluation and release | CTRL-GATE-001 and CTRL-EVID-001; negative tests in [`test_gate.py`](../tests/test_gate.py) and [`test_evidence.py`](../tests/test_evidence.py) | Local hash-linked evidence is not signed, independently timestamped, append-only, or independently attested. |
 
 ## OWASP and MITRE ATLAS mapping decisions
 

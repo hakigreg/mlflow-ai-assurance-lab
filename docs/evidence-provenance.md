@@ -16,7 +16,7 @@ that the small synthetic evaluation represents production behavior.
 Unknown schema or evidence versions, missing or extra fields, wrong types, invalid digests,
 inconsistent relations, stale current-input bindings, unsafe configured content, or altered files
 fail validation. The validator independently reloads current versioned inputs, recomputes gate and
-control status, checks complete case-to-trace coverage, renders the expected report, and recomputes
+control observations, checks complete case-to-trace coverage, renders the expected report, and recomputes
 the material comparison digest. A changed manifest checksum cannot override those checks.
 
 ## Provenance fields
@@ -30,14 +30,14 @@ absolute paths are excluded.
 
 The Git marker describes generation context. The source digest is the machine-independent binding
 to the executable lab content. A `dirty` marker does not make a result pass or fail, but it requires
-review because the commit alone cannot reconstruct the generating tree.
+separate source inspection because the commit alone cannot reconstruct the generating tree.
 
 ## Material and volatile comparison
 
 The comparison profile `material-assurance-v1` classifies fields as follows:
 
 - Deterministic/material: input and source digests, versions, thresholds, tool versions, metrics,
-  decisions, failed metrics, per-case behavior, and derived control status.
+  decisions, failed metrics, per-case behavior, and derived control observations.
 - Normalizable context: Git commit and working-tree marker. These identify context but do not by
   themselves represent a semantic result change when source/input digests are unchanged.
 - Volatile: normalized UTC timestamp, MLflow experiment/run/trace IDs, and their report rendering.
@@ -57,6 +57,5 @@ unsafe inputs fail instead of producing a comparison success.
 
 The pack is local and hash-linked but not cryptographically signed, independently timestamped, or
 stored in append-only infrastructure. Hashes detect changes relative to trusted current inputs;
-they do not establish author identity or custody. MLflow identifiers are local review anchors and
-are intentionally excluded from semantic drift. Independent release review remains outside this
-Phase 2 governance increment and is planned for Phase 3.
+they do not establish author identity or custody. MLflow identifiers are local evidence anchors and
+are intentionally excluded from semantic drift. The pack does not authorize an enterprise release.

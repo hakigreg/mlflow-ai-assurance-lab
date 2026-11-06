@@ -36,9 +36,7 @@ REQUIRED_FILES = {
     "GOALS.md",
     "LICENSE",
     "Makefile",
-    "PLANS.md",
     "README.md",
-    "RELEASE_READINESS.md",
     "SECURITY.md",
     "config/control-catalog-v1.json",
     "config/release-policy-v1.json",
@@ -46,7 +44,7 @@ REQUIRED_FILES = {
     "data/policies/policies-v1.json",
     "docs/ai-system-card.md",
     "docs/architecture-decisions.md",
-    "docs/adr/0001-planned-assurance-architecture.md",
+    "docs/adr/0001-assurance-architecture.md",
     "docs/assurance-statement.md",
     "docs/claim-ledger.md",
     "docs/control-matrix.md",
@@ -55,7 +53,6 @@ REQUIRED_FILES = {
     "docs/findings.md",
     "docs/human-oversight.md",
     "docs/interview-notes.md",
-    "docs/phase-2-closure.md",
     "docs/risk-assessment.md",
     "docs/scorer-contracts.md",
     "docs/source-register.md",
@@ -185,10 +182,6 @@ def validate_implemented_scope(errors: list[str]) -> None:
         errors.append(
             f"functional MVP package files are missing: {sorted(required_package_files - observed)}"
         )
-
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    if "local portfolio review complete; publication controls pending" not in readme:
-        errors.append("README does not expose the current Phase 3 release-review status")
 
     license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
     if not license_text.startswith("MIT License\n"):

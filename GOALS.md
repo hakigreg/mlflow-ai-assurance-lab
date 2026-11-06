@@ -2,7 +2,7 @@
 
 ## Purpose and bounded assurance claim
 
-This exploratory lab will demonstrate a technical assurance chain from AI risk through controls and automated evaluation to a decision gate and reviewable evidence, with MLflow as the primary assurance tool.
+This exploratory lab demonstrates a technical assurance chain from AI risk through controls and automated evaluation to a decision gate and inspectable evidence, with MLflow as the primary assurance tool.
 
 Within documented assumptions and synthetic data, the governed variant should provide stronger and verifiable control coverage than the baseline. This bounded comparison does not demonstrate production safety, legal compliance, ISO conformity, certification, or complete audit readiness.
 
@@ -46,17 +46,11 @@ Within documented assumptions and synthetic data, the governed variant should pr
 
 - Use synthetic, public, publishable data and English public artifacts only.
 - Lock compatible dependency versions and keep policies, thresholds, datasets, and schemas under version control.
-- Use reviewable policy logic and persist no secrets or sensitive markers without redaction.
+- Use inspectable policy logic and persist no secrets or sensitive markers without redaction.
 - Prefer measured, code-generated evidence over prose assertions.
 - Label heuristics and proxies precisely; do not present them as semantic or legal proof.
 - Separate observed results from recommendations and planned work.
 - Regenerate and revalidate evidence after behavior, configuration, threshold, dataset, or schema changes.
 - Do not fabricate results or conceal failure with a successful fallback.
-
-## Known unknowns
-
-- MLflow and Python versions selected during foundation work may need evidence-based revision as implementation compatibility is tested.
-- Final thresholds will be justified using observed Phase 1 and Phase 2 results rather than selected in advance.
-- Optional-provider behavior, isolation, and redaction requirements remain to be designed and tested; the path will remain disabled by default.
 
 Change this file only when the user explicitly changes project scope or success criteria.

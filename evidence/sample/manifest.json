@@ -12,7 +12,7 @@
       "decisions, metrics, failed metrics, cases, actions, citations, and scores",
       "derived control status excluding MLflow identifiers"
     ],
-    "material_digest": "94866a8b968fda33013a75971ed7caab24f929d83e8ee738b2fbf299129f1c1a",
+    "material_digest": "e5c71b0c974b0fe83b87f1e5c7fc720d2b44daaf5d68b68c0afcad590c0913eb",
     "normalizable_fields": [
       "manifest.provenance.git.commit",
       "manifest.provenance.git.working_tree"
@@ -32,38 +32,38 @@
   },
   "evidence_version": "phase2-evidence-provenance-v2",
   "files": {
-    "case-results.json": "e65ca160b6345be9ba17548568019719eb3e57956ec6e3c9873a93498b80f284",
-    "control-status.json": "d7511e2014336de01a3385a57b09d035f278d89e9f15a39d5358c24fb0af4193",
-    "report.md": "7d7811a1570c83ab2a152c5f376f99ff9d21194b7effa4fb10934018e9910a91",
-    "summary.json": "07f9eaf0a493338b46854342e3f152a52037ad7a1595663391ec7e586c10501b"
+    "case-results.json": "8e1d859d45a852fda38ed9ee898b9df630115907a8cef649740ff38e09c5c8af",
+    "control-status.json": "03a65e9aa2df058d3158416c09e8e6999acf7c8b3e0bd638af7327c50529e4f8",
+    "report.md": "0743d698cb51342754b4afdd0531c87c9862be71d83b1fadfd60a71b26783949",
+    "summary.json": "2342b8b7bb86b877b03a454053d8df9193750d232a6e94e34a0593a57a6acee6"
   },
   "mlflow": {
     "experiment_name": "mlflow-ai-assurance-lab-offline",
     "variants": {
       "baseline": {
         "experiment_id": "1",
-        "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+        "run_id": "65d58ce08b14411089cf142191fcc649"
       },
       "governed": {
         "experiment_id": "1",
-        "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+        "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
       }
     }
   },
   "provenance": {
     "application": {
       "name": "mlflow-ai-assurance-lab",
-      "source_sha256": "834aba66333986d955f9fce23658f9fb1a0de208ebbda92f479c8396e0f10348",
+      "source_sha256": "4e5cfcec92afad532bab966e13502e4eee84bf291fafa9e6f8d3d198e6c05026",
       "version": "0.0.0"
     },
     "git": {
-      "commit": "cbec33f3699da86d625c11d863e68fab92b571b1",
-      "working_tree": "clean"
+      "commit": "ddb06111565e783d824d017a61fcd003d33e20a6",
+      "working_tree": "dirty"
     },
     "inputs": {
       "control_catalog": {
         "schema_version": "1.0",
-        "sha256": "9a9dc77adca8b8655402cc5dd9e38b2650e93a98b84cb96d26c76c321a3b8cbc",
+        "sha256": "ee70a99550afa969c426361c58014de0d1afd258844fc3389378c5714bd738f8",
         "version": "control-catalog-v1"
       },
       "corpus": {
@@ -78,7 +78,7 @@
       },
       "release_policy": {
         "schema_version": "1.0",
-        "sha256": "1628365b997bd6caefa9609e5566fbd6942fbf168ae4e19b7b945a0eb1ffe4da",
+        "sha256": "349b527f82e395b2bde7b1708f18eca8cda2bc82335e7c233ff1ccca9094c3e9",
         "thresholds": {
           "citation_source_match": 1.0,
           "expected_action_match": 1.0,

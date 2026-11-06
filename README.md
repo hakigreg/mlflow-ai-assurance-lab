@@ -1,9 +1,7 @@
 # MLflow AI Assurance Lab
 
-> **Status: local portfolio review complete; publication controls pending**
-
 This inspectable portfolio lab shows how a Data & AI Governance Architect can turn an AI risk
-into an executable control, an MLflow evaluation, a fail-closed decision, and reviewable evidence:
+into an executable control, an MLflow evaluation, a fail-closed decision, and inspectable evidence:
 
 `AI risk -> control -> automated evaluation -> decision gate -> auditable evidence`
 
@@ -138,7 +136,7 @@ assessment.
 - `data/` — versioned synthetic corpus and eight-case evaluation dataset.
 - `config/` — strict release policy and static control catalog.
 - `tests/` — positive, regression, invalid-input, persistence, and evidence-tampering paths.
-- `docs/` — assurance claim, risks, controls, threats, standards, decisions, findings, and review aids.
+- `docs/` — assurance claim, risks, controls, threats, standards, decisions, and technical findings.
 - `evidence/sample/` — selected generated and machine-validated sample evidence.
 - `artifacts/` — ignored local MLflow databases, traces, and regenerated evidence.
 
@@ -148,21 +146,13 @@ The key choices are summarized in [architecture decisions](docs/architecture-dec
 deterministic offline provider, manual MLflow spans with pre-persistence redaction, code-based
 scorers, strict `1.0` thresholds, and fail-closed evidence validation. A real provider and
 LLM-as-a-judge are intentionally absent from the required path because they add cost,
-nondeterminism, secret handling, and data-boundary review.
+nondeterminism, secret handling, and data-boundary requirements.
 
 The main limitations are the small synthetic dataset, lexical rather than semantic evaluation,
 configured-pattern rather than general privacy/security detection, and local evidence that is not
 signed, independently timestamped, append-only, or custody-controlled. The gate is a technical
-decision aid, not enterprise release authorization. See [findings](docs/findings.md),
-[interview notes](docs/interview-notes.md), and [release readiness](RELEASE_READINESS.md).
-
-## Next steps
-
-- Complete the owner-only hosted controls listed in `RELEASE_READINESS.md` before publication.
-- Keep any real-provider experiment optional and outside the mandatory offline gate.
-- Use a future `deepeval-governance-tests` lab for additional CI-oriented evaluation patterns.
-- Use a future `verifywise-governance-lab` for inventory, governance workflows, and compliance
-  management; those tools are intentionally not integrated here.
+decision aid, not enterprise release authorization. See [technical findings](docs/findings.md) and
+[interview notes](docs/interview-notes.md).
 
 ## License
 

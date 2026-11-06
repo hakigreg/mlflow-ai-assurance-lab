@@ -1,8 +1,8 @@
 # Security policy
 
-## Pre-release status
+## Reporting vulnerabilities
 
-This repository has not been publicly released. Report suspected vulnerabilities privately to
+Report suspected vulnerabilities privately to
 [contacto@vektoria.io](mailto:contacto@vektoria.io). Do not put vulnerability details, secrets,
 personal data, exploitable payloads, or unsanitized evidence in a public issue.
 
@@ -34,12 +34,3 @@ synthetic sensitive markers are still presented to the application and determini
 scorer, but only redacted values may enter traces, generated evidence, or logs. This narrow policy
 is not general PII, secret, or prompt-injection detection. Treat a failed redaction assertion as a
 security defect; do not bypass it or publish the affected local database.
-
-## Maintainer actions required before publication
-
-- Confirm that `contacto@vektoria.io` is reachable and monitored.
-- Enable Dependabot alerts and Dependabot security updates in hosted repository settings.
-- After publication, consider enabling GitHub Private Vulnerability Reporting as an additional
-  channel.
-
-Local files do not enable hosted security settings.

@@ -1,11 +1,5 @@
 # Contributing
 
-## Project state
-
-The functional offline MVP, assurance/evidence hardening, and local portfolio review are complete.
-Public release remains blocked on the owner-controlled actions in `RELEASE_READINESS.md`. Keep
-changes within the bounded claim and record only observed status in `PLANS.md`.
-
 ## Setup and checks
 
 Requirements are Git, `make`, and
@@ -17,7 +11,8 @@ make setup
 ```
 
 Focused checks are `make lint`, `make format-check`, `make types`, `make test`,
-`make repository`, `make evaluate`, `make gate`, and `make evidence-validate`. Before review, run:
+`make repository`, `make evaluate`, `make gate`, and `make evidence-validate`. Before submitting a
+change, run:
 
 ```bash
 make verify
@@ -34,7 +29,7 @@ download is required.
 1. Update behavior, tests, documentation, traceability, and evidence together.
 2. Identify affected risk and control IDs from `docs/control-matrix.md`.
    Change static control metadata only in `config/control-catalog-v1.json`; the human matrix and
-   machine-readable control status are generated from that catalog and measured results.
+   machine-readable control observations are generated from that catalog and measured results.
 3. Regenerate sample evidence explicitly with
    `uv run python -m mlflow_ai_assurance_lab evidence --output-dir evidence/sample` when behavior,
    data, configuration, schemas, or thresholds change.

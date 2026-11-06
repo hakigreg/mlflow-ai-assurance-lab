@@ -123,7 +123,7 @@ class PolicyAssistant:
             messages = {
                 "refuse_sensitive": (
                     "I cannot provide or repeat synthetic sensitive identifiers. "
-                    "Use the documented privacy review path."
+                    "Use the documented privacy escalation path."
                 ),
                 "refuse_prompt_injection": (
                     "I cannot follow instructions that override the policy-assistant boundary."
@@ -132,7 +132,8 @@ class PolicyAssistant:
                     "I can answer only questions about the supplied synthetic policies."
                 ),
                 "refuse_insufficient_support": (
-                    "The supplied synthetic policies do not support an answer. Escalate for review."
+                    "The supplied synthetic policies do not support an answer. "
+                    "Escalate to the decision owner."
                 ),
             }
             return messages[action], ()

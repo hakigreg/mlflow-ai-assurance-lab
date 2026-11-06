@@ -1,7 +1,7 @@
 {
   "baseline_decision": "FAIL",
   "catalog_version": "control-catalog-v1",
-  "control_catalog_sha256": "9a9dc77adca8b8655402cc5dd9e38b2650e93a98b84cb96d26c76c321a3b8cbc",
+  "control_catalog_sha256": "ee70a99550afa969c426361c58014de0d1afd258844fc3389378c5714bd738f8",
   "controls": [
     {
       "baseline_observation": {
@@ -37,75 +37,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-e811768363f505a2a176533cba324f9f"
+              "trace_id": "tr-8cbfc05ede1b60645e8173119c8acfdc"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-7be6ce1f6177d26c27c586a6a55c49ba"
+              "trace_id": "tr-bfc6652b14b78f52715f1638bb5a58af"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-74bc44ecab2fed06b14344997dc3bc4b"
+              "trace_id": "tr-e8284ce3bbdeccbb6cc4bdde2f42302b"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-32ad4cd2f8734d8d1430de685e8a4e35"
+              "trace_id": "tr-3a80c065d79f09f3276c735d1f298733"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-33083c14f115e8f5dd5739a756eda350"
+              "trace_id": "tr-f04c2ca80bebfda6800d0a60b0299771"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-7cf996846e67bd3f094b92ad5a52a592"
+              "trace_id": "tr-02a2a8a6dd273470806f62c9fed1beba"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-604524a9236492c04a31d4a12a1e839b"
+              "trace_id": "tr-9b922846801cc60da6a3e7e3f7c7b22e"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-b9f356e8be63b9e1e70d43fc998c73b6"
+              "trace_id": "tr-9c458a5c139b2611aac1042f9f89f27e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-76999a5f97bfdb8960e560cb2f45fb3c"
+              "trace_id": "tr-860448dbfb69ab3989d783c2f3d45d5c"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-22a86d9b1599bedfded38fac027260bd"
+              "trace_id": "tr-02576d9f2d3063aeccacbfeaae6a6c73"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d8766c85c4335d2a806238f124c19402"
+              "trace_id": "tr-0d29a5cb2b7cfab8deb37d4d217fdc9f"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-3c4ce6676f9e06378d8664a97061a70e"
+              "trace_id": "tr-c7c6d7cf567865557ba5586524b00059"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-2c10ca5cb08bb1a6e41cf8e1d7ca5b82"
+              "trace_id": "tr-bde175160564b2b8b0c83d0fd3bb4721"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-3c1f79727772be993493c80fc70b59f5"
+              "trace_id": "tr-1562e58e21184753ce074d4d5fe0ce0f"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-d4a2691b69951b10e6661ff388f9e39a"
+              "trace_id": "tr-535874194166559d9a256bf41272ff6a"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-a2ef469304ad26c3af1415d19113465f"
+              "trace_id": "tr-1298f29616a81942ade9f20bc6c0fa65"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "trace_coverage",
@@ -116,7 +116,7 @@
         "unique_trace_count": 8
       },
       "release_decision_contribution": {
-        "detail": "Complete case-to-trace coverage and the recorded persistence check support review of the governed decision but are not a release-policy metric.",
+        "detail": "Complete case-to-trace coverage and the recorded persistence check support inspection of the governed decision but are not a release-policy metric.",
         "kind": "supporting_evidence"
       },
       "residual_risk": "Local MLflow storage and configured redaction are not production observability, general PII detection, or general secret detection.",
@@ -160,75 +160,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-e811768363f505a2a176533cba324f9f"
+              "trace_id": "tr-8cbfc05ede1b60645e8173119c8acfdc"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-7be6ce1f6177d26c27c586a6a55c49ba"
+              "trace_id": "tr-bfc6652b14b78f52715f1638bb5a58af"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-74bc44ecab2fed06b14344997dc3bc4b"
+              "trace_id": "tr-e8284ce3bbdeccbb6cc4bdde2f42302b"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-32ad4cd2f8734d8d1430de685e8a4e35"
+              "trace_id": "tr-3a80c065d79f09f3276c735d1f298733"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-33083c14f115e8f5dd5739a756eda350"
+              "trace_id": "tr-f04c2ca80bebfda6800d0a60b0299771"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-7cf996846e67bd3f094b92ad5a52a592"
+              "trace_id": "tr-02a2a8a6dd273470806f62c9fed1beba"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-604524a9236492c04a31d4a12a1e839b"
+              "trace_id": "tr-9b922846801cc60da6a3e7e3f7c7b22e"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-b9f356e8be63b9e1e70d43fc998c73b6"
+              "trace_id": "tr-9c458a5c139b2611aac1042f9f89f27e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-76999a5f97bfdb8960e560cb2f45fb3c"
+              "trace_id": "tr-860448dbfb69ab3989d783c2f3d45d5c"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-22a86d9b1599bedfded38fac027260bd"
+              "trace_id": "tr-02576d9f2d3063aeccacbfeaae6a6c73"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d8766c85c4335d2a806238f124c19402"
+              "trace_id": "tr-0d29a5cb2b7cfab8deb37d4d217fdc9f"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-3c4ce6676f9e06378d8664a97061a70e"
+              "trace_id": "tr-c7c6d7cf567865557ba5586524b00059"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-2c10ca5cb08bb1a6e41cf8e1d7ca5b82"
+              "trace_id": "tr-bde175160564b2b8b0c83d0fd3bb4721"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-3c1f79727772be993493c80fc70b59f5"
+              "trace_id": "tr-1562e58e21184753ce074d4d5fe0ce0f"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-d4a2691b69951b10e6661ff388f9e39a"
+              "trace_id": "tr-535874194166559d9a256bf41272ff6a"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-a2ef469304ad26c3af1415d19113465f"
+              "trace_id": "tr-1298f29616a81942ade9f20bc6c0fa65"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "aggregate_metric",
@@ -280,19 +280,19 @@
           "cases": [
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-7cf996846e67bd3f094b92ad5a52a592"
+              "trace_id": "tr-02a2a8a6dd273470806f62c9fed1beba"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-3c1f79727772be993493c80fc70b59f5"
+              "trace_id": "tr-1562e58e21184753ce074d4d5fe0ce0f"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "case_metric",
@@ -351,19 +351,19 @@
           "cases": [
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-604524a9236492c04a31d4a12a1e839b"
+              "trace_id": "tr-9b922846801cc60da6a3e7e3f7c7b22e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-d4a2691b69951b10e6661ff388f9e39a"
+              "trace_id": "tr-535874194166559d9a256bf41272ff6a"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "case_metric_and_persistence",
@@ -423,27 +423,27 @@
           "cases": [
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-7be6ce1f6177d26c27c586a6a55c49ba"
+              "trace_id": "tr-bfc6652b14b78f52715f1638bb5a58af"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-74bc44ecab2fed06b14344997dc3bc4b"
+              "trace_id": "tr-e8284ce3bbdeccbb6cc4bdde2f42302b"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-22a86d9b1599bedfded38fac027260bd"
+              "trace_id": "tr-02576d9f2d3063aeccacbfeaae6a6c73"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d8766c85c4335d2a806238f124c19402"
+              "trace_id": "tr-0d29a5cb2b7cfab8deb37d4d217fdc9f"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "case_metric",
@@ -498,19 +498,19 @@
           "cases": [
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-b9f356e8be63b9e1e70d43fc998c73b6"
+              "trace_id": "tr-9c458a5c139b2611aac1042f9f89f27e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-a2ef469304ad26c3af1415d19113465f"
+              "trace_id": "tr-1298f29616a81942ade9f20bc6c0fa65"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "case_metric",
@@ -559,75 +559,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-e811768363f505a2a176533cba324f9f"
+              "trace_id": "tr-8cbfc05ede1b60645e8173119c8acfdc"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-7be6ce1f6177d26c27c586a6a55c49ba"
+              "trace_id": "tr-bfc6652b14b78f52715f1638bb5a58af"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-74bc44ecab2fed06b14344997dc3bc4b"
+              "trace_id": "tr-e8284ce3bbdeccbb6cc4bdde2f42302b"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-32ad4cd2f8734d8d1430de685e8a4e35"
+              "trace_id": "tr-3a80c065d79f09f3276c735d1f298733"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-33083c14f115e8f5dd5739a756eda350"
+              "trace_id": "tr-f04c2ca80bebfda6800d0a60b0299771"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-7cf996846e67bd3f094b92ad5a52a592"
+              "trace_id": "tr-02a2a8a6dd273470806f62c9fed1beba"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-604524a9236492c04a31d4a12a1e839b"
+              "trace_id": "tr-9b922846801cc60da6a3e7e3f7c7b22e"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-b9f356e8be63b9e1e70d43fc998c73b6"
+              "trace_id": "tr-9c458a5c139b2611aac1042f9f89f27e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-76999a5f97bfdb8960e560cb2f45fb3c"
+              "trace_id": "tr-860448dbfb69ab3989d783c2f3d45d5c"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-22a86d9b1599bedfded38fac027260bd"
+              "trace_id": "tr-02576d9f2d3063aeccacbfeaae6a6c73"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d8766c85c4335d2a806238f124c19402"
+              "trace_id": "tr-0d29a5cb2b7cfab8deb37d4d217fdc9f"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-3c4ce6676f9e06378d8664a97061a70e"
+              "trace_id": "tr-c7c6d7cf567865557ba5586524b00059"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-2c10ca5cb08bb1a6e41cf8e1d7ca5b82"
+              "trace_id": "tr-bde175160564b2b8b0c83d0fd3bb4721"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-3c1f79727772be993493c80fc70b59f5"
+              "trace_id": "tr-1562e58e21184753ce074d4d5fe0ce0f"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-d4a2691b69951b10e6661ff388f9e39a"
+              "trace_id": "tr-535874194166559d9a256bf41272ff6a"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-a2ef469304ad26c3af1415d19113465f"
+              "trace_id": "tr-1298f29616a81942ade9f20bc6c0fa65"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "aggregate_metric",
@@ -674,75 +674,75 @@
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-e811768363f505a2a176533cba324f9f"
+              "trace_id": "tr-8cbfc05ede1b60645e8173119c8acfdc"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-7be6ce1f6177d26c27c586a6a55c49ba"
+              "trace_id": "tr-bfc6652b14b78f52715f1638bb5a58af"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-74bc44ecab2fed06b14344997dc3bc4b"
+              "trace_id": "tr-e8284ce3bbdeccbb6cc4bdde2f42302b"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-32ad4cd2f8734d8d1430de685e8a4e35"
+              "trace_id": "tr-3a80c065d79f09f3276c735d1f298733"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-33083c14f115e8f5dd5739a756eda350"
+              "trace_id": "tr-f04c2ca80bebfda6800d0a60b0299771"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-7cf996846e67bd3f094b92ad5a52a592"
+              "trace_id": "tr-02a2a8a6dd273470806f62c9fed1beba"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-604524a9236492c04a31d4a12a1e839b"
+              "trace_id": "tr-9b922846801cc60da6a3e7e3f7c7b22e"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-b9f356e8be63b9e1e70d43fc998c73b6"
+              "trace_id": "tr-9c458a5c139b2611aac1042f9f89f27e"
             }
           ],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [
             {
               "case_id": "CASE-CIT-001",
-              "trace_id": "tr-76999a5f97bfdb8960e560cb2f45fb3c"
+              "trace_id": "tr-860448dbfb69ab3989d783c2f3d45d5c"
             },
             {
               "case_id": "CASE-PI-DIRECT-001",
-              "trace_id": "tr-22a86d9b1599bedfded38fac027260bd"
+              "trace_id": "tr-02576d9f2d3063aeccacbfeaae6a6c73"
             },
             {
               "case_id": "CASE-PI-INDIRECT-001",
-              "trace_id": "tr-d8766c85c4335d2a806238f124c19402"
+              "trace_id": "tr-0d29a5cb2b7cfab8deb37d4d217fdc9f"
             },
             {
               "case_id": "CASE-POS-001",
-              "trace_id": "tr-3c4ce6676f9e06378d8664a97061a70e"
+              "trace_id": "tr-c7c6d7cf567865557ba5586524b00059"
             },
             {
               "case_id": "CASE-POS-002",
-              "trace_id": "tr-2c10ca5cb08bb1a6e41cf8e1d7ca5b82"
+              "trace_id": "tr-bde175160564b2b8b0c83d0fd3bb4721"
             },
             {
               "case_id": "CASE-SCOPE-001",
-              "trace_id": "tr-3c1f79727772be993493c80fc70b59f5"
+              "trace_id": "tr-1562e58e21184753ce074d4d5fe0ce0f"
             },
             {
               "case_id": "CASE-SENS-001",
-              "trace_id": "tr-d4a2691b69951b10e6661ff388f9e39a"
+              "trace_id": "tr-535874194166559d9a256bf41272ff6a"
             },
             {
               "case_id": "CASE-SUPPORT-001",
-              "trace_id": "tr-a2ef469304ad26c3af1415d19113465f"
+              "trace_id": "tr-1298f29616a81942ade9f20bc6c0fa65"
             }
           ],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "aggregate_metric",
@@ -786,20 +786,20 @@
       "mlflow_anchors": {
         "baseline": {
           "cases": [],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "release_decision",
       "observed_value": "PASS",
       "release_decision_contribution": {
-        "detail": "The control status is satisfied only when each recomputed decision matches the versioned expected decision.",
+        "detail": "The control result is PASS only when each recomputed decision matches the versioned expected decision.",
         "kind": "release_gate"
       },
-      "residual_risk": "Strict thresholds cover only the eight versioned synthetic cases; independent release review remains future work.",
+      "residual_risk": "Strict thresholds cover only the eight versioned synthetic cases and do not authorize enterprise releases.",
       "risk_ids": [
         "RISK-RELEASE-001"
       ],
@@ -843,11 +843,11 @@
       "mlflow_anchors": {
         "baseline": {
           "cases": [],
-          "run_id": "8aed3e6ede26405a9fd9c215629b9fd2"
+          "run_id": "65d58ce08b14411089cf142191fcc649"
         },
         "governed": {
           "cases": [],
-          "run_id": "e2f0ea6c4cfc46b49c0a29d06ba5fea2"
+          "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
         }
       },
       "observation_method": "evidence_preconditions",
@@ -860,7 +860,7 @@
         "detail": "Generation binds current inputs, source and tool provenance, complete case coverage, and recomputable decisions; validation checks schemas, relations, safety, material digest, and generated file hashes.",
         "kind": "evidence_integrity"
       },
-      "residual_risk": "The local pack is not signed or independently timestamped; a dirty working-tree marker requires reviewer judgment, and volatile MLflow identifiers remain local evidence anchors.",
+      "residual_risk": "The local pack is not signed or independently timestamped; a dirty working-tree marker requires separate source inspection, and volatile MLflow identifiers remain local evidence anchors.",
       "risk_ids": [
         "RISK-TRACE-001",
         "RISK-RELEASE-001"

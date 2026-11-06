@@ -32,7 +32,7 @@
       },
       "release_decision_contribution": {
         "kind": "supporting_evidence",
-        "detail": "Complete case-to-trace coverage and the recorded persistence check support review of the governed decision but are not a release-policy metric."
+        "detail": "Complete case-to-trace coverage and the recorded persistence check support inspection of the governed decision but are not a release-policy metric."
       },
       "residual_risk": "Local MLflow storage and configured redaction are not production observability, general PII detection, or general secret detection."
     },
@@ -241,9 +241,9 @@
       },
       "release_decision_contribution": {
         "kind": "release_gate",
-        "detail": "The control status is satisfied only when each recomputed decision matches the versioned expected decision."
+        "detail": "The control result is PASS only when each recomputed decision matches the versioned expected decision."
       },
-      "residual_risk": "Strict thresholds cover only the eight versioned synthetic cases; independent release review remains future work."
+      "residual_risk": "Strict thresholds cover only the eight versioned synthetic cases and do not authorize enterprise releases."
     },
     {
       "control_id": "CTRL-EVID-001",
@@ -274,7 +274,7 @@
         "kind": "evidence_integrity",
         "detail": "Generation binds current inputs, source and tool provenance, complete case coverage, and recomputable decisions; validation checks schemas, relations, safety, material digest, and generated file hashes."
       },
-      "residual_risk": "The local pack is not signed or independently timestamped; a dirty working-tree marker requires reviewer judgment, and volatile MLflow identifiers remain local evidence anchors."
+      "residual_risk": "The local pack is not signed or independently timestamped; a dirty working-tree marker requires separate source inspection, and volatile MLflow identifiers remain local evidence anchors."
     }
   ]
 }

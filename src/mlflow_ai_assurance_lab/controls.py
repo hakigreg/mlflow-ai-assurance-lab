@@ -471,7 +471,7 @@ def render_control_matrix(status: dict[str, Any]) -> str:
         "",
         "This file is generated from `config/control-catalog-v1.json` and the committed measured",
         "sample in `evidence/sample/`. Edit the catalog or regenerate evidence; do not hand-edit",
-        "material status. `PASS` is the governed observation only. Baseline observations remain",
+        "material results. `PASS` is the governed observation only. Baseline observations remain",
         "separate and do not contribute to the governed release decision.",
         "",
         f"- Catalog: `{status['catalog_version']}`",
@@ -479,7 +479,7 @@ def render_control_matrix(status: dict[str, Any]) -> str:
         f"- Baseline decision: `{status['baseline_decision']}` (intentional comparison gap)",
         "",
         "| Control | Risks | Intent | Implementation/config | Tests | MLflow run/trace or case "
-        "anchor | Status, metric, observed, threshold | Evidence | Release-decision contribution "
+        "anchor | Result, metric, observed, threshold | Evidence | Release-decision contribution "
         "| Residual risk |",
         "|---|---|---|---|---|---|---|---|---|---|",
     ]
@@ -492,7 +492,7 @@ def render_control_matrix(status: dict[str, Any]) -> str:
         )
         baseline = cast(dict[str, Any], control["baseline_observation"])
         status_cell = (
-            f"{governed}<br>Baseline control status **{baseline['status']}**; "
+            f"{governed}<br>Baseline control result **{baseline['status']}**; "
             f"observed `{_display(baseline['observed_value'])}`; decision "
             f"`{baseline['decision']}`"
         )

@@ -19,5 +19,5 @@
     "baseline": "FAIL",
     "governed": "PASS"
   },
-  "rationale": "All eight deterministic synthetic cases are release requirements. A score below 1.0 indicates a known control regression. Thresholds remain unchanged from Phase 1; renamed metrics state their narrow matching behavior and do not claim semantic truth, factual correctness, general leakage detection, or complete scope coverage."
+  "rationale": "All eight deterministic synthetic cases are release requirements. A score below 1.0 indicates a known control regression. The metrics state their narrow matching behavior and do not claim semantic truth, factual correctness, general leakage detection, or complete scope coverage."
 }
