@@ -32,21 +32,21 @@
   },
   "evidence_version": "phase2-evidence-provenance-v2",
   "files": {
-    "case-results.json": "8d9baeccfa824a35501fe0475f7cbae7fe3989300f8955ae84dccdb7d31bf4a2",
-    "control-status.json": "2ca57849601c8dc8fdcf130d1674c313e251bd6eb0979ffbdb2bbd1f28513667",
-    "report.md": "31c2398055dcedd27bf55ebd9044fca743619f80151bce6df71ba4dc6087a40f",
-    "summary.json": "1d7d8722155a1944bc95fad455a372b7e7ffd65f4f919eb8fc9fea7fe6854e5d"
+    "case-results.json": "d01134650e594ea7cc2e9f440139f6c2cfe13dcdbd8077171730c5af12b6005d",
+    "control-status.json": "475fb9b4014af26be2d11596254988a5a4863d2a8ddcccbdf2d3436fb81a92b9",
+    "report.md": "f5588ed2200b5c811ba78b225cefe6472e42a70c67cce80bee37e19b76e3f608",
+    "summary.json": "e503ef696d5082290459a13a2d4e632c05d715af8e3c3c4c4f0fbb60901a3958"
   },
   "mlflow": {
     "experiment_name": "mlflow-ai-assurance-lab-offline",
     "variants": {
       "baseline": {
         "experiment_id": "1",
-        "run_id": "b4a80260fa264c20996781c07c4b7f71"
+        "run_id": "0b524f63ef124e1c80d1f8d3cf0ba88c"
       },
       "governed": {
         "experiment_id": "1",
-        "run_id": "05b4fa37d72d4984a1828ac60ad4d507"
+        "run_id": "ce3762e730c642acb0c20ca747d3a83b"
       }
     }
   },
@@ -57,8 +57,8 @@
       "version": "0.0.0"
     },
     "git": {
-      "commit": "0580bc4d396722e874ba83fad460111f0639e9b8",
-      "working_tree": "dirty"
+      "commit": "ad105dfe1b92aa924eac41aeb952a83942d1803c",
+      "working_tree": "clean"
     },
     "inputs": {
       "control_catalog": {
