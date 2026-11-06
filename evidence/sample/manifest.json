@@ -12,7 +12,7 @@
       "decisions, metrics, failed metrics, cases, actions, citations, and scores",
       "derived control status excluding MLflow identifiers"
     ],
-    "material_digest": "e5c71b0c974b0fe83b87f1e5c7fc720d2b44daaf5d68b68c0afcad590c0913eb",
+    "material_digest": "4cf94a18405f13b742e6104438c584680af27686968ab675b85f99cd6351f57f",
     "normalizable_fields": [
       "manifest.provenance.git.commit",
       "manifest.provenance.git.working_tree"
@@ -32,32 +32,32 @@
   },
   "evidence_version": "phase2-evidence-provenance-v2",
   "files": {
-    "case-results.json": "8e1d859d45a852fda38ed9ee898b9df630115907a8cef649740ff38e09c5c8af",
-    "control-status.json": "03a65e9aa2df058d3158416c09e8e6999acf7c8b3e0bd638af7327c50529e4f8",
-    "report.md": "0743d698cb51342754b4afdd0531c87c9862be71d83b1fadfd60a71b26783949",
-    "summary.json": "2342b8b7bb86b877b03a454053d8df9193750d232a6e94e34a0593a57a6acee6"
+    "case-results.json": "8d9baeccfa824a35501fe0475f7cbae7fe3989300f8955ae84dccdb7d31bf4a2",
+    "control-status.json": "2ca57849601c8dc8fdcf130d1674c313e251bd6eb0979ffbdb2bbd1f28513667",
+    "report.md": "31c2398055dcedd27bf55ebd9044fca743619f80151bce6df71ba4dc6087a40f",
+    "summary.json": "1d7d8722155a1944bc95fad455a372b7e7ffd65f4f919eb8fc9fea7fe6854e5d"
   },
   "mlflow": {
     "experiment_name": "mlflow-ai-assurance-lab-offline",
     "variants": {
       "baseline": {
         "experiment_id": "1",
-        "run_id": "65d58ce08b14411089cf142191fcc649"
+        "run_id": "b4a80260fa264c20996781c07c4b7f71"
       },
       "governed": {
         "experiment_id": "1",
-        "run_id": "9c8f419cfb0c461dbb951fcc30ceee02"
+        "run_id": "05b4fa37d72d4984a1828ac60ad4d507"
       }
     }
   },
   "provenance": {
     "application": {
       "name": "mlflow-ai-assurance-lab",
-      "source_sha256": "4e5cfcec92afad532bab966e13502e4eee84bf291fafa9e6f8d3d198e6c05026",
+      "source_sha256": "37400f01a92f18250dd164f1d4444b8d9515fc4253ff840ae6a7e2d8edfc2fd5",
       "version": "0.0.0"
     },
     "git": {
-      "commit": "ddb06111565e783d824d017a61fcd003d33e20a6",
+      "commit": "0580bc4d396722e874ba83fad460111f0639e9b8",
       "working_tree": "dirty"
     },
     "inputs": {

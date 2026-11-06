@@ -43,7 +43,7 @@ semantic truth, factual accuracy, general sensitive-data discovery, vector retri
 data poisoning, access control, real-provider variability, or production operations. The evidence
 is local and hash-linked but is not signed, independently timestamped, or append-only.
 
-The statement may be used to explain this portfolio lab's evidence chain. It must not be used as
+The statement may be used to explain this lab project's evidence chain. It must not be used as
 an enterprise release authorization or as a normative, legal, certification, or audit conclusion.
 Material claims and their individual evidence boundaries are listed in the
 [`claim ledger`](claim-ledger.md).

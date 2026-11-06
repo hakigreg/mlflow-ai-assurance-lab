@@ -1,4 +1,4 @@
-# Portfolio demo script (5–7 minutes)
+# Project demo script (5–7 minutes)
 
 Use only synthetic data and the generated repository evidence. Do not present the governed `PASS`
 as a production, compliance, or semantic-quality conclusion.

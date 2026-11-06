@@ -14,7 +14,7 @@ def test_readme_leads_with_the_assurance_lab() -> None:
     assert "Status:" not in readme
 
 
-def test_portfolio_explanation_materials_exist() -> None:
+def test_project_explanation_materials_exist() -> None:
     for relative_path in (
         "docs/architecture-decisions.md",
         "docs/demo-script.md",

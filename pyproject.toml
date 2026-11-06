@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "mlflow-ai-assurance-lab"
 version = "0.0.0"
-description = "Deterministic offline MLflow AI assurance portfolio lab"
+description = "Deterministic offline MLflow AI assurance lab project"
 readme = "README.md"
 requires-python = ">=3.12.16,<3.13"
 license = "MIT"

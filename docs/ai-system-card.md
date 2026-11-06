@@ -2,12 +2,12 @@
 
 ## System and purpose
 
-`mlflow-ai-assurance-lab` is a portfolio-scale synthetic-policy question-answering system used to
-demonstrate a bounded assurance chain. It compares a deliberately limited baseline with a governed
-variant. Intended users are engineers, assurance practitioners, and governance architects examining
-the controls, traces, evaluation results, and evidence—not end users seeking real policy advice.
-The governing interpretation is the [`bounded assurance statement`](assurance-statement.md), with
-individual evidence boundaries in the [`claim ledger`](claim-ledger.md).
+`mlflow-ai-assurance-lab` implements a bounded assurance chain for a lab-scale synthetic-policy
+question-answering system. It compares a deliberately limited baseline with a governed variant and
+exposes the resulting controls, traces, evaluation results, decisions, and evidence for inspection.
+It is not a policy-advice system. The governing interpretation is the
+[`bounded assurance statement`](assurance-statement.md), with individual evidence boundaries in
+the [`claim ledger`](claim-ledger.md).
 
 ## Boundaries and data
 

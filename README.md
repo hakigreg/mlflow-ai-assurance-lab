@@ -1,7 +1,8 @@
 # MLflow AI Assurance Lab
 
-This inspectable portfolio lab shows how a Data & AI Governance Architect can turn an AI risk
-into an executable control, an MLflow evaluation, a fail-closed decision, and inspectable evidence:
+This lab project implements a deterministic AI assurance workflow that maps documented AI risks
+to executable controls, evaluates them with MLflow, applies a fail-closed decision gate, and
+produces inspectable evidence:
 
 `AI risk -> control -> automated evaluation -> decision gate -> auditable evidence`
 
@@ -41,8 +42,7 @@ general PII or secret detection.
 
 ## MLflow UI walkthrough
 
-The local MLflow UI makes the comparison inspectable without reading the generated JSON first.
-These screenshots were captured from MLflow 3.17.2 using the synthetic offline workflow. Run
+The local MLflow UI makes the comparison inspectable without reading the generated JSON first. Run
 names, timestamps, trace identifiers, and latency are volatile local values; the dataset, scorer
 definitions, aggregate metric pattern, and expected `baseline=FAIL governed=PASS` decisions are
 versioned and reproducible.

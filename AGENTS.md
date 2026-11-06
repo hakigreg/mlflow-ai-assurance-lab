@@ -2,7 +2,7 @@
 
 ## Purpose and invariants
 
-This repository is a small, inspectable AI assurance lab for a Data & AI Governance Architect portfolio. Its intended evidence chain is:
+This repository is a small, inspectable AI assurance lab project. Its intended evidence chain is:
 
 `AI risk -> control -> automated evaluation -> decision gate -> auditable evidence`
 
