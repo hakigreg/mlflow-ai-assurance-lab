@@ -41,6 +41,26 @@ available to scorers, while configured synthetic markers, credential shapes, and
 prompt phrases are redacted before trace persistence. This is a narrow configured boundary, not
 general PII or secret detection.
 
+## MLflow UI walkthrough
+
+The local MLflow UI makes the comparison inspectable without reading the generated JSON first.
+These screenshots were captured from MLflow 3.17.2 using the synthetic offline workflow. Run
+names, timestamps, trace identifiers, and latency are volatile local values; the dataset, scorer
+definitions, aggregate metric pattern, and expected `baseline=FAIL governed=PASS` decisions are
+versioned and reproducible.
+
+The evaluation-runs view exposes the managed dataset and all five aggregate scorer metrics. The
+latest governed row scores `1.0` throughout, while the paired baseline row shows the intentional
+control gaps (`0.875`, `0.875`, `0.375`, `0.25`, and `0.25`).
+
+![MLflow evaluation runs comparing governed and baseline scorer metrics](docs/images/mlflow-ui/evaluation-runs.jpg)
+
+Opening `CASE-SCOPE-001` connects the aggregate result to an individual trace. The span tree shows
+input handling, retrieval, control decision, generation, and output validation; the governed output
+records `refuse_scope`, no citations, and a synthetic-policy boundary response to the weather query.
+
+![MLflow governed trace for the out-of-scope evaluation case](docs/images/mlflow-ui/governed-scope-trace.jpg)
+
 ## Reproduce locally
 
 Prerequisites are Git, `make`, and [uv](https://docs.astral.sh/uv/) available on `PATH`. The
